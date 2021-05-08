@@ -25,7 +25,7 @@ void ResourceManager::initialise_window ()
   load_default_font ();
   player_info.setFont (default_font);
   player_info.setPosition (475.0f, 700.0f);
-  player_info.setCharacterSize (17.5);
+  player_info.setCharacterSize (17);
   player_info.setFillColor (sf::Color::White);
   player_info.setLetterSpacing (0.5f);
   set_player_info (1, "Mercenary");
