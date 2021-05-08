@@ -19,8 +19,7 @@ class WindowManager {
 
  private:
   ResourceManager resource_manager;
-  sf::RenderWindow window{sf::VideoMode (1600, 900, 32), "Fantasia",
-						  sf::Style::Close};
+  sf::RenderWindow window{sf::VideoMode (1600, 900, 32), "Fantasia"};
 };
 
 #endif//_WINDOW_MANAGER_H_
