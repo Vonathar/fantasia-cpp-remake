@@ -29,6 +29,13 @@ void ResourceManager::initialise_window ()
   player_info.setFillColor (sf::Color::White);
   player_info.setLetterSpacing (0.5f);
   set_player_info (1, "Mercenary");
+  // Enemy info
+  enemy_info.setFont (default_font);
+  enemy_info.setPosition (850.0f, 700.0f);
+  enemy_info.setCharacterSize (17);
+  enemy_info.setFillColor (sf::Color::White);
+  enemy_info.setLetterSpacing (0.5f);
+  set_enemy_info (1, "Test name");
 }
 
 void ResourceManager::load_player_sprite ()
@@ -101,12 +108,22 @@ sf::Sprite ResourceManager::get_battle_area_sprite ()
   return battle_area_sprite;
 }
 
+void ResourceManager::set_player_info (int player_level, string player_name)
+{
+  player_info.setString ("Lv. " + to_string (player_level) + " " + player_name);
+}
+
+void ResourceManager::set_enemy_info (int enemy_level, string enemy_name)
+{
+  enemy_info.setString ("Lv. " + to_string (enemy_level) + " " + enemy_name);
+}
+
 Text ResourceManager::get_player_info ()
 {
   return player_info;
 }
 
-void ResourceManager::set_player_info (int player_level, string player_name)
+Text ResourceManager::get_enemy_info ()
 {
-  player_info.setString ("Lv. " + to_string (player_level) + " " + player_name);
+  return enemy_info;
 }

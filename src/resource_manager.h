@@ -25,6 +25,7 @@ class ResourceManager {
   Sprite get_background_sprite ();
   Sprite get_battle_area_sprite ();
   Text get_player_info ();
+  Text get_enemy_info ();
 
  private:
   /**
@@ -53,6 +54,13 @@ class ResourceManager {
    */
   void set_player_info (int player_level, string player_name);
   /**
+   * Updates the enemy name and level.
+   *
+   * @param enemy_level the new level of the enemy.
+   * @param enemy_name the new name of the enemy.
+   */
+  void set_enemy_info (int enemy_level, string enemy_name);
+  /**
    * Returns the numerical representation of a game stage.
    *
    * @param game_stage the game stage.
@@ -67,6 +75,7 @@ class ResourceManager {
   Texture battle_area_texture{};
   Font default_font;
   Text player_info;
+  Text enemy_info;
   string resources_path{"../res/"};
 };
 
