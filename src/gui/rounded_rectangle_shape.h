@@ -10,22 +10,22 @@ class RoundedRectangleShape : public sf::Shape {
  public:
   explicit RoundedRectangleShape (const Vector2f &size = Vector2f (0, 0),
 								  float radius = 0,
-								  unsigned int cornerPointCount = 0);
+								  unsigned int corner_point_count = 0);
 
-  void setSize (const Vector2f &size);
+  void set_size (const Vector2f &size);
 
-  void setCornersRadius (float radius);
+  void set_corners_radius (float radius);
 
-  void setCornerPointCount (unsigned int count);
+  void set_corner_point_count (unsigned int count);
 
-  virtual std::size_t getPointCount () const;
+  std::size_t getPointCount () const override;
 
-  virtual sf::Vector2f getPoint (std::size_t index) const;
+  sf::Vector2f getPoint (std::size_t index) const override;
 
  private:
-  Vector2f mySize;
-  float myRadius;
-  unsigned int myCornerPointCount;
+  Vector2f size;
+  float radius;
+  unsigned int corner_point_count;
 };
 }// namespace sf
 #endif// ROUNDEDRECTANGLESHAPE_HPP

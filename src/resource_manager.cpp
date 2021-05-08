@@ -88,27 +88,27 @@ void ResourceManager::load_background_sprite (GameStage game_stage)
 
 void ResourceManager::load_battle_area_rect ()
 {
-  battle_area_rect.setSize (sf::Vector2f (746.0f, 464.0f));
-  battle_area_rect.setCornersRadius (25);
-  battle_area_rect.setCornerPointCount (50);
+  battle_area_rect.set_size (sf::Vector2f (746.0f, 464.0f));
+  battle_area_rect.set_corners_radius (25);
+  battle_area_rect.set_corner_point_count (50);
   battle_area_rect.setFillColor (sf::Color (0, 0, 0, 230));
   battle_area_rect.setPosition (585.0f, 500.0f);
 }
 
 void ResourceManager::load_player_info_rect ()
 {
-  player_info_rect.setSize (sf::Vector2f (192, 25));
-  player_info_rect.setCornersRadius (12);
-  player_info_rect.setCornerPointCount (20);
+  player_info_rect.set_size (sf::Vector2f (192, 25));
+  player_info_rect.set_corners_radius (12);
+  player_info_rect.set_corner_point_count (20);
   player_info_rect.setFillColor (sf::Color (0, 0, 0, 230));
   player_info_rect.setPosition (603.0f, 801.0f);
 }
 
 void ResourceManager::load_enemy_info_rect ()
 {
-  enemy_info_rect.setSize (sf::Vector2f (435, 25));
-  enemy_info_rect.setCornersRadius (12);
-  enemy_info_rect.setCornerPointCount (20);
+  enemy_info_rect.set_size (sf::Vector2f (435, 25));
+  enemy_info_rect.set_corners_radius (12);
+  enemy_info_rect.set_corner_point_count (20);
   enemy_info_rect.setFillColor (sf::Color (0, 0, 0, 230));
   enemy_info_rect.setPosition (880.0f, 801.0f);
 }

@@ -5,70 +5,68 @@ namespace sf
 {
 RoundedRectangleShape::RoundedRectangleShape (const Vector2f &size,
 											  float radius,
-											  unsigned int cornerPointCount)
+											  unsigned int corner_point_count)
+	: size (size), radius (radius), corner_point_count (corner_point_count)
 {
-  mySize = size;
-  myRadius = radius;
-  myCornerPointCount = cornerPointCount;
   update ();
 }
 
-void RoundedRectangleShape::setSize (const Vector2f &size)
+void RoundedRectangleShape::set_size (const Vector2f &size)
 {
-  mySize = size;
+  this->size = size;
   update ();
 }
 
-void RoundedRectangleShape::setCornersRadius (float radius)
+void RoundedRectangleShape::set_corners_radius (float radius)
 {
-  myRadius = radius;
+  this->radius = radius;
   update ();
 }
 
-void RoundedRectangleShape::setCornerPointCount (unsigned int count)
+void RoundedRectangleShape::set_corner_point_count (unsigned int count)
 {
-  myCornerPointCount = count;
+  this->corner_point_count = count;
   update ();
 }
 
 std::size_t RoundedRectangleShape::getPointCount () const
 {
-  return myCornerPointCount * 4;
+  return corner_point_count * 4;
 }
 
 sf::Vector2f RoundedRectangleShape::getPoint (std::size_t index) const
 {
-  if (index >= myCornerPointCount * 4)
+  if (index >= corner_point_count * 4)
 	return sf::Vector2f (0, 0);
 
-  float deltaAngle = 90.0f / (myCornerPointCount - 1);
+  float delta_angle = 90.0f / (corner_point_count - 1);
   sf::Vector2f center;
-  unsigned int centerIndex = index / myCornerPointCount;
+  unsigned int center_index = index / corner_point_count;
   static const float pi = 3.141592654f;
 
-  switch (centerIndex)
+  switch (center_index)
   {
   case 0:
-	center.x = mySize.x - myRadius;
-	center.y = myRadius;
+	center.x = size.x - radius;
+	center.y = radius;
 	break;
   case 1:
-	center.x = myRadius;
-	center.y = myRadius;
+	center.x = radius;
+	center.y = radius;
 	break;
   case 2:
-	center.x = myRadius;
-	center.y = mySize.y - myRadius;
+	center.x = radius;
+	center.y = size.y - radius;
 	break;
   case 3:
-	center.x = mySize.x - myRadius;
-	center.y = mySize.y - myRadius;
+	center.x = size.x - radius;
+	center.y = size.y - radius;
 	break;
   }
 
   return sf::Vector2f (
-	  myRadius * cos (deltaAngle * (index - centerIndex) * pi / 180) + center.x,
-	  -myRadius * sin (deltaAngle * (index - centerIndex) * pi / 180)
+	  radius * cos (delta_angle * (index - center_index) * pi / 180) + center.x,
+	  -radius * sin (delta_angle * (index - center_index) * pi / 180)
 		  + center.y);
 }
 }// namespace sf
