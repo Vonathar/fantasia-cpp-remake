@@ -1,5 +1,6 @@
 #include "resource_manager.h"
 #include "../lib/json.hpp"
+#include "gui/rounded_rectangle_shape.h"
 #include <iostream>
 
 using nlohmann::json;
@@ -11,47 +12,73 @@ using std::to_string;
 void ResourceManager::initialise_window ()
 {
   // Background
-  load_background_sprite (GameStage::CITY_ENTRANCE);
-  // Battle area
-  load_battle_area_sprite ();
-  battle_area_sprite.setPosition (425.0f, 350.0f);
-  battle_area_sprite.setColor (sf::Color (225, 225, 225, 230));
+  load_background_sprite (GameStage::GREEN_FOREST);
+  // Rects
+  load_battle_area_rect ();
+  load_player_info_rect ();
+  load_enemy_info_rect ();
   // Player
   load_player_sprite ();
-  player_sprite.setPosition (475.0f, 540.0f);
-  player_sprite.setScale (0.65f, 0.65f);
+  player_sprite.setPosition (655.0f, 640.0f);
+  player_sprite.setScale (0.53f, 0.53f);
   player_texture.setSmooth (true);
   // Player info
   load_default_font ();
+  set_player_info (1, "Mercenary");
   player_info.setFont (default_font);
-  player_info.setPosition (475.0f, 700.0f);
   player_info.setCharacterSize (17);
   player_info.setFillColor (sf::Color::White);
   player_info.setLetterSpacing (0.5f);
-  set_player_info (1, "Mercenary");
+  sf::FloatRect player_info_bounds = player_info.getLocalBounds ();
+  player_info.setPosition (697.0f - player_info_bounds.width / 2, 802.0f);
+  // Enemy
+  Enemy e{};
+  e.name = "Fairy Filia";
+  e.level = 0;
+  load_enemy_sprite (GameStage::GREEN_FOREST, e);
+  enemy_sprite.setPosition (1053.0f, 640.0f);
+  enemy_sprite.setScale (0.8f, 0.8f);
+  enemy_texture.setSmooth (true);
   // Enemy info
+  set_enemy_info (1, "Fairy Filia");
   enemy_info.setFont (default_font);
-  enemy_info.setPosition (850.0f, 700.0f);
   enemy_info.setCharacterSize (17);
   enemy_info.setFillColor (sf::Color::White);
   enemy_info.setLetterSpacing (0.5f);
-  set_enemy_info (1, "Test name");
+  sf::FloatRect enemy_info_bounds = enemy_info.getLocalBounds ();
+  enemy_info.setPosition (1098.0f - enemy_info_bounds.width / 2, 802.0f);
 }
 
 void ResourceManager::load_player_sprite ()
 {
-  if (!player_texture.loadFromFile (resources_path + R"(/img/player.png)"))
+  if (!player_texture.loadFromFile (resources_path + "/img/player.png"))
   {
 	cerr << "Failed to load player sprite." << endl;
   }
   this->player_sprite.setTexture (player_texture);
 }
 
+void ResourceManager::load_enemy_sprite (GameStage game_stage,
+										 const Enemy &enemy)
+{
+  string enemy_name = enemy.name;
+  replace (enemy_name.begin (), enemy_name.end (), ' ', '_');
+  std::transform (enemy_name.begin (), enemy_name.end (), enemy_name.begin (),
+				  [] (unsigned char c) { return std::tolower (c); });
+  string img_path = resources_path + "/img/enemies/stage_"
+					+ to_string (to_stage_number (game_stage)) + "/"
+					+ enemy_name + ".png";
+  if (!enemy_texture.loadFromFile (img_path))
+  {
+	cerr << "Failed to load enemy sprite." << endl;
+  }
+  this->enemy_sprite.setTexture (enemy_texture);
+}
+
 void ResourceManager::load_background_sprite (GameStage game_stage)
 {
   string stage_number = std::to_string (to_stage_number (game_stage));
-  string path =
-	  resources_path + R"(/img/background/)" + (stage_number) + ".jpg";
+  string path = resources_path + "/img/background/" + (stage_number) + ".jpg";
   if (!background_texture.loadFromFile (path))
   {
 	cerr << "Failed to load background." << endl;
@@ -59,20 +86,37 @@ void ResourceManager::load_background_sprite (GameStage game_stage)
   background_sprite.setTexture (background_texture);
 }
 
-void ResourceManager::load_battle_area_sprite ()
+void ResourceManager::load_battle_area_rect ()
 {
-  if (!battle_area_texture.loadFromFile (resources_path
-										 + R"(/img/battle_area.png)"))
-  {
-	cerr << "Failed to load battle area." << endl;
-  }
-  battle_area_sprite.setTexture (battle_area_texture);
+  battle_area_rect.setSize (sf::Vector2f (746.0f, 464.0f));
+  battle_area_rect.setCornersRadius (25);
+  battle_area_rect.setCornerPointCount (50);
+  battle_area_rect.setFillColor (sf::Color (0, 0, 0, 230));
+  battle_area_rect.setPosition (585.0f, 500.0f);
+}
+
+void ResourceManager::load_player_info_rect ()
+{
+  player_info_rect.setSize (sf::Vector2f (192, 25));
+  player_info_rect.setCornersRadius (12);
+  player_info_rect.setCornerPointCount (20);
+  player_info_rect.setFillColor (sf::Color (0, 0, 0, 230));
+  player_info_rect.setPosition (603.0f, 801.0f);
+}
+
+void ResourceManager::load_enemy_info_rect ()
+{
+  enemy_info_rect.setSize (sf::Vector2f (435, 25));
+  enemy_info_rect.setCornersRadius (12);
+  enemy_info_rect.setCornerPointCount (20);
+  enemy_info_rect.setFillColor (sf::Color (0, 0, 0, 230));
+  enemy_info_rect.setPosition (880.0f, 801.0f);
 }
 
 void ResourceManager::load_default_font ()
 {
   if (!default_font.loadFromFile (resources_path
-								  + R"(font/Righteous-Regular.ttf)"))
+								  + "font/Righteous-Regular.ttf"))
   {
 	cerr << "Failed to load font." << endl;
   }
@@ -82,30 +126,15 @@ int ResourceManager::to_stage_number (GameStage game_stage)
 {
   switch (game_stage)
   {
-  case GameStage::CITY_ENTRANCE: return 1;
+  case GameStage::GREEN_FOREST: return 1;
   case GameStage::DARK_FOREST: return 2;
-  case GameStage::FORGOTTEN_ROAD: return 3;
-  case GameStage::GOLDEN_TEMPLE: return 4;
-  case GameStage::GREEN_FOREST: return 5;
+  case GameStage::MAGIC_FOREST: return 3;
+  case GameStage::CITY_ENTRANCE: return 4;
+  case GameStage::FORGOTTEN_ROAD: return 5;
   case GameStage::HAUNTED_MARKETPLACE: return 6;
-  case GameStage::INFERNO: return 7;
-  case GameStage::MAGIC_FOREST: return 8;
+  case GameStage::GOLDEN_TEMPLE: return 7;
+  case GameStage::INFERNO: return 8;
   }
-}
-
-sf::Sprite ResourceManager::get_player_sprite ()
-{
-  return player_sprite;
-}
-
-sf::Sprite ResourceManager::get_background_sprite ()
-{
-  return background_sprite;
-}
-
-sf::Sprite ResourceManager::get_battle_area_sprite ()
-{
-  return battle_area_sprite;
 }
 
 void ResourceManager::set_player_info (int player_level, string player_name)
@@ -118,12 +147,16 @@ void ResourceManager::set_enemy_info (int enemy_level, string enemy_name)
   enemy_info.setString ("Lv. " + to_string (enemy_level) + " " + enemy_name);
 }
 
-Text ResourceManager::get_player_info ()
+std::vector<sf::Drawable *> ResourceManager::get_drawables ()
 {
-  return player_info;
-}
-
-Text ResourceManager::get_enemy_info ()
-{
-  return enemy_info;
+  std::vector<sf::Drawable *> drawables{};
+  drawables.push_back (&background_sprite);
+  drawables.push_back (&battle_area_rect);
+  drawables.push_back (&player_info_rect);
+  drawables.push_back (&enemy_info_rect);
+  drawables.push_back (&player_sprite);
+  drawables.push_back (&enemy_sprite);
+  drawables.push_back (&player_info);
+  drawables.push_back (&enemy_info);
+  return drawables;
 }

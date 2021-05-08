@@ -2,11 +2,10 @@
 
 void WindowManager::draw_all ()
 {
-  window.draw (resource_manager.get_background_sprite ());
-  window.draw (resource_manager.get_battle_area_sprite ());
-  window.draw (resource_manager.get_player_sprite ());
-  window.draw (resource_manager.get_player_info ());
-  window.draw (resource_manager.get_enemy_info ());
+  for (auto drawable : resource_manager.get_drawables ())
+  {
+	window.draw (*drawable);
+  }
   window.display ();
 }
 

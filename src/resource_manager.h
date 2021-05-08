@@ -3,7 +3,10 @@
 
 #include "SFML/Graphics.hpp"
 #include "enum/game_stage.h"
+#include "gui/rounded_rectangle_shape.h"
+#include "struct/enemy.h"
 #include <iostream>
+#include <vector>
 
 using sf::Font;
 using sf::Sprite;
@@ -21,17 +24,17 @@ class ResourceManager {
    * Loads all resources and sets their initial position.
    */
   void initialise_window ();
-  Sprite get_player_sprite ();
-  Sprite get_background_sprite ();
-  Sprite get_battle_area_sprite ();
-  Text get_player_info ();
-  Text get_enemy_info ();
+  std::vector<sf::Drawable *> get_drawables ();
 
  private:
   /**
    * Loads the default player sprite from a resource file.
    */
   void load_player_sprite ();
+  /**
+   * Loads the given enemy sprite from a resource file.
+   */
+  void load_enemy_sprite (GameStage game_stage, const Enemy &enemy);
   /**
    * Loads the background sprite of a given game stage from a resource file.
    *
@@ -41,7 +44,15 @@ class ResourceManager {
   /**
    * Loads the battle area sprite from a resource file.
    */
-  void load_battle_area_sprite ();
+  void load_battle_area_rect ();
+  /**
+   * Loads the player info background sprite from a resource file.
+   */
+  void load_player_info_rect ();
+  /**
+   * Loads the enemy info background sprite from a resource file.
+   */
+  void load_enemy_info_rect ();
   /**
    * Loads the default font from a resource file.
    */
@@ -68,9 +79,13 @@ class ResourceManager {
    */
   int to_stage_number (GameStage game_stage);
   Sprite player_sprite{};
+  Sprite enemy_sprite{};
   Sprite background_sprite{};
-  Sprite battle_area_sprite{};
+  sf::RoundedRectangleShape battle_area_rect{};
+  sf::RoundedRectangleShape player_info_rect{};
+  sf::RoundedRectangleShape enemy_info_rect{};
   Texture player_texture;
+  Texture enemy_texture;
   Texture background_texture;
   Texture battle_area_texture{};
   Font default_font;
