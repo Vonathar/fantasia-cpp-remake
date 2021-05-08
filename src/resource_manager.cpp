@@ -101,11 +101,6 @@ sf::Sprite ResourceManager::get_battle_area_sprite ()
   return battle_area_sprite;
 }
 
-sf::Font ResourceManager::get_default_font ()
-{
-  return default_font;
-}
-
 Text ResourceManager::get_player_info ()
 {
   return player_info;

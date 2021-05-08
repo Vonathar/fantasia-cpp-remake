@@ -25,7 +25,6 @@ class ResourceManager {
   Sprite get_background_sprite ();
   Sprite get_battle_area_sprite ();
   Text get_player_info ();
-  Font get_default_font ();
 
  private:
   /**
