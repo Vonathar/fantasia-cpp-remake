@@ -17,11 +17,12 @@ class ResourceManager {
 
  public:
   /**
-   * Loads all the required initial resources and sets their initial position.
+   * Loads all resources and sets their initial position.
    */
   void initialise_window ();
   Sprite get_player_sprite ();
   Sprite get_background_sprite ();
+  Sprite get_battle_area_sprite ();
   Font get_default_font ();
 
  private:
@@ -36,6 +37,10 @@ class ResourceManager {
    */
   void load_background_sprite (GameStage game_stage);
   /**
+   * Loads the battle area sprite from a resource file.
+   */
+  void load_battle_area_sprite ();
+  /**
    * Loads the default font from a resource file.
    */
   void load_default_font ();
@@ -48,8 +53,10 @@ class ResourceManager {
   int to_stage_number (GameStage game_stage);
   Sprite player_sprite{};
   Sprite background_sprite{};
+  Sprite battle_area_sprite{};
   Texture player_texture;
   Texture background_texture;
+  Texture battle_area_texture{};
   Font default_font;
   string resources_path{"../res/"};
 };

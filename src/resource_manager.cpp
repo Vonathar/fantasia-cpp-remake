@@ -10,11 +10,13 @@ using std::endl;
 void ResourceManager::initialise_window ()
 {
   load_background_sprite (GameStage::CITY_ENTRANCE);
-  background_sprite.setPosition (0.0f, 0.0f);
-  background_sprite.setScale (0.6f, 0.6f);
+  load_battle_area_sprite ();
+  battle_area_sprite.setPosition (425.0f, 350.0f);
+  battle_area_sprite.setColor (sf::Color (225, 225, 225, 230));
   load_player_sprite ();
-  player_sprite.setPosition (700.0f, 600.0f);
-  player_sprite.setScale (0.7f, 0.7f);
+  player_sprite.setPosition (475.0f, 540.0f);
+  player_texture.setSmooth (true);
+  player_sprite.setScale (0.65f, 0.65f);
 }
 
 void ResourceManager::load_player_sprite ()
@@ -36,6 +38,16 @@ void ResourceManager::load_background_sprite (GameStage game_stage)
 	cerr << "Failed to load background." << endl;
   }
   background_sprite.setTexture (background_texture);
+}
+
+void ResourceManager::load_battle_area_sprite ()
+{
+  if (!battle_area_texture.loadFromFile (resources_path
+										 + R"(/img/battle_area.png)"))
+  {
+	cerr << "Failed to load battle area." << endl;
+  }
+  battle_area_sprite.setTexture (battle_area_texture);
 }
 
 void ResourceManager::load_default_font ()
@@ -70,6 +82,11 @@ sf::Sprite ResourceManager::get_player_sprite ()
 sf::Sprite ResourceManager::get_background_sprite ()
 {
   return background_sprite;
+}
+
+sf::Sprite ResourceManager::get_battle_area_sprite ()
+{
+  return battle_area_sprite;
 }
 
 sf::Font ResourceManager::get_default_font ()
