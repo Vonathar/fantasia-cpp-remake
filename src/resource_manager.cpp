@@ -6,17 +6,29 @@ using nlohmann::json;
 using std::cerr;
 using std::cout;
 using std::endl;
+using std::to_string;
 
 void ResourceManager::initialise_window ()
 {
+  // Background
   load_background_sprite (GameStage::CITY_ENTRANCE);
+  // Battle area
   load_battle_area_sprite ();
   battle_area_sprite.setPosition (425.0f, 350.0f);
   battle_area_sprite.setColor (sf::Color (225, 225, 225, 230));
+  // Player
   load_player_sprite ();
   player_sprite.setPosition (475.0f, 540.0f);
-  player_texture.setSmooth (true);
   player_sprite.setScale (0.65f, 0.65f);
+  player_texture.setSmooth (true);
+  // Player info
+  load_default_font ();
+  player_info.setFont (default_font);
+  player_info.setPosition (475.0f, 700.0f);
+  player_info.setCharacterSize (17.5);
+  player_info.setFillColor (sf::Color::White);
+  player_info.setLetterSpacing (0.5f);
+  set_player_info (1, "Mercenary");
 }
 
 void ResourceManager::load_player_sprite ()
@@ -53,7 +65,7 @@ void ResourceManager::load_battle_area_sprite ()
 void ResourceManager::load_default_font ()
 {
   if (!default_font.loadFromFile (resources_path
-								  + R"(/font/Righteous-Regular.ttf)"))
+								  + R"(font/Righteous-Regular.ttf)"))
   {
 	cerr << "Failed to load font." << endl;
   }
@@ -92,4 +104,14 @@ sf::Sprite ResourceManager::get_battle_area_sprite ()
 sf::Font ResourceManager::get_default_font ()
 {
   return default_font;
+}
+
+Text ResourceManager::get_player_info ()
+{
+  return player_info;
+}
+
+void ResourceManager::set_player_info (int player_level, string player_name)
+{
+  player_info.setString ("Lv. " + to_string (player_level) + " " + player_name);
 }

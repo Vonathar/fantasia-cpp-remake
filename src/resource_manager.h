@@ -7,6 +7,7 @@
 
 using sf::Font;
 using sf::Sprite;
+using sf::Text;
 using sf::Texture;
 using std::string;
 
@@ -23,6 +24,7 @@ class ResourceManager {
   Sprite get_player_sprite ();
   Sprite get_background_sprite ();
   Sprite get_battle_area_sprite ();
+  Text get_player_info ();
   Font get_default_font ();
 
  private:
@@ -45,6 +47,13 @@ class ResourceManager {
    */
   void load_default_font ();
   /**
+   * Updates the player name and level.
+   *
+   * @param player_level the new level of the player.
+   * @param player_name the new name of the player.
+   */
+  void set_player_info (int player_level, string player_name);
+  /**
    * Returns the numerical representation of a game stage.
    *
    * @param game_stage the game stage.
@@ -58,6 +67,7 @@ class ResourceManager {
   Texture background_texture;
   Texture battle_area_texture{};
   Font default_font;
+  Text player_info;
   string resources_path{"../res/"};
 };
 
