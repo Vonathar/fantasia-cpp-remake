@@ -1,5 +1,5 @@
-#ifndef ROUNDEDRECTANGLESHAPE_HPP
-#define ROUNDEDRECTANGLESHAPE_HPP
+#ifndef ROUNDEDRECTANGLESHAPE_H
+#define ROUNDEDRECTANGLESHAPE_H
 
 #include <SFML/Graphics/Shape.hpp>
 
@@ -28,4 +28,4 @@ class RoundedRectangleShape : public sf::Shape {
   unsigned int corner_point_count;
 };
 }// namespace sf
-#endif// ROUNDEDRECTANGLESHAPE_HPP
+#endif// ROUNDEDRECTANGLESHAPE_H
