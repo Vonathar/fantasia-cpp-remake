@@ -19,25 +19,25 @@ void ResourceManager::initialise_window ()
   load_enemy_info_rect ();
   // Player
   load_player_sprite ();
-  player_sprite.setPosition (655.0f, 640.0f);
-  player_sprite.setScale (0.53f, 0.53f);
+  player_sprite.setPosition (655.0f, 680.0f);
+  player_sprite.setScale (0.6f, 0.6f);
   player_texture.setSmooth (true);
   // Player info
   load_default_font ();
-  set_player_info (1, "Mercenary");
+  set_player_info (1, "Rogue");
   player_info.setFont (default_font);
   player_info.setCharacterSize (17);
   player_info.setFillColor (sf::Color::White);
   player_info.setLetterSpacing (0.5f);
   sf::FloatRect player_info_bounds = player_info.getLocalBounds ();
-  player_info.setPosition (697.0f - player_info_bounds.width / 2, 802.0f);
+  player_info.setPosition (697.0f - player_info_bounds.width / 2, 832.0f);
   // Enemy
   Enemy e{};
   e.name = "Fairy Filia";
   e.level = 0;
   load_enemy_sprite (GameStage::GREEN_FOREST, e);
-  enemy_sprite.setPosition (1053.0f, 640.0f);
-  enemy_sprite.setScale (0.8f, 0.8f);
+  enemy_sprite.setPosition (1040.0f, 650.0f);
+  enemy_sprite.setScale (0.9f, 0.9f);
   enemy_texture.setSmooth (true);
   // Enemy info
   set_enemy_info (1, "Fairy Filia");
@@ -46,7 +46,8 @@ void ResourceManager::initialise_window ()
   enemy_info.setFillColor (sf::Color::White);
   enemy_info.setLetterSpacing (0.5f);
   sf::FloatRect enemy_info_bounds = enemy_info.getLocalBounds ();
-  enemy_info.setPosition (1098.0f - enemy_info_bounds.width / 2, 802.0f);
+  enemy_info.setPosition (1098.0f - enemy_info_bounds.width / 2, 832.0f);
+  load_static_text ();
 }
 
 void ResourceManager::load_player_sprite ()
@@ -101,7 +102,7 @@ void ResourceManager::load_player_info_rect ()
   player_info_rect.set_corners_radius (12);
   player_info_rect.set_corner_point_count (20);
   player_info_rect.setFillColor (sf::Color (0, 0, 0, 230));
-  player_info_rect.setPosition (603.0f, 801.0f);
+  player_info_rect.setPosition (603.0f, 831.0f);
 }
 
 void ResourceManager::load_enemy_info_rect ()
@@ -110,7 +111,7 @@ void ResourceManager::load_enemy_info_rect ()
   enemy_info_rect.set_corners_radius (12);
   enemy_info_rect.set_corner_point_count (20);
   enemy_info_rect.setFillColor (sf::Color (0, 0, 0, 230));
-  enemy_info_rect.setPosition (880.0f, 801.0f);
+  enemy_info_rect.setPosition (880.0f, 831.0f);
 }
 
 void ResourceManager::load_default_font ()
@@ -120,6 +121,37 @@ void ResourceManager::load_default_font ()
   {
 	cerr << "Failed to load font." << endl;
   }
+}
+
+void ResourceManager::load_static_text ()
+{
+  player_hp_text.setFont (default_font);
+  player_hp_text.setCharacterSize (13);
+  player_hp_text.setFillColor (sf::Color::White);
+  player_hp_text.setLetterSpacing (0.5f);
+  player_hp_text.setPosition (603.0f, 868.0f);
+  player_hp_text.setString ("HP");
+
+  player_fever_text.setFont (default_font);
+  player_fever_text.setCharacterSize (13);
+  player_fever_text.setFillColor (sf::Color::White);
+  player_fever_text.setLetterSpacing (0.5f);
+  player_fever_text.setPosition (603.0f, 893.0f);
+  player_fever_text.setString ("FV");
+
+  player_xp_text.setFont (default_font);
+  player_xp_text.setCharacterSize (13);
+  player_xp_text.setFillColor (sf::Color::White);
+  player_xp_text.setLetterSpacing (0.5f);
+  player_xp_text.setPosition (603.0f, 918.0f);
+  player_xp_text.setString ("XP");
+
+  enemy_hp_text.setFont (default_font);
+  enemy_hp_text.setCharacterSize (13);
+  enemy_hp_text.setFillColor (sf::Color::White);
+  enemy_hp_text.setLetterSpacing (0.5f);
+  enemy_hp_text.setPosition (882.0f, 868.0f);
+  enemy_hp_text.setString ("HP");
 }
 
 int ResourceManager::to_stage_number (GameStage game_stage)
@@ -158,5 +190,13 @@ std::vector<sf::Drawable *> ResourceManager::get_drawables ()
   drawables.push_back (&enemy_sprite);
   drawables.push_back (&player_info);
   drawables.push_back (&enemy_info);
+  drawables.push_back (&enemy_hp_bar);
+  drawables.push_back (&enemy_hp_text);
+  drawables.push_back (&player_hp_text);
+  drawables.push_back (&player_hp_bar);
+  drawables.push_back (&player_fever_text);
+  drawables.push_back (&player_fever_bar);
+  drawables.push_back (&player_xp_text);
+  drawables.push_back (&player_xp_bar);
   return drawables;
 }

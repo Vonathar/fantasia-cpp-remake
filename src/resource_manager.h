@@ -3,6 +3,7 @@
 
 #include "SFML/Graphics.hpp"
 #include "enum/game_stage.h"
+#include "gui/progress_bar.h"
 #include "gui/rounded_rectangle_shape.h"
 #include "struct/enemy.h"
 #include <iostream>
@@ -58,6 +59,10 @@ class ResourceManager {
    */
   void load_default_font ();
   /**
+   * Loads the default static text elements.
+   */
+  void load_static_text ();
+  /**
    * Updates the player name and level.
    *
    * @param player_level the new level of the player.
@@ -78,19 +83,28 @@ class ResourceManager {
    * @return the numerical representation of the game stage.
    */
   int to_stage_number (GameStage game_stage);
+
   Sprite player_sprite{};
   Sprite enemy_sprite{};
   Sprite background_sprite{};
   sf::RoundedRectangleShape battle_area_rect{};
   sf::RoundedRectangleShape player_info_rect{};
   sf::RoundedRectangleShape enemy_info_rect{};
+  sf::ProgressBar enemy_hp_bar{407, sf::Color (207, 63, 46), 907.0f, 871.0f};
+  sf::ProgressBar player_hp_bar{169, sf::Color (207, 63, 46), 625.0f, 871.0f};
+  sf::ProgressBar player_fever_bar{689, sf::Color (141, 102, 241), 625.0f,
+								   896.0f};
+  sf::ProgressBar player_xp_bar{689, sf::Color (166, 255, 17), 625.0f, 921.0f};
   Texture player_texture;
   Texture enemy_texture;
   Texture background_texture;
-  Texture battle_area_texture{};
   Font default_font;
   Text player_info;
   Text enemy_info;
+  Text player_hp_text;
+  Text player_fever_text;
+  Text player_xp_text;
+  Text enemy_hp_text;
   string resources_path{"../res/"};
 };
 
