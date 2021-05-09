@@ -23,6 +23,7 @@ class ProgressBar : public Drawable {
   float max_value{0};
   sf::Color fg_color;
   void draw (RenderTarget &target, RenderStates states) const override;
+  void refresh ();
 };
 }// namespace sf
 #endif//_PROGRESS_BAR_H_
