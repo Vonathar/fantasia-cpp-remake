@@ -7,6 +7,7 @@
 class WindowManager {
 
  public:
+  WindowManager ();
   /**
    * Draws all managed resources to the window, ready to be painted by the next
    * call to display.
@@ -19,7 +20,7 @@ class WindowManager {
 
  private:
   ResourceManager resource_manager;
-  sf::RenderWindow window{sf::VideoMode (1920, 1080, 32), "Fantasia"};
+  sf::RenderWindow *window;
 };
 
 #endif//_WINDOW_MANAGER_H_
