@@ -9,7 +9,10 @@
 #include <iostream>
 #include <vector>
 
+using sf::Color;
 using sf::Font;
+using sf::ProgressBar;
+using sf::RoundedRectangleShape;
 using sf::Sprite;
 using sf::Text;
 using sf::Texture;
@@ -87,14 +90,13 @@ class ResourceManager {
   Sprite player_sprite{};
   Sprite enemy_sprite{};
   Sprite background_sprite{};
-  sf::RoundedRectangleShape battle_area_rect{};
-  sf::RoundedRectangleShape player_info_rect{};
-  sf::RoundedRectangleShape enemy_info_rect{};
-  sf::ProgressBar enemy_hp_bar{407, sf::Color (207, 63, 46), 907.0f, 871.0f};
-  sf::ProgressBar player_hp_bar{169, sf::Color (207, 63, 46), 625.0f, 871.0f};
-  sf::ProgressBar player_fever_bar{689, sf::Color (141, 102, 241), 625.0f,
-								   896.0f};
-  sf::ProgressBar player_xp_bar{689, sf::Color (166, 255, 17), 625.0f, 921.0f};
+  RoundedRectangleShape battle_area_rect{};
+  RoundedRectangleShape player_info_rect{};
+  RoundedRectangleShape enemy_info_rect{};
+  ProgressBar enemy_hp_bar{407, Color (207, 63, 46), 907.0f, 871.0f};
+  ProgressBar player_hp_bar{169, Color (207, 63, 46), 625.0f, 871.0f};
+  ProgressBar player_fever_bar{689, Color (141, 102, 241), 625.0f, 896.0f};
+  ProgressBar player_xp_bar{689, Color (166, 255, 17), 625.0f, 921.0f};
   Texture player_texture;
   Texture enemy_texture;
   Texture background_texture;
