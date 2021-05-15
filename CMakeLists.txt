@@ -3,7 +3,7 @@ set(PROJECT_NAME fantasia_remake)
 project(${PROJECT_NAME})
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -static")
 set(CMAKE_CXX_STANDARD 14)
-set(SOURCE_FILES src/main.cpp src/resource_manager.cpp src/resource_manager.h src/enum/game_stage.h src/window_manager.cpp src/window_manager.h src/struct/enemy.cpp src/struct/enemy.h src/gui/rounded_rectangle_shape.cpp src/gui/rounded_rectangle_shape.h src/gui/progress_bar.cpp src/gui/progress_bar.h)
+set(SOURCE_FILES src/main.cpp src/resource_manager.cpp src/resource_manager.h src/enum/stage_name.h src/window_manager.cpp src/window_manager.h src/enemy.cpp src/enemy.h src/gui/rounded_rectangle_shape.cpp src/gui/rounded_rectangle_shape.h src/gui/progress_bar.cpp src/gui/progress_bar.h src/clickable.h src/player.cpp src/player.h src/stage.cpp src/stage.h src/gameplay/game.cpp src/gameplay/game.h)
 
 if (CMAKE_BUILD_TYPE STREQUAL "Release")
     add_executable(${PROJECT_NAME} WIN32 ${SOURCE_FILES})
