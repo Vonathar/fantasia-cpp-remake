@@ -1,7 +1,8 @@
-#include "window_manager.h"
+#include "gameplay/game.h"
 
 int main ()
 {
-  WindowManager ().start_window ();
+  Game game{};
+  game.start ();
   return 0;
 }
