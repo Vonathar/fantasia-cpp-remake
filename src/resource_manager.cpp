@@ -1,6 +1,5 @@
 #include "resource_manager.h"
 #include "../lib/json.hpp"
-#include "gui/rounded_rectangle_shape.h"
 #include <iostream>
 
 using nlohmann::json;
@@ -12,7 +11,7 @@ using std::to_string;
 void ResourceManager::initialise_window ()
 {
   // Background
-  load_background_sprite (GameStage::GREEN_FOREST);
+  load_background_sprite (StageName::GREEN_FOREST);
   // Rects
   load_battle_area_rect ();
   load_player_info_rect ();
@@ -32,10 +31,6 @@ void ResourceManager::initialise_window ()
   sf::FloatRect player_info_bounds = player_info.getLocalBounds ();
   player_info.setPosition (697.0f - player_info_bounds.width / 2, 832.0f);
   // Enemy
-  Enemy e{};
-  e.name = "Fairy Filia";
-  e.level = 0;
-  load_enemy_sprite (GameStage::GREEN_FOREST, e);
   enemy_sprite.setPosition (1040.0f, 650.0f);
   enemy_sprite.setScale (0.9f, 0.9f);
   enemy_texture.setSmooth (true);
@@ -59,15 +54,14 @@ void ResourceManager::load_player_sprite ()
   this->player_sprite.setTexture (player_texture);
 }
 
-void ResourceManager::load_enemy_sprite (GameStage game_stage,
-										 const Enemy &enemy)
+void ResourceManager::load_enemy_sprite (StageName stage_name,
+										 string enemy_name)
 {
-  string enemy_name = enemy.name;
   replace (enemy_name.begin (), enemy_name.end (), ' ', '_');
   std::transform (enemy_name.begin (), enemy_name.end (), enemy_name.begin (),
 				  [] (unsigned char c) { return std::tolower (c); });
   string img_path = resources_path + "/img/enemies/stage_"
-					+ to_string (to_stage_number (game_stage)) + "/"
+					+ to_string (to_stage_number (stage_name)) + "/"
 					+ enemy_name + ".png";
   if (!enemy_texture.loadFromFile (img_path))
   {
@@ -76,7 +70,7 @@ void ResourceManager::load_enemy_sprite (GameStage game_stage,
   this->enemy_sprite.setTexture (enemy_texture);
 }
 
-void ResourceManager::load_background_sprite (GameStage game_stage)
+void ResourceManager::load_background_sprite (StageName game_stage)
 {
   string stage_number = std::to_string (to_stage_number (game_stage));
   string path = resources_path + "/img/background/" + (stage_number) + ".jpg";
@@ -154,27 +148,28 @@ void ResourceManager::load_static_text ()
   enemy_hp_text.setString ("HP");
 }
 
-int ResourceManager::to_stage_number (GameStage game_stage)
+int ResourceManager::to_stage_number (StageName game_stage)
 {
   switch (game_stage)
   {
-  case GameStage::GREEN_FOREST: return 1;
-  case GameStage::DARK_FOREST: return 2;
-  case GameStage::MAGIC_FOREST: return 3;
-  case GameStage::CITY_ENTRANCE: return 4;
-  case GameStage::FORGOTTEN_ROAD: return 5;
-  case GameStage::HAUNTED_MARKETPLACE: return 6;
-  case GameStage::GOLDEN_TEMPLE: return 7;
-  case GameStage::INFERNO: return 8;
+  case StageName::GREEN_FOREST: return 1;
+  case StageName::DARK_FOREST: return 2;
+  case StageName::MAGIC_FOREST: return 3;
+  case StageName::CITY_ENTRANCE: return 4;
+  case StageName::FORGOTTEN_ROAD: return 5;
+  case StageName::HAUNTED_MARKETPLACE: return 6;
+  case StageName::GOLDEN_TEMPLE: return 7;
+  case StageName::INFERNO: return 8;
   }
 }
 
-void ResourceManager::set_player_info (int player_level, string player_name)
+void ResourceManager::set_player_info (int player_level,
+									   const string &player_name)
 {
   player_info.setString ("Lv. " + to_string (player_level) + " " + player_name);
 }
 
-void ResourceManager::set_enemy_info (int enemy_level, string enemy_name)
+void ResourceManager::set_enemy_info (int enemy_level, const string &enemy_name)
 {
   enemy_info.setString ("Lv. " + to_string (enemy_level) + " " + enemy_name);
 }
@@ -199,4 +194,13 @@ std::vector<sf::Drawable *> ResourceManager::get_drawables ()
   drawables.push_back (&player_xp_text);
   drawables.push_back (&player_xp_bar);
   return drawables;
+}
+
+const Sprite &ResourceManager::get_player_sprite () const
+{
+  return player_sprite;
+}
+const Sprite &ResourceManager::get_enemy_sprite () const
+{
+  return enemy_sprite;
 }

@@ -2,10 +2,13 @@
 #define _RESOURCE_MANAGER_H_
 
 #include "SFML/Graphics.hpp"
-#include "enum/game_stage.h"
+#include "clickable.h"
+#include "enemy.h"
+#include "enum/stage_name.h"
 #include "gui/progress_bar.h"
 #include "gui/rounded_rectangle_shape.h"
-#include "struct/enemy.h"
+#include "player.h"
+#include "stage.h"
 #include <iostream>
 #include <vector>
 
@@ -28,7 +31,13 @@ class ResourceManager {
    * Loads all resources and sets their initial position.
    */
   void initialise_window ();
+  /**
+   * Loads the given enemy sprite from a resource file.
+   */
+  void load_enemy_sprite (StageName stage_name, string enemy_name);
   std::vector<sf::Drawable *> get_drawables ();
+  const Sprite &get_player_sprite () const;
+  const Sprite &get_enemy_sprite () const;
 
  private:
   /**
@@ -36,15 +45,11 @@ class ResourceManager {
    */
   void load_player_sprite ();
   /**
-   * Loads the given enemy sprite from a resource file.
-   */
-  void load_enemy_sprite (GameStage game_stage, const Enemy &enemy);
-  /**
    * Loads the background sprite of a given game stage from a resource file.
    *
    * @param game_stage the game stage.
    */
-  void load_background_sprite (GameStage game_stage);
+  void load_background_sprite (StageName game_stage);
   /**
    * Loads the battle area sprite from a resource file.
    */
@@ -71,22 +76,23 @@ class ResourceManager {
    * @param player_level the new level of the player.
    * @param player_name the new name of the player.
    */
-  void set_player_info (int player_level, string player_name);
+  void set_player_info (int player_level, const string &player_name);
   /**
    * Updates the enemy name and level.
    *
    * @param enemy_level the new level of the enemy.
    * @param enemy_name the new name of the enemy.
    */
-  void set_enemy_info (int enemy_level, string enemy_name);
+  void set_enemy_info (int enemy_level, const string &enemy_name);
   /**
    * Returns the numerical representation of a game stage.
    *
    * @param game_stage the game stage.
    * @return the numerical representation of the game stage.
    */
-  int to_stage_number (GameStage game_stage);
+  int to_stage_number (StageName game_stage);
 
+ private:
   Sprite player_sprite{};
   Sprite enemy_sprite{};
   Sprite background_sprite{};
