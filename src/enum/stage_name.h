@@ -1,7 +1,7 @@
-#ifndef _GAME_STAGE_H_
-#define _GAME_STAGE_H_
+#ifndef _STAGE_NAME_H_
+#define _STAGE_NAME_H_
 
-enum class GameStage {
+enum class StageName {
   GREEN_FOREST,
   DARK_FOREST,
   MAGIC_FOREST,
@@ -12,4 +12,4 @@ enum class GameStage {
   INFERNO
 };
 
-#endif//_GAME_STAGE_H_
+#endif//_STAGE_NAME_H_
