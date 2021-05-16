@@ -47,21 +47,9 @@ class ResourceManager
   const Sprite &get_enemy_sprite() const;
 
   private:
-  /**
-   * Loads the default player sprite from a resource file.
-   */
   void load_player_sprite();
-  /**
-   * Loads and sets up all static rects.
-   */
   void load_static_rects();
-  /**
-   * Loads the default font from a resource file.
-   */
   void load_default_font();
-  /**
-   * Loads the default static text elements.
-   */
   void load_static_text();
   /**
    * Returns the numerical representation of a game name.

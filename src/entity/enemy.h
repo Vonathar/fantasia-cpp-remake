@@ -6,16 +6,16 @@
 
 using std::string;
 
-struct Enemy : public sf::Clickable {
-
- public:
-  Enemy () = default;
-  ~Enemy () override = default;
+struct Enemy : public sf::Clickable
+{
+  public:
+  Enemy() = default;
+  ~Enemy() override = default;
   string name{};
   int level{};
   float hp{};
   float max_hp{};
-  void click () override;
+  void click() override;
 };
 
-#endif//_ENEMY_H_
+#endif //_ENEMY_H_

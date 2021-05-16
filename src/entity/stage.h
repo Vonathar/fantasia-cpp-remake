@@ -6,12 +6,12 @@
 
 using std::string;
 
-class Stage {
-
- public:
+class Stage
+{
+  public:
   StageName name;
   bool is_next_stage_unlocked;
   int kills_for_next_stage;
 };
 
-#endif//_STAGE_H_
+#endif //_STAGE_H_

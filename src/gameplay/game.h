@@ -9,15 +9,15 @@
 #include <iostream>
 #include <vector>
 
-class Game {
-
- public:
+class Game
+{
+  public:
   Enemy enemy{};
   Player player{};
   Stage stage{};
   ResourceManager resource_manager{};
   WindowManager window_manager{&resource_manager, &player, &enemy, &stage};
-  void start ();
+  void start();
 };
 
-#endif//_GAME_H_
+#endif //_GAME_H_

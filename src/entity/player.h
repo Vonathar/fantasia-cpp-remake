@@ -7,7 +7,6 @@ using std::string;
 
 class Player : public sf::Clickable
 {
-
   public:
   Player() = default;
   ~Player() override = default;
