@@ -1,0 +1,88 @@
+{
+  "greenForest": [
+    "Fairy Filia",
+    "Grasshopper",
+    "Green Spider",
+    "Imperial Widow",
+    "Mothy",
+    "Shroomy",
+    "Spora"
+  ],
+  "darkForest": [
+    "Dark Angel",
+    "Reaper",
+    "Banshee",
+    "Imp",
+    "Ghaul",
+    "Seeker",
+    "Succubus",
+    "Ogre"
+  ],
+  "magicForest": [
+    "Earth Bull",
+    "Bush Wisp",
+    "Leaf Imp",
+    "Earth Lion",
+    "Mandrake",
+    "Rock Golem",
+    "Earth Snake",
+    "Earth Spawn",
+    "Earth Turtle",
+    "Earth Wisp"
+  ],
+  "cityEntrance": [
+    "Goblin Archer",
+    "Goblin Elite",
+    "Goblin Grunt",
+    "Goblin Mage",
+    "Goblin Raider",
+    "Rogue Swordman",
+    "Rogue Monk",
+    "Rogue Assassin"
+  ],
+  "forgottenRoad": [
+    "Elf Archer",
+    "Elf Assassin",
+    "Crossbow Elf",
+    "Dual Sword Elf",
+    "Elf Mage",
+    "Spear Elf",
+    "Sword Elf",
+    "Nature Linker",
+    "Rogue Elf",
+    "Spellcaster"
+  ],
+  "hauntedMarketplace": [
+    "Gazers Eyewing",
+    "Gazers Skull",
+    "Tenteye",
+    "Ghostus",
+    "Knight Destrand",
+    "Knight Galpha",
+    "Knight Goliath",
+    "Ghost Puppet Pailo",
+    "Ghost Revelator"
+  ],
+  "goldenTemple": [
+    "Axe Knight",
+    "Golden Axe Knight",
+    "Gunner Knight ",
+    "Golden Gunner Knight",
+    "Spear Knight",
+    "Golden Spear Knight",
+    "Sword Knight",
+    "Golden Sword Knight"
+  ],
+  "inferno": [
+    "Fire Bull",
+    "Fire Dragonspawn",
+    "Fire Lion",
+    "Fire Ogre",
+    "Fire Sabretooth",
+    "Fire Salamander",
+    "Fire Turtle",
+    "Volcanic Maiden",
+    "Fire Vulture",
+    "Fire Wisp"
+  ]
+}
