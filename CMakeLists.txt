@@ -3,17 +3,17 @@ set(PROJECT_NAME fantasia_remake)
 project(${PROJECT_NAME})
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -static")
 set(CMAKE_CXX_STANDARD 14)
-set(SOURCE_FILES src/main.cpp src/resource_manager.cpp src/resource_manager.h src/enum/stage_name.h src/window_manager.cpp src/window_manager.h src/enemy.cpp src/enemy.h src/gui/rounded_rectangle_shape.cpp src/gui/rounded_rectangle_shape.h src/gui/progress_bar.cpp src/gui/progress_bar.h src/clickable.h src/player.cpp src/player.h src/stage.cpp src/stage.h src/gameplay/game.cpp src/gameplay/game.h)
+set(SOURCE_FILES src/main.cpp src/resource_manager.cpp src/resource_manager.h src/enum/stage_name.h src/window_manager.cpp src/window_manager.h src/gui/rounded_rectangle_shape.cpp src/gui/rounded_rectangle_shape.h src/gui/progress_bar.cpp src/gui/progress_bar.h src/clickable.h src/entity/player.cpp src/entity/player.h src/entity/stage.cpp src/entity/stage.h src/gameplay/game.cpp src/gameplay/game.h src/entity/enemy.cpp src/entity/enemy.h)
+set(SFML_DIR "C:/SFML/lib/cmake/SFML")
 
-if (CMAKE_BUILD_TYPE STREQUAL "Release")
-    add_executable(${PROJECT_NAME} WIN32 ${SOURCE_FILES})
-else ()
-    add_executable(${PROJECT_NAME} ${SOURCE_FILES})
-endif ()
+FILE(COPY res DESTINATION "${CMAKE_BINARY_DIR}")
 
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake_modules")
-find_package(SFML 2 REQUIRED COMPONENTS audio graphics window system)
-if (SFML_FOUND)
-    include_directories(${SFML_INCLUDE_DIR})
-    target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
-endif ()
+## If you want to link SFML statically
+set(SFML_STATIC_LIBRARIES TRUE)
+
+## In most cases better set in the CMake cache
+
+
+find_package(SFML 2.5 COMPONENTS system window graphics network audio REQUIRED)
+add_executable(sfml ${SOURCE_FILES})
+target_link_libraries(sfml sfml-system sfml-window sfml-graphics sfml-network sfml-audio)

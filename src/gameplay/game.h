@@ -1,10 +1,10 @@
 #ifndef _GAME_H_
 #define _GAME_H_
 
-#include "../enemy.h"
-#include "../player.h"
+#include "../entity/enemy.h"
+#include "../entity/player.h"
+#include "../entity/stage.h"
 #include "../resource_manager.h"
-#include "../stage.h"
 #include "../window_manager.h"
 #include <iostream>
 #include <vector>
