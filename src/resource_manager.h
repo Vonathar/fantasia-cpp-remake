@@ -27,30 +27,15 @@ using std::string;
 class ResourceManager
 {
   public:
-  /**
-   * Loads all resources and sets their initial position.
-   */
   void initialise_window();
-  /**
-   * Loads the given enemy sprite from a resource file.
-   */
   void set_enemy(Stage stage, Enemy enemy);
   void set_player(Player player);
-  /**
-   * Loads the background sprite of a given game name from a resource file.
-   *
-   * @param game_stage the game name.
-   */
   void set_background(StageName game_stage);
   std::vector<sf::Drawable *> get_drawables();
   const Sprite &get_player_sprite() const;
   const Sprite &get_enemy_sprite() const;
 
   private:
-  void load_player_sprite();
-  void load_static_rects();
-  void load_default_font();
-  void load_static_text();
   /**
    * Returns the numerical representation of a game name.
    *
@@ -58,6 +43,9 @@ class ResourceManager
    * @return the numerical representation of the game name.
    */
   int to_stage_number(StageName game_stage);
+  void load_static_resources();
+  void init_static_rects();
+  void init_static_text();
 
   Sprite player_sprite{};
   Sprite enemy_sprite{};

@@ -3,3 +3,4 @@ AccessModifierOffset: '0'
 BreakBeforeBraces: Allman
 ColumnLimit: '80'
 Standard: Cpp11
+AllowShortFunctionsOnASingleLine: Empty

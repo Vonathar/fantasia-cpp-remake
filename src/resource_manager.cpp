@@ -10,41 +10,44 @@ using std::to_string;
 
 void ResourceManager::initialise_window()
 {
-  load_static_rects();
-  // Player
-  load_player_sprite();
+  init_static_rects();
+  init_static_text();
   player_sprite.setPosition(655.0f, 680.0f);
   player_sprite.setScale(0.6f, 0.6f);
   player_texture.setSmooth(true);
-  // Player info
-  load_default_font();
-  player_info.setFont(default_font);
-  player_info.setCharacterSize(17);
-  player_info.setFillColor(sf::Color::White);
-  player_info.setLetterSpacing(0.5f);
-  sf::FloatRect player_info_bounds = player_info.getLocalBounds();
-  player_info.setPosition(697.0f - player_info_bounds.width / 2, 832.0f);
+  load_static_resources();
   // Enemy
   enemy_sprite.setPosition(1040.0f, 650.0f);
   enemy_sprite.setScale(0.9f, 0.9f);
   enemy_texture.setSmooth(true);
-  // Enemy info
+
   enemy_info.setFont(default_font);
   enemy_info.setCharacterSize(17);
   enemy_info.setFillColor(sf::Color::White);
   enemy_info.setLetterSpacing(0.5f);
   sf::FloatRect enemy_info_bounds = enemy_info.getLocalBounds();
   enemy_info.setPosition(1098.0f - enemy_info_bounds.width / 2, 832.0f);
-  load_static_text();
+
+  player_info.setFont(default_font);
+  player_info.setCharacterSize(17);
+  player_info.setFillColor(sf::Color::White);
+  player_info.setLetterSpacing(0.5f);
+  sf::FloatRect player_info_bounds = player_info.getLocalBounds();
+  player_info.setPosition(697.0f - player_info_bounds.width / 2, 832.0f);
 }
 
-void ResourceManager::load_player_sprite()
+void ResourceManager::load_static_resources()
 {
   if (!player_texture.loadFromFile(resources_path + "img/player.png"))
   {
     cerr << "Failed to load player sprite." << endl;
   }
   this->player_sprite.setTexture(player_texture);
+
+  if (!default_font.loadFromFile(resources_path + "font/Righteous-Regular.ttf"))
+  {
+    cerr << "Failed to load font." << endl;
+  }
 }
 
 void ResourceManager::set_enemy(Stage stage, Enemy enemy)
@@ -86,7 +89,7 @@ void ResourceManager::set_background(StageName game_stage)
   background_sprite.setTexture(background_texture);
 }
 
-void ResourceManager::load_static_rects()
+void ResourceManager::init_static_rects()
 {
   battle_area_rect.set_size(sf::Vector2f(746.0f, 464.0f));
   battle_area_rect.set_corners_radius(25);
@@ -107,15 +110,7 @@ void ResourceManager::load_static_rects()
   enemy_info_rect.setPosition(880.0f, 831.0f);
 }
 
-void ResourceManager::load_default_font()
-{
-  if (!default_font.loadFromFile(resources_path + "font/Righteous-Regular.ttf"))
-  {
-    cerr << "Failed to load font." << endl;
-  }
-}
-
-void ResourceManager::load_static_text()
+void ResourceManager::init_static_text()
 {
   player_hp_text.setFont(default_font);
   player_hp_text.setCharacterSize(13);
@@ -195,4 +190,8 @@ const Sprite &ResourceManager::get_player_sprite() const
 {
   return player_sprite;
 }
-const Sprite &ResourceManager::get_enemy_sprite() const { return enemy_sprite; }
+
+const Sprite &ResourceManager::get_enemy_sprite() const
+{
+  return enemy_sprite;
+}
