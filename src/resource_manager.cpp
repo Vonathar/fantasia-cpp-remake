@@ -50,15 +50,14 @@ void ResourceManager::load_static_resources()
   }
 }
 
-void ResourceManager::set_enemy(Stage stage, Enemy enemy)
+void ResourceManager::set_enemy(Enemy enemy)
 {
   string enemy_name = enemy.name;
   replace(enemy_name.begin(), enemy_name.end(), ' ', '_');
   std::transform(enemy_name.begin(), enemy_name.end(), enemy_name.begin(),
                  [](unsigned char c) { return std::tolower(c); });
-  string img_path = resources_path + "img/enemies/stage_" +
-                    to_string(to_stage_number(stage.name)) + "/" + enemy_name +
-                    ".png";
+  string img_path =
+      resources_path + "img/enemies/stage_" + "1" + "/" + enemy_name + ".png";
   if (!enemy_texture.loadFromFile(img_path))
   {
     cerr << "Failed to load enemy sprite." << endl;

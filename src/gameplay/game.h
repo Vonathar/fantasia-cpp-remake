@@ -5,19 +5,24 @@
 #include "../entity/player.h"
 #include "../entity/stage.h"
 #include "../resource_manager.h"
-#include "../window_manager.h"
+#include "SFML/Graphics.hpp"
 #include <iostream>
 #include <vector>
 
 class Game
 {
   public:
+  ResourceManager resource_manager{};
   Enemy enemy{};
   Player player{};
   Stage stage{};
-  ResourceManager resource_manager{};
-  WindowManager window_manager{&resource_manager, &player, &enemy, &stage};
-  void start();
+
+  private:
+  sf::RenderWindow *window;
+  void run();
+  void process_event(sf::Event event);
+  void update();
+  void render();
 };
 
 #endif //_GAME_H_

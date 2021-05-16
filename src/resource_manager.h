@@ -28,7 +28,7 @@ class ResourceManager
 {
   public:
   void initialise_window();
-  void set_enemy(Stage stage, Enemy enemy);
+  void set_enemy(Enemy enemy);
   void set_player(Player player);
   void set_background(StageName game_stage);
   std::vector<sf::Drawable *> get_drawables();
