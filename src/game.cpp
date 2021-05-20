@@ -4,9 +4,8 @@ void Game::run()
 {
   sf::ContextSettings settings;
   settings.antialiasingLevel = 8;
-  window = new sf::RenderWindow(sf::VideoMode(1920, 1080, 32), "Fantasia",
-                                sf::Style::Default, settings);
-
+  window = std::make_unique<sf::RenderWindow>(
+      sf::VideoMode(1920, 1080, 32), "Fantasia", sf::Style::Default, settings);
   while (window->isOpen())
   {
     sf::Event event{};
@@ -14,7 +13,8 @@ void Game::run()
     {
       process_event(event);
     }
-    // Draw everything
+    update();
+    render();
   }
 }
 
@@ -28,6 +28,18 @@ void Game::process_event(sf::Event event)
   {
     sf::Vector2f click_pos(static_cast<float>(event.mouseButton.x),
                            static_cast<float>(event.mouseButton.y));
-    // Process click
+    // TODO: Process click
   }
+}
+
+void Game::update() {}
+
+void Game::render()
+{
+  this->window->clear();
+  stage.render(*window);
+  static_gui.render(*window);
+  player.render(*window);
+  enemy.render(*window);
+  this->window->display();
 }

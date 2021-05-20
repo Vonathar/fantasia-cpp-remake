@@ -1,8 +1,8 @@
-#include "gameplay/game.h"
+#include "game.h"
 
 int main()
 {
   Game game{};
-  game.start();
+  game.run();
   return 0;
 }
