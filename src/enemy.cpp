@@ -2,7 +2,7 @@
 
 Enemy::Enemy(Resources &r) : resources(r), gui(r)
 {
-  sf::Texture &texture = resources.get_enemy_texture(EnemyName::FAIRY_FILIA);
+  sf::Texture &texture = resources.get_texture(EnemyName::FAIRY_FILIA);
   sprite.setTexture(texture);
   sprite.setPosition(1095.0f - (static_cast<float>(texture.getSize().x) / 2.0f),
                      740.0f - (static_cast<float>(texture.getSize().y) / 2.0f));

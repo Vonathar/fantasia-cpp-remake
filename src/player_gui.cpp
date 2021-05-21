@@ -2,7 +2,7 @@
 
 PlayerGUI::PlayerGUI(Resources &r) : resources(r)
 {
-  info.setFont(resources.get_default_font());
+  info.setFont(resources.get_font(ResourceName::RIGHTEOUS_FONT));
   info.setCharacterSize(17);
   info.setFillColor(sf::Color::White);
   info.setLetterSpacing(0.5f);

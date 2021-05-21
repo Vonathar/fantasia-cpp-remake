@@ -3,7 +3,7 @@ project(fantasia_remake)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -static")
 set(CMAKE_CXX_STANDARD 14)
-set(SOURCE_FILES "src/main.cpp" "src/stage_name.h" "src/rounded_rect.cpp" "src/rounded_rect.h" "src/progress_bar.cpp" "src/progress_bar.h" "src/player.h" "src/stage.cpp" "src/stage.h" "src/game.cpp" "src/game.h" "src/enemy.h" "src/entity.h" "src/player_gui.h" "src/enemy_gui.h" "src/static_gui.h" src/static_gui.cpp src/resources.cpp src/resources.h src/player.cpp src/enemy_name.h src/enemy.cpp src/enemy_gui.cpp src/player_gui.cpp src/animator.cpp src/animator.h)
+set(SOURCE_FILES "src/main.cpp" "src/stage_name.h" "src/rounded_rect.cpp" "src/rounded_rect.h" "src/progress_bar.cpp" "src/progress_bar.h" "src/player.h" "src/stage.cpp" "src/stage.h" "src/game.cpp" "src/game.h" "src/enemy.h" "src/entity.h" "src/player_gui.h" "src/enemy_gui.h" "src/static_gui.h" src/static_gui.cpp src/resources.cpp src/resources.h src/player.cpp src/enemy_name.h src/enemy.cpp src/enemy_gui.cpp src/player_gui.cpp src/animator.cpp src/animator.h src/resource_name.h)
 
 set(SFML_DIR "C:/SFML/lib/cmake/SFML")
 set(SFML_STATIC_LIBRARIES TRUE)

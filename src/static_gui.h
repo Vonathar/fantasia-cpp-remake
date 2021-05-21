@@ -17,10 +17,12 @@ class StaticGUI : public Entity
   RoundedRect battle_area_rect{};
   RoundedRect player_info_rect{};
   RoundedRect enemy_info_rect{};
+  RoundedRect inventory_rect{};
   sf::Text player_hp_text;
   sf::Text player_fever_text;
   sf::Text player_xp_text;
   sf::Text enemy_hp_text;
+  sf::Text inventory_text;
 };
 
 #endif // !_STATIC_GUI_H_

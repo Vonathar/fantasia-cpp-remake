@@ -4,8 +4,9 @@ void Game::run()
 {
   sf::ContextSettings settings;
   settings.antialiasingLevel = 8;
-  window = std::make_unique<sf::RenderWindow>(
-      sf::VideoMode(1920, 1080, 32), "Fantasia", sf::Style::Default, settings);
+  window = std::make_unique<sf::RenderWindow>(sf::VideoMode(1920, 1080, 32),
+                                              "Fantasia", sf::Style::Fullscreen,
+                                              settings);
   while (window->isOpen())
   {
     sf::Event event{};

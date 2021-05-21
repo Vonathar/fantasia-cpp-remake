@@ -2,6 +2,7 @@
 #define _RESOURCES_H_
 
 #include "enemy_name.h"
+#include "resource_name.h"
 #include "stage_name.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -11,20 +12,21 @@ class Resources
 {
   public:
   Resources();
-  sf::Font &get_default_font();
-  sf::Texture &get_background_texture(StageName stage_name);
-  sf::Texture &get_enemy_texture(EnemyName enemy_name);
-  sf::Texture &get_player_texture();
+  sf::Font &get_font(ResourceName resource_name);
+  sf::Texture &get_texture(StageName stage_name);
+  sf::Texture &get_texture(EnemyName enemy_name);
+  sf::Texture &get_texture(ResourceName resource_name);
 
   private:
   std::string resources_path{"../res/"};
-  sf::Font default_font{};
-  sf::Texture player_texture{};
   std::map<StageName, std::unique_ptr<sf::Texture>> background_textures{};
   std::map<EnemyName, std::unique_ptr<sf::Texture>> enemy_textures{};
-  void load_background(StageName stage_name, const std::string &file_name);
-  void load_enemy(EnemyName enemy_name, const std::string &file_name);
-  void load_static_resources();
+  std::map<ResourceName, std::unique_ptr<sf::Texture>> other_textures{};
+  std::map<ResourceName, std::unique_ptr<sf::Font>> fonts{};
+  void load_texture(StageName stage_name, const std::string &file_name);
+  void load_texture(EnemyName enemy_name, const std::string &file_name);
+  void load_texture(ResourceName resource_name, const std::string &file_name);
+  void load_font(ResourceName resource_name, const std::string &file_name);
 };
 
 #endif //_RESOURCES_H_
