@@ -11,7 +11,7 @@
 struct Enemy : public Entity
 {
   public:
-  Enemy(Resources &r);
+  explicit Enemy(Resources &r);
   void render(sf::RenderTarget &target) override;
 
   private:

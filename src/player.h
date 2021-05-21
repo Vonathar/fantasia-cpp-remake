@@ -10,7 +10,7 @@
 class Player : public Entity
 {
   public:
-  Player(Resources &r);
+  explicit Player(Resources &r);
   void render(sf::RenderTarget &target) override;
 
   private:

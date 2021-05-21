@@ -36,7 +36,7 @@ sf::Vector2f RoundedRect::getPoint(std::size_t index) const
   if (index >= corner_point_count * 4)
     return {0, 0};
 
-  float delta_angle = 90.0f / (corner_point_count - 1);
+  float delta_angle = 90.0f / (static_cast<float>(corner_point_count) - 1.0f);
   sf::Vector2f center;
   unsigned int center_index = index / corner_point_count;
   static const float pi = 3.141592654f;
@@ -61,8 +61,12 @@ sf::Vector2f RoundedRect::getPoint(std::size_t index) const
     break;
   }
 
-  return sf::Vector2f(
-      radius * cos(delta_angle * (index - center_index) * pi / 180) + center.x,
-      -radius * sin(delta_angle * (index - center_index) * pi / 180) +
-          center.y);
+  return {
+      radius * std::cos(delta_angle *
+                        (static_cast<float>(index - center_index)) * pi / 180) +
+          center.x,
+      -radius *
+              std::sin(delta_angle *
+                       (static_cast<float>(index - center_index)) * pi / 180) +
+          center.y};
 }

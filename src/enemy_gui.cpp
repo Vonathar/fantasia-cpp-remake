@@ -18,7 +18,7 @@ void EnemyGUI::set_hp(double hp)
   hp_bar.set_value(static_cast<float>(hp));
 }
 
-void EnemyGUI::set_info(std::string name, int level)
+void EnemyGUI::set_info(const std::string &name, int level)
 {
   info.setString("Lv. " + std::to_string(level) + " " + name);
   sf::FloatRect enemy_info_bounds = info.getLocalBounds();

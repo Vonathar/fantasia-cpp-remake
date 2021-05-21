@@ -9,7 +9,7 @@
 class StaticGUI : public Entity
 {
   public:
-  StaticGUI(Resources &r);
+  explicit StaticGUI(Resources &r);
   void render(sf::RenderTarget &t) override;
 
   private:

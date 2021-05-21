@@ -12,7 +12,7 @@ class EnemyGUI : public Entity
   public:
   explicit EnemyGUI(Resources &r);
   void render(sf::RenderTarget &target) override;
-  void set_info(std::string name, int level);
+  void set_info(const std::string &name, int level);
   void set_hp(double hp);
   void set_max_hp(double max_hp);
 

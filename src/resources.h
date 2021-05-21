@@ -22,8 +22,8 @@ class Resources
   sf::Texture player_texture{};
   std::map<StageName, std::unique_ptr<sf::Texture>> background_textures{};
   std::map<EnemyName, std::unique_ptr<sf::Texture>> enemy_textures{};
-  void load_background(StageName stage_name, std::string file_name);
-  void load_enemy(EnemyName enemy_name, std::string file_name);
+  void load_background(StageName stage_name, const std::string &file_name);
+  void load_enemy(EnemyName enemy_name, const std::string &file_name);
   void load_static_resources();
 };
 
