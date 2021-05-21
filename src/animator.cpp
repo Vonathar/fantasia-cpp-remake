@@ -34,19 +34,24 @@ void Animator::update_scales()
     auto sprite = pair.first;
     auto should_animate = pair.second;
 
+    sf::Vector2f current_scale = sprite->getScale();
+    sf::Vector2<unsigned int> current_size = sprite->getTexture()->getSize();
+
     if (should_animate)
     {
-      sf::Vector2f current_scale = sprite->getScale();
-      if (current_scale.x < original_scales[sprite].x + 0.20f)
+      if (current_scale.x < original_scales[sprite].x + 0.05f)
       {
+        sprite->move(static_cast<float>(current_size.x) * -0.0025f,
+                     static_cast<float>(current_size.y) * -0.005f);
         sprite->setScale(
-            sf::Vector2f(current_scale.x + 0.01f, current_scale.y + 0.01f));
+            sf::Vector2f(current_scale.x + 0.005f, current_scale.y + 0.005f));
       }
     }
     else if (sprite->getScale().x > original_scales[sprite].x)
     {
-      sprite->setScale(sprite->getScale().x - 0.01f,
-                       sprite->getScale().y - 0.01f);
+      sprite->move(static_cast<float>(current_size.x) * 0.0025f,
+                   static_cast<float>(current_size.y) * 0.005f);
+      sprite->setScale(current_scale.x - 0.005f, current_scale.y - 0.005f);
     }
   }
 }
