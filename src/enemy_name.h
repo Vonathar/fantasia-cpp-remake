@@ -1,9 +1,6 @@
 #ifndef _ENEMY_NAME_H_
 #define _ENEMY_NAME_H_
 
-/**
- * An enumerable that represents the name of an enemy entity.
- */
 enum class EnemyName
 {
   /////////////////////
@@ -90,7 +87,7 @@ enum class EnemyName
   GAZERS_EYEWING,
   GAZERS_SKULL,
   TENTEYE,
-  GHOTSUS,
+  GHOSTUS,
   KNIGHT_DESTRAND,
   KNIGHT_GALPHA,
   KNIGHT_GOLIATH,

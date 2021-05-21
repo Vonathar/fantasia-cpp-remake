@@ -8,21 +8,21 @@ RoundedRect::RoundedRect(const sf::Vector2f &size, float radius,
   update();
 }
 
-void RoundedRect::set_size(const sf::Vector2f &size)
+void RoundedRect::set_size(const sf::Vector2f &s)
 {
-  this->size = size;
+  this->size = s;
   update();
 }
 
-void RoundedRect::set_corners_radius(float radius)
+void RoundedRect::set_corners_radius(float r)
 {
-  this->radius = radius;
+  this->radius = r;
   update();
 }
 
-void RoundedRect::set_corner_point_count(unsigned int count)
+void RoundedRect::set_corner_point_count(unsigned int c)
 {
-  this->corner_point_count = count;
+  this->corner_point_count = c;
   update();
 }
 
@@ -34,7 +34,7 @@ std::size_t RoundedRect::getPointCount() const
 sf::Vector2f RoundedRect::getPoint(std::size_t index) const
 {
   if (index >= corner_point_count * 4)
-    return sf::Vector2f(0, 0);
+    return {0, 0};
 
   float delta_angle = 90.0f / (corner_point_count - 1);
   sf::Vector2f center;

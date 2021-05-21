@@ -1,7 +1,8 @@
 #ifndef _STAGE_NAME_H_
 #define _STAGE_NAME_H_
 
-enum class StageName {
+enum class StageName
+{
   GREEN_FOREST,
   DARK_FOREST,
   MAGIC_FOREST,
@@ -12,4 +13,4 @@ enum class StageName {
   INFERNO
 };
 
-#endif//_STAGE_NAME_H_
+#endif //_STAGE_NAME_H_

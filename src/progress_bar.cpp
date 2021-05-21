@@ -9,24 +9,23 @@ ProgressBar::ProgressBar(float width, sf::Color fg_color, float pos_x,
   foreground_rect.set_size(sf::Vector2f(0, 11));
   background_rect.setPosition(pos_x, pos_y);
   foreground_rect.setPosition(pos_x, pos_y);
-  background_rect.set_corners_radius(1);
-  foreground_rect.set_corners_radius(1);
+  background_rect.set_corners_radius(1.2f);
+  foreground_rect.set_corners_radius(1.2f);
   background_rect.set_corner_point_count(4);
   foreground_rect.set_corner_point_count(4);
   background_rect.setFillColor(sf::Color(189, 192, 185));
   foreground_rect.setFillColor(fg_color);
+}
+
+void ProgressBar::set_max_value(float max_v)
+{
+  this->max_value = max_v;
   refresh();
 }
 
-void ProgressBar::set_max_value(float max_value)
+void ProgressBar::set_value(float v)
 {
-  this->max_value = max_value;
-  refresh();
-}
-
-void ProgressBar::set_value(float value)
-{
-  this->value = value;
+  this->value = v;
   refresh();
 }
 
@@ -43,5 +42,10 @@ void ProgressBar::refresh()
   {
     foreground_rect.set_corners_radius(0);
   }
+  else
+  {
+    foreground_rect.set_corners_radius(1.2f);
+  }
+
   foreground_rect.set_size(sf::Vector2f(fg_width, 11));
 }

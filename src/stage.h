@@ -14,9 +14,9 @@ class Stage : public Entity
 
   private:
   Resources &resources;
-  StageName name = StageName::GREEN_FOREST;
-  bool can_advance = false;
-  int kills_to_advance = 10;
+  StageName name{StageName::GREEN_FOREST};
+  bool can_advance{false};
+  int kills_to_advance{10};
   sf::Sprite sprite{};
 };
 

@@ -80,7 +80,7 @@ Resources::Resources()
   load_enemy(EnemyName::GAZERS_EYEWING, "stage_6/gazers_eyewing.png");
   load_enemy(EnemyName::GAZERS_SKULL, "stage_6/gazers_skull.png");
   load_enemy(EnemyName::TENTEYE, "stage_6/tenteye.png");
-  load_enemy(EnemyName::GHOTSUS, "stage_6/ghostus.png");
+  load_enemy(EnemyName::GHOSTUS, "stage_6/ghostus.png");
   load_enemy(EnemyName::KNIGHT_DESTRAND, "stage_6/knight_destrand.png");
   load_enemy(EnemyName::KNIGHT_GALPHA, "stage_6/knight_galpha.png");
   load_enemy(EnemyName::KNIGHT_GOLIATH, "stage_6/knight_goliath.png");
@@ -140,7 +140,8 @@ sf::Texture &Resources::get_enemy_texture(EnemyName enemy_name)
   return *pair->second;
 }
 
-void Resources::load_background(StageName stage_name, std::string file_name)
+void Resources::load_background(StageName stage_name,
+                                const std::string &file_name)
 {
   std::unique_ptr<sf::Texture> texture(new sf::Texture());
   std::string path = resources_path + "img/background/" + file_name;
@@ -148,7 +149,7 @@ void Resources::load_background(StageName stage_name, std::string file_name)
   background_textures.insert(std::make_pair(stage_name, std::move(texture)));
 }
 
-void Resources::load_enemy(EnemyName enemy_name, std::string file_name)
+void Resources::load_enemy(EnemyName enemy_name, const std::string &file_name)
 {
   std::unique_ptr<sf::Texture> texture(new sf::Texture());
   std::string path = resources_path + "img/enemies/" + file_name;
