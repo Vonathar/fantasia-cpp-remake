@@ -2,6 +2,7 @@
 #define _GAME_H_
 
 #include "SFML/Graphics.hpp"
+#include "animator.h"
 #include "enemy.h"
 #include "player.h"
 #include "resources.h"
@@ -22,6 +23,7 @@ class Game
   Player player{resources};
   Enemy enemy{resources};
   Stage stage{resources};
+  Animator animator{window, enemy.get_sprite(), player.get_sprite()};
 
   void process_event(sf::Event event);
   void update();

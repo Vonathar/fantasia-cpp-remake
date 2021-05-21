@@ -12,3 +12,8 @@ void Player::render(sf::RenderTarget &target)
   target.draw(sprite);
   gui.render(target);
 }
+
+sf::Sprite &Player::get_sprite()
+{
+  return sprite;
+}

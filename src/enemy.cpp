@@ -12,3 +12,8 @@ void Enemy::render(sf::RenderTarget &target)
   target.draw(sprite);
   gui.render(target);
 }
+
+sf::Sprite &Enemy::get_sprite()
+{
+  return sprite;
+}

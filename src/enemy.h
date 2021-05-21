@@ -13,6 +13,7 @@ struct Enemy : public Entity
   public:
   explicit Enemy(Resources &r);
   void render(sf::RenderTarget &target) override;
+  sf::Sprite &get_sprite();
 
   private:
   Resources &resources;

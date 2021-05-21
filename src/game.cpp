@@ -37,6 +37,7 @@ void Game::update() {}
 void Game::render()
 {
   this->window->clear();
+  animator.animate();
   stage.render(*window);
   static_gui.render(*window);
   player.render(*window);

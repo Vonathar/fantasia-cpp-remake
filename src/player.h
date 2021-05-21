@@ -12,6 +12,7 @@ class Player : public Entity
   public:
   explicit Player(Resources &r);
   void render(sf::RenderTarget &target) override;
+  sf::Sprite &get_sprite();
 
   private:
   Resources &resources;
