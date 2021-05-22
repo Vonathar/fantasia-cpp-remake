@@ -10,6 +10,7 @@ Player::Player(Resources &r) : resources(r), gui(r)
   set_fever(0);
   rank.name = "Rogue";
   level = 1;
+  click_damage = base_click_damage;
   gui.set_info(rank.name, level);
   sprite.setTexture(resources.get_texture(ResourceName::PLAYER_TEXTURE));
   sprite.setPosition(655.0f, 680.0f);
@@ -74,4 +75,9 @@ void Player::set_fever(const double &n)
 {
   fever = n;
   gui.set_fever(n);
+}
+
+double &Player::get_click_damage()
+{
+  return click_damage;
 }

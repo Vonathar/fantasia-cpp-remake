@@ -15,6 +15,7 @@ class Player : public Entity
   void render(sf::RenderTarget &target) override;
   void increment_level();
   sf::Sprite &get_sprite();
+  double &get_click_damage();
   void set_hp(const double &n);
   void set_max_hp(const double &n);
   void set_xp(const double &n);
@@ -32,9 +33,11 @@ class Player : public Entity
   double xp{};
   double required_xp{};
   double fever{};
+  double click_damage{};
 
   const double base_max_hp = 500;
   const double base_required_xp = 250;
+  const double base_click_damage = 50;
 };
 
 #endif //_PLAYER_H_

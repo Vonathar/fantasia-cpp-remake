@@ -26,6 +26,7 @@ class Game
   Animator animator{window, enemy.get_sprite(), player.get_sprite()};
 
   void process_event(sf::Event event);
+  void process_click(sf::Event event);
   void update();
   void render();
 };
