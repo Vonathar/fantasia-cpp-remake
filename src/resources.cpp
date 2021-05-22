@@ -15,6 +15,7 @@ Resources::Resources()
   load_texture(StageName::GOLDEN_TEMPLE, "golden_temple.jpg");
   load_texture(StageName::INFERNO, "inferno.jpg");
 
+  // Stage 1
   load_texture(EnemyName::FAIRY_FILIA, "stage_1/fairy_filia.png");
   load_texture(EnemyName::GRASSHOPPER, "stage_1/grasshopper.png");
   load_texture(EnemyName::GREEN_SPIDER, "stage_1/green_spider.png");
@@ -25,7 +26,7 @@ Resources::Resources()
   load_texture(EnemyName::RUKKHA, "stage_1/rukkha.png");
   load_texture(EnemyName::DAIDARABOTCHI, "stage_1/daidarabotchi.png");
   load_texture(EnemyName::TELLIA, "stage_1/tellia.png");
-
+  // Stage 2
   load_texture(EnemyName::DARK_ANGEL, "stage_2/dark_angel.png");
   load_texture(EnemyName::REAPER, "stage_2/reaper.png");
   load_texture(EnemyName::BANSHEE, "stage_2/banshee.png");
@@ -37,7 +38,7 @@ Resources::Resources()
   load_texture(EnemyName::BLOOD_FERAL, "stage_2/blood_feral.png");
   load_texture(EnemyName::DARK_QUEEN_YOA, "stage_2/dark_queen_yoa.png");
   load_texture(EnemyName::KNIGHT_REMMENT, "stage_2/knight_remment.png");
-
+  // Stage 3
   load_texture(EnemyName::EARTH_BULL, "stage_3/earth_bull.png");
   load_texture(EnemyName::BUSH_WISP, "stage_3/bush_wisp.png");
   load_texture(EnemyName::LEAF_IMP, "stage_3/leaf_imp.png");
@@ -51,7 +52,7 @@ Resources::Resources()
   load_texture(EnemyName::QUEEN_RAFFLESIA, "stage_3/queen_rafflesia.png");
   load_texture(EnemyName::QUEEN_YGGDRASIL, "stage_3/queen_yggdrasil.png");
   load_texture(EnemyName::GEMSTONE_GOLEM, "stage_3/gemstone_golem.png");
-
+  // Stage 4
   load_texture(EnemyName::GOBLIN_ARCHER, "stage_4/goblin_archer.png");
   load_texture(EnemyName::GOBLIN_ELITE, "stage_4/goblin_elite.png");
   load_texture(EnemyName::GOBLIN_GRUNT, "stage_4/goblin_grunt.png");
@@ -63,7 +64,7 @@ Resources::Resources()
   load_texture(EnemyName::BONEMASK, "stage_4/bonemask.png");
   load_texture(EnemyName::THE_FALLEN, "stage_4/the_fallen.png");
   load_texture(EnemyName::ANCIENT_AUTOMATON, "stage_4/ancient_automaton.png");
-
+  // Stage 5
   load_texture(EnemyName::ELF_ARCHER, "stage_5/elf_archer.png");
   load_texture(EnemyName::ELF_ASSASSIN, "stage_5/elf_assassin.png");
   load_texture(EnemyName::CROSSBOW_ELF, "stage_5/crossbow_elf.png");
@@ -77,7 +78,7 @@ Resources::Resources()
   load_texture(EnemyName::CELESTIAL_BEATRIX, "stage_5/celestial_beatrix.png");
   load_texture(EnemyName::ALFADRIEL, "stage_5/alfadriel.png");
   load_texture(EnemyName::SON_OF_VALHALLA, "stage_5/son_of_valhalla.png");
-
+  // Stage 6
   load_texture(EnemyName::GAZERS_EYEWING, "stage_6/gazers_eyewing.png");
   load_texture(EnemyName::GAZERS_SKULL, "stage_6/gazers_skull.png");
   load_texture(EnemyName::TENTEYE, "stage_6/tenteye.png");
@@ -90,7 +91,7 @@ Resources::Resources()
   load_texture(EnemyName::ASTRAL_LICH, "stage_6/astral_lich.png");
   load_texture(EnemyName::ELDRITCH_GOD, "stage_6/eldritch_god.png");
   load_texture(EnemyName::REAPER_NIHILO, "stage_6/reaper_nihilo.png");
-
+  // Stage 7
   load_texture(EnemyName::AXE_KNIGHT, "stage_7/axe_knight.png");
   load_texture(EnemyName::GOLDEN_AXE_KNIGHT, "stage_7/golden_axe_knight.png");
   load_texture(EnemyName::GUNNER_KNIGHT, "stage_7/gunner_knight.png");
@@ -105,7 +106,7 @@ Resources::Resources()
   load_texture(EnemyName::GOLDEN_HUANGLONG, "stage_7/golden_huanglong.png");
   load_texture(EnemyName::GOLDEN_LADON, "stage_7/golden_ladon.png");
   load_texture(EnemyName::GOLDEN_EMPEROR, "stage_7/golden_emperor.png");
-
+  // Stage 8
   load_texture(EnemyName::FIRE_BULL, "stage_8/fire_bull.png");
   load_texture(EnemyName::FIRE_DRAGONSPAWN, "stage_8/fire_dragonspawn.png");
   load_texture(EnemyName::FIRE_LION, "stage_8/fire_lion.png");
@@ -122,6 +123,111 @@ Resources::Resources()
 
   load_texture(ResourceName::PLAYER_TEXTURE, "img/player.png");
   load_texture(ResourceName::COIN_TEXTURE, "img/coin.png");
+
+  enemy_names = {
+      // Stage 1
+      {EnemyName::FAIRY_FILIA, "Fairy Filia"},
+      {EnemyName::GRASSHOPPER, "Grasshopper"},
+      {EnemyName::GREEN_SPIDER, "Green Spider"},
+      {EnemyName::IMPERIAL_WIDOW, "Imperial Widow"},
+      {EnemyName::MOTHY, "Mothy"},
+      {EnemyName::SHROOMY, "Shroomy"},
+      {EnemyName::SPORA, "Spora"},
+      {EnemyName::RUKKHA, "Rukkha"},
+      {EnemyName::DAIDARABOTCHI, "Daidarabotchi"},
+      {EnemyName::TELLIA, "Tellia"},
+      // Stage 2
+      {EnemyName::DARK_ANGEL, "Dark Angel"},
+      {EnemyName::REAPER, "Reaper"},
+      {EnemyName::BANSHEE, "Banshee"},
+      {EnemyName::IMP, "Imp"},
+      {EnemyName::GHAUL, "Ghaul"},
+      {EnemyName::SEEKER, "Seeker"},
+      {EnemyName::SUCCUBUS, "Succubus"},
+      {EnemyName::OGRE, "Ogre"},
+      {EnemyName::BLOOD_FERAL, "Blood Feral"},
+      {EnemyName::DARK_QUEEN_YOA, "Dark Queen Yoa"},
+      {EnemyName::KNIGHT_REMMENT, "Fairy Filia"},
+      // Stage 3
+      {EnemyName::EARTH_BULL, "Earth Bull"},
+      {EnemyName::BUSH_WISP, "Bush Wisp"},
+      {EnemyName::LEAF_IMP, "Leaf Imp"},
+      {EnemyName::EARTH_LION, "Earth Lion"},
+      {EnemyName::MANDRAKE, "Mandrake"},
+      {EnemyName::ROCK_GOLEM, "Rock Golem"},
+      {EnemyName::EARTH_SNAKE, "Earth Snake"},
+      {EnemyName::EARTH_SPAWN, "Earth Spawn"},
+      {EnemyName::EARTH_TURTLE, "Earth Turtle"},
+      {EnemyName::EARTH_WISP, "Earth Wisp"},
+      {EnemyName::QUEEN_RAFFLESIA, "Queen Rafflesia"},
+      {EnemyName::QUEEN_YGGDRASIL, "Queen Yggdrasil"},
+      {EnemyName::GEMSTONE_GOLEM, "Gemstone Golem"},
+      // Stage 4
+      {EnemyName::GOBLIN_ARCHER, "Goblin Archer"},
+      {EnemyName::GOBLIN_ELITE, "Goblin Elite"},
+      {EnemyName::GOBLIN_GRUNT, "Goblin Grunt"},
+      {EnemyName::GOBLIN_MAGE, "Goblin Mage"},
+      {EnemyName::GOBLIN_RAIDER, "Goblin Raider"},
+      {EnemyName::ROGUE_SWORDMAN, "Rogue Swordman"},
+      {EnemyName::ROGUE_MONK, "Rogue Monk"},
+      {EnemyName::ROGUE_ASSASSIN, "Rogue Assassin"},
+      {EnemyName::BONEMASK, "Bonemask"},
+      {EnemyName::THE_FALLEN, "The Fallen"},
+      {EnemyName::ANCIENT_AUTOMATON, "Ancient Automaton"},
+      // Stage 5
+      {EnemyName::ELF_ARCHER, "Elf Archer"},
+      {EnemyName::ELF_ASSASSIN, "Elf Assassin"},
+      {EnemyName::CROSSBOW_ELF, "Crossbow Elf"},
+      {EnemyName::DUAL_SWORD_ELF, "Dual Sword Elf"},
+      {EnemyName::ELF_MAGE, "Elf Mage"},
+      {EnemyName::SPEAR_ELF, "Spear Elf"},
+      {EnemyName::SWORD_ELF, "Sword Elf"},
+      {EnemyName::NATURE_LINKER, "Nature Linker"},
+      {EnemyName::ROGUE_ELF, "Rogue Elf"},
+      {EnemyName::SPELLCASTER, "Spellcaster"},
+      {EnemyName::CELESTIAL_BEATRIX, "Celestial Beatrix"},
+      {EnemyName::ALFADRIEL, "Alfadriel"},
+      {EnemyName::SON_OF_VALHALLA, "Son of Valhalla"},
+      // Stage 6
+      {EnemyName::GAZERS_EYEWING, "Gazers Eyewing"},
+      {EnemyName::GAZERS_SKULL, "Gazers Skull"},
+      {EnemyName::TENTEYE, "Tenteye"},
+      {EnemyName::GHOSTUS, "Ghostus"},
+      {EnemyName::KNIGHT_DESTRAND, "Knight Destrand"},
+      {EnemyName::KNIGHT_GALPHA, "Knight Galpha"},
+      {EnemyName::KNIGHT_GOLIATH, "Knight Goliath"},
+      {EnemyName::GHOST_PUPPET_PAILO, "Ghost Puppet Pailo"},
+      {EnemyName::GHOST_REVELATOR, "Ghost Revelator"},
+      {EnemyName::ASTRAL_LICH, "Astral Lich"},
+      {EnemyName::ELDRITCH_GOD, "Eldritch God"},
+      {EnemyName::REAPER_NIHILO, "Reaper Nihilo"},
+      // Stage 7
+      {EnemyName::AXE_KNIGHT, "Axe Knight"},
+      {EnemyName::GOLDEN_AXE_KNIGHT, "Golden Axe Knight"},
+      {EnemyName::GUNNER_KNIGHT, "Gunner Knight"},
+      {EnemyName::GOLDEN_GUNNER_KNIGHT, "Golden Gunner Knight"},
+      {EnemyName::SPEAR_KNIGHT, "Spear Knight"},
+      {EnemyName::GOLDEN_SPEAR_KNIGHT, "Golden Spear Knight"},
+      {EnemyName::SWORD_KNIGHT, "Sword Knight"},
+      {EnemyName::GOLDEN_SWORD_KNIGHT, "Golden Sword Knight"},
+      {EnemyName::GOLDEN_HUANGLONG, "Golden Huanglong"},
+      {EnemyName::GOLDEN_LADON, "GOlden Ladon"},
+      {EnemyName::GOLDEN_EMPEROR, "Golden Emperor"},
+      // Stage 8
+      {EnemyName::FIRE_BULL, "Fire Bull"},
+      {EnemyName::FIRE_DRAGONSPAWN, "Fire Dragonspawn"},
+      {EnemyName::FIRE_LION, "Fire Lion"},
+      {EnemyName::FIRE_OGRE, "Fire Ogre"},
+      {EnemyName::FIRE_SABRETOOTH, "Fire Sabretooth"},
+      {EnemyName::FIRE_SALAMANDER, "Fire Salamander"},
+      {EnemyName::FIRE_TURTLE, "Fire Turtle"},
+      {EnemyName::VOLCANIC_MAIDEN, "Volcanic Maiden"},
+      {EnemyName::FIRE_VULTURE, "Fire Vulture"},
+      {EnemyName::FIRE_WISP, "Fire Wisp"},
+      {EnemyName::NUCKELAVEE, "Nuckelavee"},
+      {EnemyName::ILNOCT, "Ilnoct"},
+      {EnemyName::HELLHOUND_GARM, "Hellhound Garm"},
+  };
 }
 
 sf::Texture &Resources::get_texture(StageName stage_name)
@@ -177,8 +283,14 @@ void Resources::load_texture(ResourceName resource_name,
   texture->setSmooth(true);
   other_textures.insert(std::make_pair(resource_name, std::move(texture)));
 }
+
 sf::Texture &Resources::get_texture(ResourceName resource_name)
 {
   auto pair = other_textures.find(resource_name);
   return *pair->second;
+}
+
+std::string &Resources::get_name(const EnemyName &enemy_name)
+{
+  return enemy_names[enemy_name];
 }
