@@ -6,7 +6,7 @@ ProgressBar::ProgressBar(float width, sf::Color fg_color, float pos_x,
     : width(width)
 {
   background_rect.set_size(sf::Vector2f(width, 11));
-  foreground_rect.set_size(sf::Vector2f(0, 11));
+  foreground_rect.set_size(sf::Vector2f(0, 0));
   background_rect.setPosition(pos_x, pos_y);
   foreground_rect.setPosition(pos_x, pos_y);
   background_rect.set_corners_radius(1.2f);
