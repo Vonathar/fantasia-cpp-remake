@@ -32,6 +32,9 @@ class Player : public Entity
   double xp{};
   double required_xp{};
   double fever{};
+
+  const double base_max_hp = 500;
+  const double base_required_xp = 250;
 };
 
 #endif //_PLAYER_H_
