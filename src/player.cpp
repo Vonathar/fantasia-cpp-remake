@@ -17,3 +17,17 @@ sf::Sprite &Player::get_sprite()
 {
   return sprite;
 }
+
+void Player::increment_level()
+{
+  this->level++;
+  for (const auto &req : rank.requirements)
+  {
+    if (req.first > this->level)
+    {
+      rank.name = req.second;
+      break;
+    }
+  }
+  gui.set_info(rank.name, this->level);
+}

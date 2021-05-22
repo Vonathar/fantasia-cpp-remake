@@ -17,7 +17,7 @@ class PlayerGUI : public Entity
   void set_xp(double xp);
   void set_max_xp(double max_xp);
   void set_fever(double fever);
-  void set_info(const std::string &name, int level);
+  void set_info(const std::string &rank, int level);
 
   private:
   Resources &resources;

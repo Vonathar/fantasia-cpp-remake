@@ -9,9 +9,9 @@ PlayerGUI::PlayerGUI(Resources &r) : resources(r)
   fever_bar.set_max_value(100);
 }
 
-void PlayerGUI::set_info(const std::string &name, int level)
+void PlayerGUI::set_info(const std::string &rank, int level)
 {
-  info.setString("Lv. " + std::to_string(level) + " " + name);
+  info.setString("Lv. " + std::to_string(level) + " " + rank);
   sf::FloatRect player_info_bounds = info.getLocalBounds();
   info.setPosition(697.0f - player_info_bounds.width / 2, 832.0f);
 }
