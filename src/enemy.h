@@ -13,6 +13,9 @@ struct Enemy : public Entity
   public:
   explicit Enemy(Resources &r);
   void render(sf::RenderTarget &target) override;
+  void set_hp(const float &n);
+  void set_max_hp(const float &n);
+  void set_info(const std::string &n, const int &lv);
   sf::Sprite &get_sprite();
 
   private:

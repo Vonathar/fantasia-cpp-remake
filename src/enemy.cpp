@@ -19,3 +19,21 @@ sf::Sprite &Enemy::get_sprite()
 {
   return sprite;
 }
+
+void Enemy::set_hp(const float &n)
+{
+  this->hp = n;
+  gui.set_hp(n);
+}
+
+void Enemy::set_max_hp(const float &n)
+{
+  this->max_hp = n;
+  gui.set_max_hp(n);
+}
+void Enemy::set_info(const std::string &n, const int &lv)
+{
+  this->name = n;
+  this->level = lv;
+  gui.set_info(n, lv);
+}

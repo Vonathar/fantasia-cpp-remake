@@ -27,9 +27,6 @@ void EnemyGUI::set_info(const std::string &name, int level)
 
 void EnemyGUI::render(sf::RenderTarget &target)
 {
-  set_info("Fairy Filia", 1);
-  set_max_hp(100);
-  set_hp(95);
   target.draw(hp_bar);
   target.draw(info);
 }
