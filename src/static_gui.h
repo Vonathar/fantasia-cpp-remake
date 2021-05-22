@@ -23,6 +23,7 @@ class StaticGUI : public Entity
   sf::Text player_xp_text;
   sf::Text enemy_hp_text;
   sf::Text inventory_text;
+  sf::Sprite coin_icon;
 };
 
 #endif // !_STATIC_GUI_H_

@@ -33,7 +33,7 @@ StaticGUI::StaticGUI(Resources &r) : resources(r)
   inventory_text.setFont(resources.get_font(ResourceName::RIGHTEOUS_FONT));
   inventory_text.setCharacterSize(18);
   inventory_text.setFillColor(sf::Color::White);
-  inventory_text.setLetterSpacing(0.2f);
+  inventory_text.setLetterSpacing(0.1f);
   inventory_text.setPosition(1594.0f, 210.0f);
   inventory_text.setString("Inventory");
   inventory_text.setStyle(sf::Text::Style::Bold);
@@ -61,6 +61,12 @@ StaticGUI::StaticGUI(Resources &r) : resources(r)
   inventory_rect.set_corner_point_count(20);
   inventory_rect.setFillColor(sf::Color(0, 0, 0, 230));
   inventory_rect.setPosition(1392.0f, 190.0f);
+
+  sf::Texture &coin_texture = resources.get_texture(ResourceName::COIN_TEXTURE);
+  coin_texture.setSmooth(true);
+  coin_icon.setTexture(coin_texture);
+  coin_icon.setPosition(1605.0f, 240.0f);
+  coin_icon.setScale(0.35f, 0.35f);
 }
 
 void StaticGUI::render(sf::RenderTarget &t)
@@ -76,4 +82,5 @@ void StaticGUI::render(sf::RenderTarget &t)
   t.draw(player_fever_text);
   t.draw(enemy_hp_text);
   t.draw(inventory_text);
+  t.draw(coin_icon);
 }
