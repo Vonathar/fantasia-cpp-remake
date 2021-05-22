@@ -31,7 +31,7 @@ void PlayerGUI::set_xp(double xp)
   xp_bar.set_value(static_cast<float>(xp));
 }
 
-void PlayerGUI::set_max_xp(double max_xp)
+void PlayerGUI::set_required_xp(double max_xp)
 {
   xp_bar.set_max_value(static_cast<float>(max_xp));
 }
@@ -43,12 +43,6 @@ void PlayerGUI::set_fever(double fever)
 
 void PlayerGUI::render(sf::RenderTarget &target)
 {
-  set_info("Rogue", 1);
-  set_max_hp(100);
-  set_hp(95);
-  set_max_xp(100);
-  set_xp(95);
-  set_fever(5);
   target.draw(hp_bar);
   target.draw(xp_bar);
   target.draw(fever_bar);

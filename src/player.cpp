@@ -31,3 +31,33 @@ void Player::increment_level()
   }
   gui.set_info(rank.name, this->level);
 }
+
+void Player::set_hp(double n)
+{
+  this->hp = n;
+  gui.set_hp(n);
+}
+
+void Player::set_max_hp(double n)
+{
+  this->max_hp = n;
+  gui.set_max_hp(n);
+}
+
+void Player::set_xp(double n)
+{
+  this->xp = n;
+  gui.set_xp(n);
+}
+
+void Player::set_required_xp(double n)
+{
+  this->required_xp = n;
+  gui.set_required_xp(n);
+}
+
+void Player::set_fever(double n)
+{
+  this->fever = n;
+  gui.set_fever(n);
+}
