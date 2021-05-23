@@ -58,7 +58,7 @@ void Enemy::regenerate(const StageName &stage_name, const int &min_level,
   auto random_enemy = generator.get_random_enemy(stage_name);
 
   // Uses the Mersenne Twister PRNG to generate a random integer from the
-  // interval [min_level, min_level + 2]
+  // interval [min_level, min_level + 2].
   static std::random_device random_device;
   static std::mt19937 rng(random_device());
   std::uniform_int_distribution<std::mt19937::result_type> dist(min_level,
@@ -67,8 +67,10 @@ void Enemy::regenerate(const StageName &stage_name, const int &min_level,
 
   const int damage_multiplier = [&] { return is_boss ? 20 : 1; }();
   const int hp_multiplier = [&] { return is_boss ? 5 : 1; }();
+  const int xp_held_multiplier = [&] { return is_boss ? 3 : 1; }();
 
   damage = (base_damage * damage_multiplier) * pow(1.045, level);
+  xp_held = ((base_xp_held * xp_held_multiplier)) * pow(1.08, level);
   set_max_hp((base_max_hp * hp_multiplier) * pow(1.12, level));
   set_hp(max_hp);
   set_texture(resources.get_texture(random_enemy));

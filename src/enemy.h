@@ -32,10 +32,12 @@ struct Enemy : public Entity
   double hp{};
   double max_hp{};
   double damage{};
+  double xp_held{};
   sf::Sprite sprite{};
 
   const double base_max_hp = 500;
   const double base_damage = 3;
+  const double base_xp_held = 25;
 };
 
 #endif //_ENEMY_H_
