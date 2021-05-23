@@ -38,6 +38,11 @@ void Game::process_click(sf::Event event)
   if (enemy.get_sprite().getGlobalBounds().contains(click_pos))
   {
     enemy.receive_damage(player.get_click_damage());
+    if (enemy.is_dead())
+    {
+      player.receive_xp(enemy.get_xp_held());
+      enemy.regenerate(StageName::GREEN_FOREST, 1, false);
+    }
   }
 }
 

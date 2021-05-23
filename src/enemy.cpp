@@ -29,6 +29,7 @@ void Enemy::set_max_hp(const double &n)
   this->max_hp = n;
   gui.set_max_hp(n);
 }
+
 void Enemy::set_info(const std::string &n, const int &lv)
 {
   this->name = n;
@@ -39,9 +40,10 @@ void Enemy::set_info(const std::string &n, const int &lv)
 void Enemy::receive_damage(const double &damage_received)
 {
   set_hp(hp - damage_received);
-
-  // DEBUGGING ONLY
-  regenerate(StageName::GREEN_FOREST, 1, false);
+  if (hp <= 0)
+  {
+    dead = true;
+  }
 }
 
 void Enemy::set_texture(const sf::Texture &texture)
@@ -55,6 +57,7 @@ void Enemy::set_texture(const sf::Texture &texture)
 void Enemy::regenerate(const StageName &stage_name, const int &min_level,
                        const bool &is_boss)
 {
+  dead = false;
   auto random_enemy = generator.get_random_enemy(stage_name);
 
   // Uses the Mersenne Twister PRNG to generate a random integer from the
@@ -75,4 +78,14 @@ void Enemy::regenerate(const StageName &stage_name, const int &min_level,
   set_hp(max_hp);
   set_texture(resources.get_texture(random_enemy));
   set_info(resources.get_name(random_enemy), level);
+}
+
+bool &Enemy::is_dead()
+{
+  return dead;
+}
+
+double &Enemy::get_xp_held()
+{
+  return xp_held;
 }

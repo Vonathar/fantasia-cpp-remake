@@ -23,9 +23,13 @@ void Player::render(sf::RenderTarget &target)
   gui.render(target);
 }
 
-sf::Sprite &Player::get_sprite()
+void Player::receive_xp(const double &n)
 {
-  return sprite;
+  set_xp(xp + n);
+  while (xp >= required_xp)
+  {
+    increment_level();
+  }
 }
 
 void Player::increment_level()
@@ -80,4 +84,9 @@ void Player::set_fever(const double &n)
 double &Player::get_click_damage()
 {
   return click_damage;
+}
+
+sf::Sprite &Player::get_sprite()
+{
+  return sprite;
 }

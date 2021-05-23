@@ -13,14 +13,15 @@ class Player : public Entity
   public:
   explicit Player(Resources &r);
   void render(sf::RenderTarget &target) override;
+  void receive_xp(const double &n);
   void increment_level();
-  sf::Sprite &get_sprite();
-  double &get_click_damage();
   void set_hp(const double &n);
   void set_max_hp(const double &n);
   void set_xp(const double &n);
   void set_required_xp(const double &n);
   void set_fever(const double &n);
+  double &get_click_damage();
+  sf::Sprite &get_sprite();
 
   private:
   Resources &resources;

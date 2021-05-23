@@ -22,6 +22,8 @@ struct Enemy : public Entity
   void set_info(const std::string &n, const int &lv);
   void set_texture(const sf::Texture &texture);
   sf::Sprite &get_sprite();
+  double &get_xp_held();
+  bool &is_dead();
 
   private:
   Resources &resources;
@@ -34,6 +36,7 @@ struct Enemy : public Entity
   double damage{};
   double xp_held{};
   sf::Sprite sprite{};
+  bool dead{};
 
   const double base_max_hp = 500;
   const double base_damage = 3;
