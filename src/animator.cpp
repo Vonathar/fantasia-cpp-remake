@@ -12,11 +12,11 @@ Animator::Animator(std::unique_ptr<sf::RenderWindow> &w,
 
 void Animator::animate()
 {
-  find_hovered_sprite();
+  refresh_states();
   update_scales();
 }
 
-void Animator::find_hovered_sprite()
+void Animator::refresh_states()
 {
   sf::Vector2f mouse_pos =
       sf::Vector2f(static_cast<float>(sf::Mouse::getPosition(*window).x),
@@ -29,6 +29,10 @@ void Animator::find_hovered_sprite()
 
 void Animator::update_scales()
 {
+  const float max_scale_increase = 0.05f;
+  const float frame_count = 40;
+  const float increment = max_scale_increase / frame_count;
+
   for (const auto &pair : animation_states)
   {
     auto sprite = pair.first;
@@ -39,19 +43,20 @@ void Animator::update_scales()
 
     if (should_animate)
     {
-      if (current_scale.x < original_scales[sprite].x + 0.05f)
+      if (current_scale.x < original_scales[sprite].x + max_scale_increase)
       {
-        sprite->move(static_cast<float>(current_size.x) * -0.0025f,
-                     static_cast<float>(current_size.y) * -0.005f);
-        sprite->setScale(
-            sf::Vector2f(current_scale.x + 0.005f, current_scale.y + 0.005f));
+        sprite->move(static_cast<float>(current_size.x) * -increment,
+                     static_cast<float>(current_size.y) * -(increment * 2));
+        sprite->setScale(sf::Vector2f(current_scale.x + (increment * 2),
+                                      current_scale.y + (increment * 2)));
       }
     }
     else if (sprite->getScale().x > original_scales[sprite].x)
     {
-      sprite->move(static_cast<float>(current_size.x) * 0.0025f,
-                   static_cast<float>(current_size.y) * 0.005f);
-      sprite->setScale(current_scale.x - 0.005f, current_scale.y - 0.005f);
+      sprite->move(static_cast<float>(current_size.x) * increment,
+                   static_cast<float>(current_size.y) * (increment * 2));
+      sprite->setScale(current_scale.x - (increment * 2),
+                       current_scale.y - (increment * 2));
     }
   }
 }
