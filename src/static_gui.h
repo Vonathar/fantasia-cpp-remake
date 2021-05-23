@@ -14,10 +14,12 @@ class StaticGUI : public Entity
 
   private:
   Resources &resources;
+  RoundedRect title_rect{};
   RoundedRect battle_area_rect{};
   RoundedRect player_info_rect{};
   RoundedRect enemy_info_rect{};
   RoundedRect inventory_rect{};
+  sf::Text title_text;
   sf::Text player_hp_text;
   sf::Text player_fever_text;
   sf::Text player_xp_text;

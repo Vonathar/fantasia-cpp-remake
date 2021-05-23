@@ -2,6 +2,14 @@
 
 StaticGUI::StaticGUI(Resources &r) : resources(r)
 {
+  title_text.setFont(resources.get_font(ResourceName::GREAT_VIBES_FONT));
+  title_text.setCharacterSize(38);
+  title_text.setOutlineColor(sf::Color::White);
+  title_text.setOutlineThickness(0.2f);
+  title_text.setFillColor(sf::Color::White);
+  title_text.setPosition(900.5f, 50.0f);
+  title_text.setString("Fantasia");
+
   player_hp_text.setFont(resources.get_font(ResourceName::RIGHTEOUS_FONT));
   player_hp_text.setCharacterSize(13);
   player_hp_text.setFillColor(sf::Color::White);
@@ -38,6 +46,12 @@ StaticGUI::StaticGUI(Resources &r) : resources(r)
   inventory_text.setString("Inventory");
   inventory_text.setStyle(sf::Text::Style::Bold);
 
+  title_rect.set_size(sf::Vector2f(275.0f, 50.0f));
+  title_rect.set_corners_radius(25);
+  title_rect.set_corner_point_count(50);
+  title_rect.setFillColor(sf::Color(0, 0, 0, 230));
+  title_rect.setPosition(822.5f, 50.0f);
+
   battle_area_rect.set_size(sf::Vector2f(746.0f, 464.0f));
   battle_area_rect.set_corners_radius(25);
   battle_area_rect.set_corner_point_count(50);
@@ -71,12 +85,14 @@ StaticGUI::StaticGUI(Resources &r) : resources(r)
 
 void StaticGUI::render(sf::RenderTarget &t)
 {
+  t.draw(title_rect);
   t.draw(battle_area_rect);
   t.draw(player_info_rect);
   t.draw(enemy_info_rect);
   t.draw(player_info_rect);
   t.draw(enemy_info_rect);
   t.draw(inventory_rect);
+  t.draw(title_text);
   t.draw(player_hp_text);
   t.draw(player_xp_text);
   t.draw(player_fever_text);
