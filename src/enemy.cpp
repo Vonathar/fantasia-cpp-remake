@@ -1,5 +1,6 @@
 #include "enemy.h"
 #include <cmath>
+#include <random>
 
 Enemy::Enemy(Resources &r) : resources(r), gui(r)
 {
@@ -52,11 +53,17 @@ void Enemy::set_texture(const sf::Texture &texture)
 void Enemy::regenerate(const StageName &stage_name, const int &min_level)
 {
   auto random_enemy = generator.get_random_enemy(stage_name);
-  set_texture(resources.get_texture(random_enemy));
-  // TODO: Randomise the enemy level between min_level and min_level + 2
-  level = min_level;
+
+  // Uses the Mersenne Twister PRNG to generate a random integer from the
+  // interval [min_level, min_level + 2]
+  static std::random_device random_device;
+  static std::mt19937 rng(random_device());
+  std::uniform_int_distribution<std::mt19937::result_type> dist(min_level,
+                                                                min_level + 2);
+  level = dist(rng);
   damage = base_damage * pow(1.045, level);
   set_max_hp(base_max_hp * pow(1.12, level));
   set_hp(max_hp);
-  set_info(resources.get_name(random_enemy), min_level);
+  set_texture(resources.get_texture(random_enemy));
+  set_info(resources.get_name(random_enemy), level);
 }
