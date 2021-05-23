@@ -15,7 +15,8 @@ struct Enemy : public Entity
   explicit Enemy(Resources &r);
   void render(sf::RenderTarget &target) override;
   void receive_damage(const double &damage_received);
-  void regenerate(const StageName &stage_name, const int &min_level);
+  void regenerate(const StageName &stage_name, const int &min_level,
+                  const bool &is_boss);
   void set_hp(const double &n);
   void set_max_hp(const double &n);
   void set_info(const std::string &n, const int &lv);

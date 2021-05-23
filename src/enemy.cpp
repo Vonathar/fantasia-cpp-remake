@@ -50,7 +50,8 @@ void Enemy::set_texture(const sf::Texture &texture)
   sprite.setScale(0.8f, 0.8f);
 }
 
-void Enemy::regenerate(const StageName &stage_name, const int &min_level)
+void Enemy::regenerate(const StageName &stage_name, const int &min_level,
+                       const bool &is_boss)
 {
   auto random_enemy = generator.get_random_enemy(stage_name);
 
@@ -60,9 +61,13 @@ void Enemy::regenerate(const StageName &stage_name, const int &min_level)
   static std::mt19937 rng(random_device());
   std::uniform_int_distribution<std::mt19937::result_type> dist(min_level,
                                                                 min_level + 2);
-  level = dist(rng);
-  damage = base_damage * pow(1.045, level);
-  set_max_hp(base_max_hp * pow(1.12, level));
+  level = static_cast<int>(dist(rng));
+
+  const int damage_multiplier = [&] { return is_boss ? 20 : 1; }();
+  const int hp_multiplier = [&] { return is_boss ? 5 : 1; }();
+
+  damage = (base_damage * damage_multiplier) * pow(1.045, level);
+  set_max_hp((base_max_hp * hp_multiplier) * pow(1.12, level));
   set_hp(max_hp);
   set_texture(resources.get_texture(random_enemy));
   set_info(resources.get_name(random_enemy), level);
