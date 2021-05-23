@@ -37,6 +37,7 @@ void Game::process_click(sf::Event event)
                          static_cast<float>(event.mouseButton.y));
   if (enemy.get_sprite().getGlobalBounds().contains(click_pos))
   {
+    animator.set_clicked_state(enemy.get_sprite());
     enemy.receive_damage(player.get_click_damage());
     if (enemy.is_dead())
     {

@@ -8,11 +8,6 @@
 /**
  * A class responsible for animating sprites' properties (e.g. their scale).
  *
- * Each sprite has an 'animation state', which can either be true or false: true
- * means that the property should be actively animated (unless the
- * maximum allowed increase has been reached), and false that it should not be
- * animated anymore (and return to the baseline value if it currently isn't).
- *
  * Animated properties define two constants in their individual update
  * functions, allowing isolated tweaking of:
  *
@@ -31,26 +26,60 @@ class Animator
    */
   void animate();
 
+  void set_clicked_state(sf::Sprite &sprite);
+
   private:
   std::unique_ptr<sf::RenderWindow> &window;
-  std::map<sf::Sprite *, bool> animation_states;
+  ///  Each hoverable sprite has an 'animation state', which can either be true
+  ///  or false: true means that the property should be actively animated
+  ///  (unless the maximum allowed increase has been reached), and false that it
+  ///  should not be animated anymore (and return to the baseline value if it
+  ///  currently isn't).
+  std::map<sf::Sprite *, bool> hover_animation_states;
+  ///  Each clickable sprite has an 'animation state', which holds the number of
+  ///  frames left for the animation to complete. The first half of the frames
+  ///  scales up the sprite, whereas the second half scales it down to its
+  ///  original size.
+  std::map<sf::Sprite *, int> click_animation_states;
   std::map<sf::Sprite *, sf::Vector2f> original_scales;
 
-  /**
-   * Refreshes all animation states.
-   */
-  void refresh_states();
+  const int click_animation_frames = 20;
 
   /**
-   * Updates the scale of all sprites that should be animated.
+   * Scales a sprite by the given increment.
    *
-   * For animations with a state set to true, this will increment their scale
-   * linearly until the maximum allowed value is reached (defined in the local
-   * constant max_scale_increase); for animations with a state set to false,
-   * this will decrease their scale linearly until the baseline is reached (or
-   * ignore them if they are already at their baseline value).
+   * @param sprite the sprite to be scaled.
+   * @param increment how much the sprite should scale and move.
    */
-  void update_scales();
+  void scale(sf::Sprite &sprite, const float &increment);
+
+  /**
+   * Finds the currently hovered sprite, then refreshes all hover states.
+   */
+  void refresh_hover_states();
+
+  /**
+   * Updates the scale of all hovered sprites.
+   *
+   * For animations with a hover state set to true, this will increment their
+   * scale linearly until the maximum allowed value is reached (defined in the
+   * local constant max_scale_increase). For animations with a state set to
+   * false, this will decrease their scale linearly until the baseline is
+   * reached (or ignore them if they are already at their baseline value).
+   */
+  void scale_hovered();
+
+  /**
+   * Updates the scale of all clicked sprites.
+   *
+   * For animations with a clicked state with a value greater than one, this
+   * will change their scale based on the amount of animation frames left:
+   * (defined in the local constant max_scale_increase). For animations with a
+   * state set to false, this will decrease their scale linearly until the
+   * baseline is reached (or ignore them if they are already at their baseline
+   * value).
+   */
+  void scale_clicked();
 };
 
 #endif //_ANIMATOR_H_
