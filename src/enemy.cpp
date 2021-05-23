@@ -4,7 +4,7 @@
 
 Enemy::Enemy(Resources &r) : resources(r), gui(r)
 {
-  regenerate(StageName::GREEN_FOREST, 1);
+  regenerate(StageName::GREEN_FOREST, 1, false);
 }
 
 void Enemy::render(sf::RenderTarget &target)
@@ -39,7 +39,9 @@ void Enemy::set_info(const std::string &n, const int &lv)
 void Enemy::receive_damage(const double &damage_received)
 {
   set_hp(hp - damage_received);
-  regenerate(StageName::GREEN_FOREST, 1);
+
+  // DEBUGGING ONLY
+  regenerate(StageName::GREEN_FOREST, 1, false);
 }
 
 void Enemy::set_texture(const sf::Texture &texture)
