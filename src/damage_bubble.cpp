@@ -1,15 +1,15 @@
 #include "damage_bubble.h"
+#include "number_formatter.h"
 
 DamageBubble::DamageBubble(const int &dmg, Resources &res)
 {
   remaining_frames = 80;
 
   damage_text.setFont(res.get_font(ResourceName::RIGHTEOUS_FONT));
-  damage_text.setCharacterSize(20);
+  damage_text.setCharacterSize(18);
   damage_text.setFillColor(sf::Color(255, 255, 255, 230));
-  damage_text.setString(std::to_string(dmg));
+  damage_text.setString(NumberFormatter::abbreviate(dmg));
   damage_text.setPosition(950.0f, 642.0f);
-
   bubble_rect.set_size(sf::Vector2f(damage_text.getLocalBounds().width * 2,
                                     damage_text.getLocalBounds().height * 2.5));
   bubble_rect.set_corners_radius(15);
