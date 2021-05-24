@@ -23,7 +23,7 @@ class Game
   Player player{resources};
   Enemy enemy{resources};
   Stage stage{resources};
-  Animator animator{window, enemy.get_sprite(), player.get_sprite()};
+  Animator animator{window, enemy.get_sprite(), player.get_sprite(), resources};
 
   void process_event(sf::Event event);
   void process_click(sf::Event event);

@@ -1,34 +1,51 @@
 #ifndef _ANIMATOR_H_
 #define _ANIMATOR_H_
 
+#include "damage_bubble.h"
 #include "enemy.h"
+#include "resources.h"
 #include <SFML/Graphics.hpp>
 #include <map>
+#include <vector>
 
 /**
  * A class responsible for animating sprites' properties (e.g. their scale).
  *
- * Animated properties define two constants in their individual update
- * functions, allowing isolated tweaking of:
+ * Animated properties can be customised by tweaking the constants in the
+ * individual update functions, such as:
  *
  * 1) the maximum value the property can be increased by;
  * 2) the number of frames that it takes for the animation to complete (i.e.
- * reach the maximum allowed value).
+ * reach the maximum allowed value);
+ * 3) the increment applied after each rendering iteration.
  */
 class Animator
 {
   public:
   Animator(std::unique_ptr<sf::RenderWindow> &w, sf::Sprite &player_sprite,
-           sf::Sprite &enemy_sprite);
+           sf::Sprite &enemy_sprite, Resources &res);
 
   /**
    * Updates all sprites based on their animation state.
    */
   void animate();
 
+  /**
+   * Adds a new damage bubble that represents the given value.
+   *
+   * @param damage the value drawn inside of the bubble.
+   */
+  void add_damage_bubble(const int &damage);
+
+  /**
+   * Sets a sprite in the clicked state, triggering the click animation.
+   *
+   * @param sprite the sprite to animate.
+   */
   void set_clicked_state(sf::Sprite &sprite);
 
   private:
+  Resources &resources;
   std::unique_ptr<sf::RenderWindow> &window;
   ///  Each hoverable sprite has an 'animation state', which can either be true
   ///  or false: true means that the property should be actively animated
@@ -41,7 +58,12 @@ class Animator
   ///  scales up the sprite, whereas the second half scales it down to its
   ///  original size.
   std::map<sf::Sprite *, int> click_animation_states;
-  std::map<sf::Sprite *, sf::Vector2f> original_scales;
+  /// A reference to the original scale of each sprite, used to return the value
+  /// to its baseline at the end of potentially multiple animations.
+  std::map<sf::Sprite *, const sf::Vector2f> original_scales;
+  /// The damage bubbles that have to be drawn to the screen. Individual bubbles
+  /// are removed and destroyed once all animation frames have been drawn.
+  std::vector<DamageBubble> damage_bubbles;
 
   const int click_animation_frames = 20;
 
@@ -80,6 +102,15 @@ class Animator
    * value).
    */
   void scale_clicked();
+
+  /**
+   * Draws all damage bubbles to the window.
+   *
+   * This function only draws a single frame for each existing damage bubble.
+   * All damage bubbles that don't have any frame left to render are removed
+   * from the vector at the end of each invocation.
+   */
+  void draw_damage_bubbles();
 };
 
 #endif //_ANIMATOR_H_

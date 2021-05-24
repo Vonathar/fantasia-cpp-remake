@@ -38,6 +38,7 @@ void Game::process_click(sf::Event event)
   if (enemy.get_sprite().getGlobalBounds().contains(click_pos))
   {
     animator.set_clicked_state(enemy.get_sprite());
+    animator.add_damage_bubble(player.get_click_damage());
     enemy.receive_damage(player.get_click_damage());
     if (enemy.is_dead())
     {
@@ -52,10 +53,10 @@ void Game::update() {}
 void Game::render()
 {
   this->window->clear();
-  animator.animate();
   stage.render(*window);
   static_gui.render(*window);
   player.render(*window);
   enemy.render(*window);
+  animator.animate();
   this->window->display();
 }

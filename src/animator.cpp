@@ -1,8 +1,9 @@
 #include "animator.h"
 
 Animator::Animator(std::unique_ptr<sf::RenderWindow> &w,
-                   sf::Sprite &player_sprite, sf::Sprite &enemy_sprite)
-    : window(w)
+                   sf::Sprite &player_sprite, sf::Sprite &enemy_sprite,
+                   Resources &res)
+    : window(w), resources(res)
 {
   hover_animation_states.emplace(&enemy_sprite, false);
   click_animation_states.emplace(&enemy_sprite, 0);
@@ -17,6 +18,7 @@ void Animator::animate()
   refresh_hover_states();
   scale_hovered();
   scale_clicked();
+  draw_damage_bubbles();
 }
 
 void Animator::refresh_hover_states()
@@ -85,6 +87,25 @@ void Animator::scale_clicked()
       scale(*pair.first, -increment);
       pair.second = pair.second - 1;
     }
+  }
+}
+
+void Animator::add_damage_bubble(const int &damage)
+{
+  damage_bubbles.emplace_back(DamageBubble{damage, resources});
+}
+
+void Animator::draw_damage_bubbles()
+{
+  for (auto it = damage_bubbles.begin(); it != damage_bubbles.end();)
+  {
+    if (it->has_more_frames())
+    {
+      it->render(*window);
+      ++it;
+    }
+    else
+      it = damage_bubbles.erase(it);
   }
 }
 
