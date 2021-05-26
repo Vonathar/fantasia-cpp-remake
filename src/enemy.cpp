@@ -42,6 +42,7 @@ void Enemy::receive_damage(const double &damage_received)
   set_hp(hp - damage_received);
   if (hp <= 0)
   {
+    set_hp(0);
     dead = true;
   }
 }
@@ -49,8 +50,10 @@ void Enemy::receive_damage(const double &damage_received)
 void Enemy::set_texture(const sf::Texture &texture)
 {
   sprite.setTexture(texture, true);
-  sprite.setPosition(1095.0f - (static_cast<float>(texture.getSize().x) / 2.0f),
-                     740.0f - (static_cast<float>(texture.getSize().y) / 2.0f));
+  sprite.setOrigin(sprite.getLocalBounds().width / 2,
+                   sprite.getLocalBounds().height /
+                       (2 * std::pow(sprite.getLocalBounds().height, -0.082)));
+  sprite.setPosition(1095.0f, 760.0f);
   sprite.setScale(0.8f, 0.8f);
 }
 
