@@ -35,9 +35,10 @@ class DamageBubble : public Entity
   bool has_more_frames() const;
 
   private:
-  sf::Text damage_text;
-  int remaining_frames;
   RoundedRect bubble_rect{};
+  sf::Text damage_text;
+  float random_offset;
+  int remaining_frames;
 };
 
 #endif //_DAMAGE_BUBBLE_H_

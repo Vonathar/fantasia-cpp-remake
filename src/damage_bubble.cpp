@@ -1,15 +1,23 @@
 #include "damage_bubble.h"
 #include "number_formatter.h"
+#include <random>
 
 DamageBubble::DamageBubble(const int &dmg, Resources &res)
 {
-  remaining_frames = 80;
+  remaining_frames = 120;
+
+  static std::random_device random_device;
+  static std::mt19937 rng(random_device());
+  std::uniform_real_distribution<float> dist(-0.75, 0.75);
+  random_offset = dist(rng);
 
   damage_text.setFont(res.get_font(ResourceName::RIGHTEOUS_FONT));
   damage_text.setCharacterSize(18);
   damage_text.setFillColor(sf::Color(255, 255, 255, 230));
   damage_text.setString(NumberFormatter::abbreviate(dmg));
-  damage_text.setPosition(950.0f, 642.0f);
+  damage_text.setPosition(
+      static_cast<float>(sf::Mouse::getPosition().x) - 20.0f,
+      static_cast<float>(sf::Mouse::getPosition().y) - 40.0f);
   bubble_rect.set_size(sf::Vector2f(damage_text.getLocalBounds().width * 2,
                                     damage_text.getLocalBounds().height * 2.5));
   bubble_rect.set_corners_radius(15);
@@ -27,7 +35,7 @@ void DamageBubble::render(sf::RenderTarget &target)
   target.draw(bubble_rect);
   target.draw(damage_text);
 
-  const float x_offset = -0.75f;
+  const float x_offset = -0.75f + random_offset;
   const float y_offset = -1.5f;
 
   bubble_rect.move(x_offset, y_offset);
