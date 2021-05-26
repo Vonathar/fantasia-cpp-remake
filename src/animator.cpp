@@ -1,16 +1,18 @@
 #include "animator.h"
+#include <cmath>
 
-Animator::Animator(std::unique_ptr<sf::RenderWindow> &w,
-                   sf::Sprite &player_sprite, sf::Sprite &enemy_sprite,
-                   Resources &res)
-    : window(w), resources(res)
+Animator::Animator(std::unique_ptr<sf::RenderWindow> &w, Resources &res,
+                   Player &p, Enemy &e, Stage &s)
+    : window(w), resources(res), player(p), enemy(e), stage(s)
 {
-  hover_animation_states.emplace(&enemy_sprite, false);
-  click_animation_states.emplace(&enemy_sprite, 0);
-  original_scales.emplace(&enemy_sprite, enemy_sprite.getScale());
-  hover_animation_states.emplace(&player_sprite, false);
-  click_animation_states.emplace(&player_sprite, 0);
-  original_scales.emplace(&player_sprite, player_sprite.getScale());
+  hover_animation_states.emplace(&enemy.get_sprite(), false);
+  click_animation_states.emplace(&enemy.get_sprite(), 0);
+  death_animation_states.emplace(&enemy.get_sprite(), 0);
+  original_scales.emplace(&enemy.get_sprite(), enemy.get_sprite().getScale());
+  hover_animation_states.emplace(&player.get_sprite(), false);
+  click_animation_states.emplace(&player.get_sprite(), 0);
+  death_animation_states.emplace(&player.get_sprite(), 0);
+  original_scales.emplace(&player.get_sprite(), player.get_sprite().getScale());
 }
 
 void Animator::animate()
@@ -19,6 +21,7 @@ void Animator::animate()
   scale_hovered();
   scale_clicked();
   draw_damage_bubbles();
+  draw_dead_sprites();
 }
 
 void Animator::refresh_hover_states()
@@ -109,7 +112,57 @@ void Animator::draw_damage_bubbles()
   }
 }
 
+void Animator::draw_dead_sprites()
+{
+  for (auto &pair : death_animation_states)
+  {
+    if (pair.second == 0)
+      continue;
+
+    const double start_frames = death_animation_frames / 6.0;
+    const double end_frames = death_animation_frames / 4.0;
+
+    if (pair.second >= start_frames)
+    {
+      const double rotation_diff = 0.2f * std::pow(pair.second, 0.13f);
+      const double position_diff = 1.0f * std::pow(pair.second, 0.20f);
+      const double scale_diff = 0.0023f * std::pow(pair.second, 0.14f);
+
+      pair.first->rotate(static_cast<float>(rotation_diff));
+      pair.first->move(static_cast<float>(position_diff),
+                       static_cast<float>(-position_diff));
+      scale(*pair.first, static_cast<float>(scale_diff));
+    }
+
+    if (pair.second > 1 && pair.second < end_frames)
+    {
+      const double position_x_diff = -1.0f * std::pow(pair.second, 0.13f);
+      const double position_y_diff = 1.0f;
+      const double scale_diff = -0.0195f * std::pow(pair.second, 0.23f);
+
+      pair.first->move(static_cast<float>(position_x_diff),
+                       static_cast<float>(position_y_diff));
+      scale(*pair.first, static_cast<float>(scale_diff));
+    }
+
+    if (pair.second == 1)
+    {
+      if (&enemy.get_sprite() == pair.first)
+      {
+        enemy.regenerate(stage.get_name(), 1, false);
+      }
+      pair.first->setRotation(0.0f);
+    }
+    pair.second = pair.second - 1;
+  }
+}
+
 void Animator::set_clicked_state(sf::Sprite &sprite)
 {
   click_animation_states[&sprite] = click_animation_frames;
+}
+
+void Animator::set_dead_state(sf::Sprite &sprite)
+{
+  death_animation_states[&sprite] = death_animation_frames;
 }

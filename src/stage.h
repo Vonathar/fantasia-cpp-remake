@@ -11,6 +11,7 @@ class Stage : public Entity
   public:
   explicit Stage(Resources &r);
   void render(sf::RenderTarget &target) override;
+  const StageName &get_name();
 
   private:
   Resources &resources;

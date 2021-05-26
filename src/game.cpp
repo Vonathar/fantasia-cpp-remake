@@ -42,8 +42,8 @@ void Game::process_click(sf::Event event)
     enemy.receive_damage(player.get_click_damage());
     if (enemy.is_dead())
     {
+      animator.set_dead_state(enemy.get_sprite());
       player.receive_xp(enemy.get_xp_held());
-      enemy.regenerate(StageName::GREEN_FOREST, 1, false);
     }
   }
 }

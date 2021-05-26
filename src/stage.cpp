@@ -11,3 +11,8 @@ void Stage::render(sf::RenderTarget &target)
 {
   target.draw(sprite);
 }
+
+const StageName &Stage::get_name()
+{
+  return name;
+}
