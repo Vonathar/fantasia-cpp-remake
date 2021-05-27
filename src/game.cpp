@@ -37,9 +37,16 @@ void Game::process_click(sf::Event event)
                          static_cast<float>(event.mouseButton.y));
   if (enemy.get_sprite().getGlobalBounds().contains(click_pos))
   {
-    animator.set_clicked_state(enemy.get_sprite());
-    animator.add_damage_bubble(player.get_click_damage());
-    enemy.receive_damage(player.get_click_damage());
+    if (enemy.is_regenerating())
+    {
+      return;
+    }
+    if (!enemy.is_dead())
+    {
+      animator.set_clicked_state(enemy.get_sprite());
+      animator.add_damage_bubble(player.get_click_damage());
+      enemy.receive_damage(player.get_click_damage());
+    }
     if (enemy.is_dead())
     {
       animator.set_dead_state(enemy.get_sprite());

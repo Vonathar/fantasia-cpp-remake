@@ -9,7 +9,7 @@
 #include "resources.h"
 #include <iostream>
 
-struct Enemy : public Entity
+class Enemy : public Entity
 {
   public:
   explicit Enemy(Resources &r);
@@ -21,9 +21,11 @@ struct Enemy : public Entity
   void set_max_hp(const double &n);
   void set_info(const std::string &n, const int &lv);
   void set_texture(const sf::Texture &texture);
+  void set_regenerating(bool r);
   sf::Sprite &get_sprite();
   double &get_xp_held();
   bool &is_dead();
+  bool &is_regenerating();
 
   private:
   Resources &resources;
@@ -37,6 +39,7 @@ struct Enemy : public Entity
   double xp_held{};
   sf::Sprite sprite{};
   bool dead{};
+  bool regenerating{};
 
   const double base_max_hp = 500;
   const double base_damage = 3;

@@ -37,6 +37,11 @@ void Enemy::set_info(const std::string &n, const int &lv)
   gui.set_info(n, lv);
 }
 
+void Enemy::set_regenerating(bool r)
+{
+  regenerating = r;
+}
+
 void Enemy::receive_damage(const double &damage_received)
 {
   set_hp(hp - damage_received);
@@ -61,6 +66,7 @@ void Enemy::regenerate(const StageName &stage_name, const int &min_level,
                        const bool &is_boss)
 {
   dead = false;
+  regenerating = false;
   auto random_enemy = generator.get_random_enemy(stage_name);
 
   // Uses the Mersenne Twister PRNG to generate a random integer from the
@@ -86,6 +92,11 @@ void Enemy::regenerate(const StageName &stage_name, const int &min_level,
 bool &Enemy::is_dead()
 {
   return dead;
+}
+
+bool &Enemy::is_regenerating()
+{
+  return regenerating;
 }
 
 double &Enemy::get_xp_held()

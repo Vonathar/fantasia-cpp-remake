@@ -164,5 +164,13 @@ void Animator::set_clicked_state(sf::Sprite &sprite)
 
 void Animator::set_dead_state(sf::Sprite &sprite)
 {
-  death_animation_states[&sprite] = death_animation_frames;
+  if (death_animation_states[&sprite] == 0)
+  {
+    death_animation_states[&sprite] = death_animation_frames;
+
+    if (&enemy.get_sprite() == &sprite)
+    {
+      enemy.set_regenerating(true);
+    }
+  }
 }
