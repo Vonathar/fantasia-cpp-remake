@@ -54,7 +54,7 @@ void Player::increment_level()
   level++;
   set_xp(xp - required_xp);
   set_required_xp(base_required_xp * pow(1.1, level));
-  set_max_hp(base_max_hp * pow(1.05, max_hp));
+  set_max_hp(base_max_hp * pow(1.12, level));
   set_hp(max_hp);
 
   for (const auto &req : rank.requirements)
