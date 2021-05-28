@@ -151,6 +151,10 @@ void Animator::draw_dead_sprites()
       {
         enemy.regenerate(stage.get_name(), 1, false);
       }
+      if (&player.get_sprite() == pair.first)
+      {
+        player.regenerate();
+      }
       pair.first->setRotation(0.0f);
     }
     pair.second = pair.second - 1;
@@ -171,6 +175,10 @@ void Animator::set_dead_state(sf::Sprite &sprite)
     if (&enemy.get_sprite() == &sprite)
     {
       enemy.set_regenerating(true);
+    }
+    if (&player.get_sprite() == &sprite)
+    {
+      player.set_regenerating(true);
     }
   }
 }

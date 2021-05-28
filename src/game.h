@@ -17,6 +17,7 @@ class Game
   void run();
 
   private:
+  sf::Clock clock{};
   std::unique_ptr<sf::RenderWindow> window{};
   Resources resources{};
   StaticGUI static_gui{resources};

@@ -32,7 +32,6 @@ void Enemy::set_max_hp(const double &n)
 
 void Enemy::set_info(const std::string &n, const int &lv)
 {
-  this->name = n;
   this->level = lv;
   gui.set_info(n, lv);
 }
@@ -102,4 +101,9 @@ bool &Enemy::is_regenerating()
 double &Enemy::get_xp_held()
 {
   return xp_held;
+}
+
+double &Enemy::get_damage()
+{
+  return damage;
 }

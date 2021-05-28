@@ -51,11 +51,27 @@ void Game::process_click(sf::Event event)
     {
       animator.set_dead_state(enemy.get_sprite());
       player.receive_xp(enemy.get_xp_held());
+      player.set_hp(player.get_max_hp());
     }
   }
 }
 
-void Game::update() {}
+void Game::update()
+{
+  if (clock.getElapsedTime().asMilliseconds() >= 1000)
+  {
+    if (!player.is_regenerating())
+      player.receive_damage(enemy.get_damage());
+
+    if (player.is_dead() && !player.is_regenerating())
+      animator.set_dead_state(player.get_sprite());
+
+    clock.restart();
+  }
+
+  if (player.is_regenerating() || enemy.is_regenerating())
+    clock.restart();
+}
 
 void Game::render()
 {
