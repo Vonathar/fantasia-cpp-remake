@@ -50,6 +50,7 @@ void Game::process_click(sf::Event event)
     if (enemy.is_dead())
     {
       animator.set_dead_state(enemy.get_sprite());
+      animator.add_dropped_money(enemy.get_coins_held());
       player.receive_xp(enemy.get_xp_held());
       player.set_hp(player.get_max_hp());
     }

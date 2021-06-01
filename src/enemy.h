@@ -24,6 +24,7 @@ class Enemy : public Entity
   void set_regenerating(bool r);
   sf::Sprite &get_sprite();
   double &get_xp_held();
+  double &get_coins_held();
   double &get_damage();
   bool &is_dead();
   bool &is_regenerating();
@@ -37,6 +38,7 @@ class Enemy : public Entity
   double max_hp{};
   double damage{};
   double xp_held{};
+  double coins_held{};
   sf::Sprite sprite{};
   bool dead{};
   bool regenerating{};
@@ -44,6 +46,7 @@ class Enemy : public Entity
   const double base_max_hp = 500;
   const double base_damage = 100;
   const double base_xp_held = 25;
+  const double base_coins_held = 25;
 };
 
 #endif //_ENEMY_H_

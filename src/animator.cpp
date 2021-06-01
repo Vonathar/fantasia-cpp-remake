@@ -1,5 +1,6 @@
 #include "animator.h"
 #include <cmath>
+#include <random>
 
 Animator::Animator(std::unique_ptr<sf::RenderWindow> &w, Resources &res,
                    Player &p, Enemy &e, Stage &s)
@@ -22,6 +23,7 @@ void Animator::animate()
   scale_clicked();
   draw_damage_bubbles();
   draw_dead_sprites();
+  draw_dropped_money();
 }
 
 void Animator::refresh_hover_states()
@@ -98,6 +100,27 @@ void Animator::add_damage_bubble(const int &damage)
   damage_bubbles.emplace_back(DamageBubble{damage, resources});
 }
 
+void Animator::add_dropped_money(const double &value)
+{
+  static std::random_device random_device;
+  static std::mt19937 rng(random_device());
+  std::uniform_int_distribution<int> dist(2, 7);
+
+  int coin_count = dist(rng);
+
+  for (int i = 0; i < coin_count; i++)
+  {
+    double coin_value = value / coin_count;
+
+    if (i == 0)
+      coin_value = coin_value * 0.7;
+    if (i == coin_count - 1)
+      coin_value = coin_value / 0.7;
+
+    dropped_money.emplace_back(Money{coin_value, resources});
+  }
+}
+
 void Animator::draw_damage_bubbles()
 {
   for (auto it = damage_bubbles.begin(); it != damage_bubbles.end();)
@@ -109,6 +132,20 @@ void Animator::draw_damage_bubbles()
     }
     else
       it = damage_bubbles.erase(it);
+  }
+}
+
+void Animator::draw_dropped_money()
+{
+  for (auto it = dropped_money.begin(); it != dropped_money.end();)
+  {
+    if (it->has_more_frames())
+    {
+      it->render(*window);
+      ++it;
+    }
+    else
+      it = dropped_money.erase(it);
   }
 }
 

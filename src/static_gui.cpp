@@ -76,11 +76,11 @@ StaticGUI::StaticGUI(Resources &r) : resources(r)
   inventory_rect.setFillColor(sf::Color(0, 0, 0, 230));
   inventory_rect.setPosition(1392.0f, 190.0f);
 
-  sf::Texture &coin_texture = resources.get_texture(ResourceName::COIN_TEXTURE);
+  sf::Texture &coin_texture =
+      resources.get_texture(ResourceName::COIN_TEXTURE_1);
   coin_texture.setSmooth(true);
   coin_icon.setTexture(coin_texture);
-  coin_icon.setPosition(1605.0f, 240.0f);
-  coin_icon.setScale(0.35f, 0.35f);
+  coin_icon.setPosition(1610.0f, 240.0f);
 }
 
 void StaticGUI::render(sf::RenderTarget &t)

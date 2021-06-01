@@ -122,7 +122,11 @@ Resources::Resources()
   load_texture(EnemyName::HELLHOUND_GARM, "stage_8/hellhound_garm.png");
 
   load_texture(ResourceName::PLAYER_TEXTURE, "img/player.png");
-  load_texture(ResourceName::COIN_TEXTURE, "img/coin.png");
+  load_texture(ResourceName::COIN_TEXTURE_1, "img/money/coin_01a.png");
+  load_texture(ResourceName::COIN_TEXTURE_2, "img/money/coin_01b.png");
+  load_texture(ResourceName::COIN_TEXTURE_3, "img/money/coin_01c.png");
+  load_texture(ResourceName::COIN_TEXTURE_4, "img/money/coin_01d.png");
+  load_texture(ResourceName::COIN_TEXTURE_5, "img/money/coin_01e.png");
 
   enemy_names = {
       // Stage 1

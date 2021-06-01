@@ -3,6 +3,7 @@
 
 #include "damage_bubble.h"
 #include "enemy.h"
+#include "money.h"
 #include "player.h"
 #include "resources.h"
 #include "stage.h"
@@ -39,6 +40,17 @@ class Animator
    */
   void add_damage_bubble(const int &damage);
 
+  /**
+   * Adds one or more money sprites, depending on the given value.
+   *
+   * The number of coins is a random integer in the interval [2, 7], and the
+   * total value is split among all coins. The values of the first and last
+   * coins are respectively multiplied and divided by a constant value, in order
+   * to prevent all coins from using the same texture.
+   *
+   * @param value the value of the dropped coins.
+   */
+  void add_dropped_money(const double &value);
   /**
    * Sets a sprite in the clicked state, triggering the click animation.
    *
@@ -77,9 +89,12 @@ class Animator
   /// A reference to the original scale of each sprite, used to return the value
   /// to its baseline at the end of potentially multiple animations.
   std::map<sf::Sprite *, const sf::Vector2f> original_scales;
-  /// The damage bubbles that have to be drawn to the screen. Individual bubbles
-  /// are removed and destroyed once all animation frames have been drawn.
+  /// The damage bubbles that have to be drawn to the screen. Each object is
+  /// removed and destroyed once all animation frames have been drawn.
   std::vector<DamageBubble> damage_bubbles;
+  /// The dropped money that has to be drawn to the screen. Each object is
+  /// removed and destroyed once all animation frames have been drawn.
+  std::vector<Money> dropped_money;
 
   const int click_animation_frames = 20;
   const int death_animation_frames = 80;
@@ -130,12 +145,21 @@ class Animator
   void draw_damage_bubbles();
 
   /**
+   * Draws all dropped money to the window.
+   *
+   * This function only draws a single frame for each existing money drop. Money
+   * drops that don't have any frame left to render are removed from the vector
+   * at the end of each invocation.
+   */
+  void draw_dropped_money();
+
+  /**
    * Updates the position, scale, and rotation of dead sprites.
    *
    * The animation has two different stages: in the first 70% of the total
-   * frames, the sprite is moved upwards, scaled, and rotated clockwise; in the
-   * remaining 30% of the frames, the sprite is moved moved downwards and scaled
-   * down.
+   * frames, the sprite is moved upwards, scaled, and rotated clockwise; in
+   * the remaining 30% of the frames, the sprite is moved moved downwards
+   * and scaled down.
    */
   void draw_dead_sprites();
 };
