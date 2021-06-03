@@ -23,8 +23,13 @@ class Player : public Entity
   void set_required_xp(const double &n);
   void set_fever(const double &n);
   void set_regenerating(bool r);
+  int &get_level();
   double &get_click_damage();
+  double &get_hp();
   double &get_max_hp();
+  double &get_xp();
+  double &get_required_xp();
+  double &get_fever();
   sf::Sprite &get_sprite();
   bool &is_dead();
   bool &is_regenerating();
