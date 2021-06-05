@@ -1,14 +1,15 @@
 #include "money.h"
 #include <random>
+#include <stdexcept>
 
 Money::Money(const double &value, Resources &resources)
 {
   static std::random_device random_device;
   static std::mt19937 rng(random_device());
-  std::uniform_real_distribution<float> frames_dist(100.0, 400.0);
+  std::uniform_int_distribution<int> frames_dist(100, 400);
 
   total_frames = frames_dist(rng);
-  remaining_frames = total_frames;
+  remaining_frames = static_cast<int>(total_frames);
 
   std::uniform_real_distribution<float> start_offset_dist(-10.0, 10.0);
   float start_offset_x = start_offset_dist(rng);
@@ -44,7 +45,7 @@ Money::Money(const double &value, Resources &resources)
     if (value <= 40)
       return ResourceName::COIN_TEXTURE_4;
 
-    if (value <= 50)
+    if (value > 40)
       return ResourceName::COIN_TEXTURE_5;
   }();
 
@@ -53,14 +54,18 @@ Money::Money(const double &value, Resources &resources)
 
 void Money::render(sf::RenderTarget &target)
 {
+  if (remaining_frames == 0)
+    return;
+
   target.draw(sprite);
 
   if (remaining_frames > total_frames / 2)
     sprite.scale(1.002, 1.002);
   else
-    sprite.scale(0.992, 0.992);
+    sprite.scale(0.991, 0.991);
 
-  const float t = (total_frames - remaining_frames) / total_frames;
+  const float t = static_cast<float>(total_frames - remaining_frames) /
+                  static_cast<float>(total_frames);
   sprite.setPosition(calc_bezier_curve(t));
 
   remaining_frames--;

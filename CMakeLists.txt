@@ -23,7 +23,7 @@ set(SOURCE_FILES
 
 set(TEST_FILES
         tests/init.cpp tests/number_formatter_test.cpp tests/resources_test.cpp
-        tests/player_test.cpp)
+        tests/player_test.cpp tests/money_test.cpp)
 
 set(SFML_FILES
         sfml-system sfml-window sfml-graphics sfml-network sfml-audio)

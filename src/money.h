@@ -32,8 +32,8 @@ struct Money : public Entity
 
   private:
   sf::Sprite sprite{};
-  float total_frames;
-  float remaining_frames;
+  int total_frames;
+  int remaining_frames;
 
   sf::Vector2f start_point{};
   sf::Vector2f mid_point{};
