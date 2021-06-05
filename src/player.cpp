@@ -112,34 +112,9 @@ sf::Sprite &Player::get_sprite()
   return sprite;
 }
 
-int &Player::get_level()
-{
-  return level;
-}
-
-double &Player::get_hp()
-{
-  return hp;
-}
-
 double &Player::get_max_hp()
 {
   return max_hp;
-}
-
-double &Player::get_xp()
-{
-  return xp;
-}
-
-double &Player::get_required_xp()
-{
-  return required_xp;
-}
-
-double &Player::get_fever()
-{
-  return fever;
 }
 
 bool &Player::is_dead()
