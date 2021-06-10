@@ -22,8 +22,11 @@ set(SOURCE_FILES
         src/money.cpp src/money.h)
 
 set(TEST_FILES
-        tests/init.cpp tests/number_formatter_test.cpp tests/resources_test.cpp
-        tests/player_test.cpp tests/money_test.cpp tests/enemy_generator_test.cpp tests/enemy_test.cpp)
+        tests/init.cpp
+        tests/number_formatter_test.cpp tests/resources_test.cpp
+        tests/player_test.cpp tests/money_test.cpp
+        tests/enemy_generator_test.cpp tests/enemy_test.cpp
+        tests/animator_test.cpp)
 
 set(SFML_FILES
         sfml-system sfml-window sfml-graphics sfml-network sfml-audio)

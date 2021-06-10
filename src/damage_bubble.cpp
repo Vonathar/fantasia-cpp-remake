@@ -4,7 +4,7 @@
 
 DamageBubble::DamageBubble(const int &dmg, Resources &res)
 {
-  remaining_frames = 120;
+  remaining_frames = total_frames;
 
   static std::random_device random_device;
   static std::mt19937 rng(random_device());

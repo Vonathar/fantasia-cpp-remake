@@ -1,6 +1,5 @@
 #include "money.h"
 #include <random>
-#include <stdexcept>
 
 Money::Money(const double &value, Resources &resources)
 {

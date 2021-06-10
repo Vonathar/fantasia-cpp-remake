@@ -39,6 +39,7 @@ class DamageBubble : public Entity
   sf::Text damage_text;
   float random_offset;
   int remaining_frames;
+  int total_frames = 120;
 };
 
 #endif //_DAMAGE_BUBBLE_H_

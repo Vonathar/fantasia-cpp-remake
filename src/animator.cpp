@@ -156,10 +156,9 @@ void Animator::draw_dead_sprites()
     if (pair.second == 0)
       continue;
 
-    const double start_frames = death_animation_frames / 6.0;
-    const double end_frames = death_animation_frames / 4.0;
+    const int start_frames = death_animation_frames * 60 / 100;
 
-    if (pair.second >= start_frames)
+    if (death_animation_frames - pair.second < start_frames)
     {
       const double rotation_diff = 0.2f * std::pow(pair.second, 0.13f);
       const double position_diff = 1.0f * std::pow(pair.second, 0.20f);
@@ -170,8 +169,7 @@ void Animator::draw_dead_sprites()
                        static_cast<float>(-position_diff));
       scale(*pair.first, static_cast<float>(scale_diff));
     }
-
-    if (pair.second > 1 && pair.second < end_frames)
+    else
     {
       const double position_x_diff = -1.0f * std::pow(pair.second, 0.13f);
       const double position_y_diff = 1.0f;
@@ -181,7 +179,6 @@ void Animator::draw_dead_sprites()
                        static_cast<float>(position_y_diff));
       scale(*pair.first, static_cast<float>(scale_diff));
     }
-
     if (pair.second == 1)
     {
       if (&enemy.get_sprite() == pair.first)
@@ -194,7 +191,7 @@ void Animator::draw_dead_sprites()
       }
       pair.first->setRotation(0.0f);
     }
-    pair.second = pair.second - 1;
+    pair.second--;
   }
 }
 
