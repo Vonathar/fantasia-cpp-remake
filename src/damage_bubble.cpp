@@ -32,6 +32,9 @@ DamageBubble::DamageBubble(const int &dmg, Resources &res)
 
 void DamageBubble::render(sf::RenderTarget &target)
 {
+  if (remaining_frames == 0)
+    return;
+
   target.draw(bubble_rect);
   target.draw(damage_text);
 
