@@ -80,7 +80,7 @@ void Animator::scale_clicked()
 
   for (auto &pair : click_animation_states)
   {
-    auto frames_left = pair.second;
+    const auto frames_left = pair.second;
 
     if (frames_left > click_animation_frames / 2)
     {
@@ -106,7 +106,7 @@ void Animator::add_dropped_money(const double &value)
   static std::mt19937 rng(random_device());
   std::uniform_int_distribution<int> dist(2, 7);
 
-  int coin_count = dist(rng);
+  const int coin_count = dist(rng);
 
   for (int i = 0; i < coin_count; i++)
   {
@@ -156,45 +156,51 @@ void Animator::draw_dead_sprites()
 {
   for (auto &pair : death_animation_states)
   {
-    if (pair.second == 0)
+    int &frames_left = pair.second;
+
+    if (frames_left == 0)
       continue;
 
-    const int start_frames = death_animation_frames * 60 / 100;
+    sf::Sprite *sprite = pair.first;
 
-    if (death_animation_frames - pair.second < start_frames)
+    if (frames_left == 1)
     {
-      const double rotation_diff = 0.2f * std::pow(pair.second, 0.13f);
-      const double position_diff = 1.0f * std::pow(pair.second, 0.20f);
-      const double scale_diff = 0.0023f * std::pow(pair.second, 0.14f);
-
-      pair.first->rotate(static_cast<float>(rotation_diff));
-      pair.first->move(static_cast<float>(position_diff),
-                       static_cast<float>(-position_diff));
-      scale(*pair.first, static_cast<float>(scale_diff));
-    }
-    else
-    {
-      const double position_x_diff = -1.0f * std::pow(pair.second, 0.13f);
-      const double position_y_diff = 1.0f;
-      const double scale_diff = -0.0195f * std::pow(pair.second, 0.23f);
-
-      pair.first->move(static_cast<float>(position_x_diff),
-                       static_cast<float>(position_y_diff));
-      scale(*pair.first, static_cast<float>(scale_diff));
-    }
-    if (pair.second == 1)
-    {
-      if (&enemy.get_sprite() == pair.first)
-      {
+      if (sprite == &enemy.get_sprite())
         enemy.regenerate(stage.get_name(), 1, false);
-      }
-      if (&player.get_sprite() == pair.first)
-      {
+
+      if (sprite == &player.get_sprite())
         player.regenerate();
-      }
-      pair.first->setRotation(0.0f);
+
+      sprite->setRotation(0.0f);
     }
-    pair.second--;
+
+    if (frames_left > 1)
+    {
+      const int start_frames = death_animation_frames * 70 / 100;
+
+      if (death_animation_frames - frames_left < start_frames)
+      {
+        const double rotation_diff = 0.2f * std::pow(frames_left, 0.13f);
+        const double position_diff = 1.0f * std::pow(frames_left, 0.20f);
+        const double scale_diff = 0.0023f * std::pow(frames_left, 0.14f);
+
+        sprite->rotate(static_cast<float>(rotation_diff));
+        sprite->move(static_cast<float>(position_diff),
+                     static_cast<float>(-position_diff));
+        scale(*sprite, static_cast<float>(scale_diff));
+      }
+      else
+      {
+        const double position_x_diff = -1.0f * std::pow(frames_left, 0.13f);
+        const double position_y_diff = 1.0f;
+        const double scale_diff = -0.0195f;
+
+        sprite->move(static_cast<float>(position_x_diff),
+                     static_cast<float>(position_y_diff));
+        scale(*sprite, static_cast<float>(scale_diff));
+      }
+    }
+    frames_left--;
   }
 }
 
