@@ -44,8 +44,9 @@ void Game::process_click(sf::Event event)
     if (!enemy.is_dead())
     {
       animator.set_clicked_state(enemy.get_sprite());
-      animator.add_damage_bubble(player.get_click_damage());
-      enemy.receive_damage(player.get_click_damage());
+      const double click_damage = player.get_click_damage();
+      animator.add_damage_bubble(click_damage);
+      enemy.receive_damage(click_damage);
     }
     if (enemy.is_dead())
     {
@@ -79,6 +80,7 @@ void Game::render()
   window->clear();
   stage.render(*window);
   static_gui.render(*window);
+  inventory.render(*window);
   player.render(*window);
   enemy.render(*window);
   animator.animate();

@@ -1,5 +1,6 @@
 #include "player.h"
 #include <cmath>
+#include <random>
 
 Player::Player(Resources &r) : resources(r), gui(r)
 {
@@ -102,9 +103,12 @@ void Player::set_regenerating(bool r)
   regenerating = r;
 }
 
-double &Player::get_click_damage()
+double Player::get_click_damage() const
 {
-  return click_damage;
+  static std::random_device random_device;
+  static std::mt19937 rng(random_device());
+  std::uniform_real_distribution<float> dist(0.8, 1.2);
+  return click_damage * dist(rng);
 }
 
 sf::Sprite &Player::get_sprite()

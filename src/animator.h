@@ -38,7 +38,7 @@ class Animator
    *
    * @param damage the value drawn inside of the bubble.
    */
-  void add_damage_bubble(const int &damage);
+  void add_damage_bubble(const long double &damage);
 
   /**
    * Adds one or more money sprites, depending on the given value.

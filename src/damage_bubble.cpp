@@ -2,7 +2,7 @@
 #include "number_formatter.h"
 #include <random>
 
-DamageBubble::DamageBubble(const int &dmg, Resources &res)
+DamageBubble::DamageBubble(const long double &dmg, Resources &res)
 {
   remaining_frames = total_frames;
 

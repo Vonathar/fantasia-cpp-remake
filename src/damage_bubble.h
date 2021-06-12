@@ -15,7 +15,7 @@
 class DamageBubble : public Entity
 {
   public:
-  explicit DamageBubble(const int &dmg, Resources &res);
+  explicit DamageBubble(const long double &dmg, Resources &res);
 
   /**
    * Draws the damage bubble on the given target window.

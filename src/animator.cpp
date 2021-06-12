@@ -95,7 +95,7 @@ void Animator::scale_clicked()
   }
 }
 
-void Animator::add_damage_bubble(const int &damage)
+void Animator::add_damage_bubble(const long double &damage)
 {
   damage_bubbles.emplace_back(DamageBubble{damage, resources});
 }
