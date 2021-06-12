@@ -4,6 +4,7 @@
 #include "SFML/Graphics.hpp"
 #include "animator.h"
 #include "enemy.h"
+#include "inventory.h"
 #include "player.h"
 #include "resources.h"
 #include "stage.h"
@@ -21,10 +22,11 @@ class Game
   std::unique_ptr<sf::RenderWindow> window{};
   Resources resources{};
   StaticGUI static_gui{resources};
+  Inventory inventory{resources};
   Player player{resources};
   Enemy enemy{resources};
   Stage stage{resources};
-  Animator animator{window, resources, player, enemy, stage};
+  Animator animator{window, resources, inventory, player, enemy, stage};
 
   void process_event(sf::Event event);
   void process_click(sf::Event event);

@@ -15,7 +15,7 @@
 struct Money : public Entity
 {
   public:
-  Money(const double &value, Resources &resources);
+  Money(const long double &value, Resources &resources);
 
   /**
    * Draws the money to the window, then updates the sprite.
@@ -29,9 +29,11 @@ struct Money : public Entity
    */
   void render(sf::RenderTarget &target) override;
   bool has_more_frames() const;
+  long double &get_value();
 
   private:
   sf::Sprite sprite{};
+  long double value;
   int total_frames;
   int remaining_frames;
 

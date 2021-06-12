@@ -3,7 +3,7 @@
 #include "../src/animator.h"
 #include <catch2/catch.hpp>
 
-namespace animator_test
+namespace damage_bubble_test
 {
 std::unique_ptr<sf::RenderWindow> w = std::make_unique<sf::RenderWindow>(
     sf::VideoMode(1, 1, 32), "t", sf::Style::None);
@@ -67,4 +67,4 @@ TEST_CASE("Damage bubbles should not render if there are no frames left",
   REQUIRE(damage_bubble.remaining_frames == 0);
 }
 
-} // namespace animator_test
+} // namespace damage_bubble_test

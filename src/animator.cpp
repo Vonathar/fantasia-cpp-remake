@@ -3,8 +3,8 @@
 #include <random>
 
 Animator::Animator(std::unique_ptr<sf::RenderWindow> &w, Resources &res,
-                   Player &p, Enemy &e, Stage &s)
-    : window(w), resources(res), player(p), enemy(e), stage(s)
+                   Inventory &inv, Player &p, Enemy &e, Stage &s)
+    : window(w), resources(res), inventory(inv), player(p), enemy(e), stage(s)
 {
   hover_animation_states.emplace(&enemy.get_sprite(), false);
   click_animation_states.emplace(&enemy.get_sprite(), 0);
@@ -145,7 +145,10 @@ void Animator::draw_dropped_money()
       ++it;
     }
     else
+    {
+      inventory.add_money(it->get_value());
       it = dropped_money.erase(it);
+    }
   }
 }
 

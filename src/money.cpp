@@ -1,7 +1,7 @@
 #include "money.h"
 #include <random>
 
-Money::Money(const double &value, Resources &resources)
+Money::Money(const long double &value, Resources &resources) : value(value)
 {
   static std::random_device random_device;
   static std::mt19937 rng(random_device());
@@ -70,11 +70,6 @@ void Money::render(sf::RenderTarget &target)
   remaining_frames--;
 }
 
-bool Money::has_more_frames() const
-{
-  return remaining_frames > 0;
-}
-
 sf::Vector2f Money::calc_bezier_curve(const float t) const
 {
   return sf::Vector2f{
@@ -82,4 +77,14 @@ sf::Vector2f Money::calc_bezier_curve(const float t) const
           (t * t * end_point.x),
       ((1 - t) * (1 - t) * start_point.y) + 2 * ((1 - t) * t * mid_point.y) +
           (t * t * end_point.y)};
+}
+
+bool Money::has_more_frames() const
+{
+  return remaining_frames > 0;
+}
+
+long double &Money::get_value()
+{
+  return value;
 }

@@ -3,6 +3,7 @@
 
 #include "damage_bubble.h"
 #include "enemy.h"
+#include "inventory.h"
 #include "money.h"
 #include "player.h"
 #include "resources.h"
@@ -25,9 +26,8 @@
 class Animator
 {
   public:
-  Animator(std::unique_ptr<sf::RenderWindow> &w, Resources &res, Player &p,
-           Enemy &e, Stage &s);
-
+  Animator(std::unique_ptr<sf::RenderWindow> &w, Resources &res, Inventory &inv,
+           Player &p, Enemy &e, Stage &s);
   /**
    * Updates all sprites based on their animation state.
    */
@@ -67,6 +67,7 @@ class Animator
 
   private:
   Resources &resources;
+  Inventory &inventory;
   Player &player;
   Enemy &enemy;
   Stage &stage;
