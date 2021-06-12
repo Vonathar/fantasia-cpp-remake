@@ -76,11 +76,11 @@ void Game::update()
 
 void Game::render()
 {
-  this->window->clear();
+  window->clear();
   stage.render(*window);
   static_gui.render(*window);
   player.render(*window);
   enemy.render(*window);
   animator.animate();
-  this->window->display();
+  window->display();
 }
