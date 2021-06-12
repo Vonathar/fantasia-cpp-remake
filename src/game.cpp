@@ -33,8 +33,8 @@ void Game::process_event(sf::Event event)
 
 void Game::process_click(sf::Event event)
 {
-  sf::Vector2f click_pos(static_cast<float>(event.mouseButton.x),
-                         static_cast<float>(event.mouseButton.y));
+  const sf::Vector2f click_pos(static_cast<float>(event.mouseButton.x),
+                               static_cast<float>(event.mouseButton.y));
   if (enemy.get_sprite().getGlobalBounds().contains(click_pos))
   {
     if (enemy.is_regenerating())
