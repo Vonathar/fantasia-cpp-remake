@@ -10,6 +10,7 @@ std::string NumberFormatter::abbreviate(const long double &n)
   // 0 - 999
   if (n < 1000)
   {
+    output << std::fixed << std::setprecision(0);
     output << (n);
     return output.str();
   }
@@ -22,26 +23,26 @@ std::string NumberFormatter::abbreviate(const long double &n)
     output << std::floor((n / 1'000) * 100) / 100 << "k";
   }
   // 1m - 999m
-  if (n >= 1'000'000 && n < 1'000'000'000)
+  else if (n >= 1'000'000 && n < 1'000'000'000)
   {
     output << std::floor((n / 1'000'000) * 100) / 100 << "m";
   }
   // 1b - 999b
-  if (n >= 1'000'000'000 && n < 1'000'000'000'000)
+  else if (n >= 1'000'000'000 && n < 1'000'000'000'000)
   {
     output << std::floor((n / 1'000'000'000) * 100) / 100 << "b";
   }
   // 1t - 999t
-  if (n >= 1'000'000'000'000 && n < 1'000'000'000'000'000)
+  else if (n >= 1'000'000'000'000 && n < 1'000'000'000'000'000)
   {
     output << std::floor((n / 1'000'000'000'000) * 100) / 100 << "t";
   }
   // 1Qa - 999Qa
-  if (n >= 1'000'000'000'000'000 && n < 1'000'000'000'000'000'000)
+  else if (n >= 1'000'000'000'000'000 && n < 1'000'000'000'000'000'000)
   {
     output << std::floor((n / 1'000'000'000'000'000) * 100) / 100 << "Qa";
   }
-  if (n > 1'000'000'000'000'000'000)
+  else if (n > 1'000'000'000'000'000'000)
   {
     output << (n);
   }
