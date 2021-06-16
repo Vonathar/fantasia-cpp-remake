@@ -1,8 +1,7 @@
 cmake_minimum_required(VERSION 3.7)
 project(fantasia_remake)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -static")
-set(CMAKE_BUILD_TYPE "RELWITHDEBINFO")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 set(CMAKE_CXX_STANDARD 14)
 
 ############################
@@ -20,7 +19,7 @@ set(SOURCE_FILES
         src/enemy_generator.cpp src/enemy_generator.h src/damage_bubble.cpp
         src/damage_bubble.h src/number_formatter.cpp src/number_formatter.h
         src/money.cpp src/money.h src/inventory.cpp src/inventory.h
-        src/inventory_gui.cpp src/inventory_gui.h)
+        src/inventory_gui.cpp src/inventory_gui.h src/stage_gui.cpp src/stage_gui.h)
 
 set(TEST_FILES
         tests/init.cpp
@@ -47,8 +46,6 @@ FetchContent_MakeAvailable(Catch2)
 ##     Load SFML     ##
 #######################
 
-set(SFML_DIR "C:/SFML/lib/cmake/SFML")
-set(SFML_STATIC_LIBRARIES TRUE)
 find_package(SFML 2.5 COMPONENTS system window graphics network audio REQUIRED)
 
 #########################

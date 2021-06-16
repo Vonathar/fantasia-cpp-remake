@@ -13,7 +13,7 @@ struct PlayerRank
       {99, "Fighter"},    {119, "Soldier"},   {149, "Assassin"},
       {179, "Champion"},  {199, "Knight"},    {229, "Templar"},
       {249, "Slayer"},    {269, "Berserker"}, {299, "Hero"},
-      {INT_MAX, "Legend"}};
+      {INT64_MAX, "Legend"}};
 };
 
 #endif //_PLAYER_RANK_H_

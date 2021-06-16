@@ -1,6 +1,6 @@
 BasedOnStyle: LLVM
-AccessModifierOffset: '0'
+AccessModifierOffset: 0
 BreakBeforeBraces: Allman
-ColumnLimit: '80'
-Standard: Cpp11
+ColumnLimit: 80
+Standard: c++11
 AllowShortFunctionsOnASingleLine: Empty
