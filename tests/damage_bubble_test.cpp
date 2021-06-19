@@ -13,8 +13,7 @@ TEST_CASE("Damage bubbles should have a random x-position offset",
           "[damage_bubble]")
 {
   DamageBubble damage_bubble{5, r};
-  REQUIRE((damage_bubble.random_offset >= -0.75 &&
-           damage_bubble.random_offset <= 0.75));
+  REQUIRE((damage_bubble.x_offset >= -0.75 && damage_bubble.x_offset <= 0.75));
 }
 
 TEST_CASE("Damage bubbles should have all frames available when initialised",

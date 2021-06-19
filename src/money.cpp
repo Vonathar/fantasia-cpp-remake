@@ -5,7 +5,7 @@ Money::Money(const long double &value, Resources &resources) : value(value)
 {
   static std::random_device random_device;
   static std::mt19937 rng(random_device());
-  std::uniform_int_distribution<int> frames_dist(100, 400);
+  std::uniform_int_distribution<int> frames_dist(40, 160);
 
   total_frames = frames_dist(rng);
   remaining_frames = static_cast<int>(total_frames);

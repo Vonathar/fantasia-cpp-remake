@@ -97,8 +97,16 @@ class Animator
   /// removed and destroyed once all animation frames have been drawn.
   std::vector<Money> dropped_money;
 
-  const int click_animation_frames = 20;
-  const int death_animation_frames = 80;
+  std::map<sf::Sprite *, float> hover_scale_increases;
+  std::map<sf::Sprite *, float> click_scale_increases;
+
+  sf::Clock delta_clock{};
+  float elapsed_time = 0.0f;
+
+  const float time_per_frame = 1.0f / 60.0f;
+  const int hover_animation_frames = 8;
+  const int click_animation_frames = 8;
+  const int death_animation_frames = 24;
 
   /**
    * Scales a sprite by the given increment.

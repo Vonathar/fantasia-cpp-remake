@@ -1,5 +1,4 @@
 #include "animator.h"
-#include <cmath>
 #include <random>
 
 Animator::Animator(std::unique_ptr<sf::RenderWindow> &w, Resources &res,
@@ -10,20 +9,30 @@ Animator::Animator(std::unique_ptr<sf::RenderWindow> &w, Resources &res,
   click_animation_states.emplace(&enemy.get_sprite(), 0);
   death_animation_states.emplace(&enemy.get_sprite(), 0);
   original_scales.emplace(&enemy.get_sprite(), enemy.get_sprite().getScale());
+  hover_scale_increases.emplace(&enemy.get_sprite(), 0.0f);
+  click_scale_increases.emplace(&enemy.get_sprite(), 0.0f);
   hover_animation_states.emplace(&player.get_sprite(), false);
   click_animation_states.emplace(&player.get_sprite(), 0);
   death_animation_states.emplace(&player.get_sprite(), 0);
+  hover_scale_increases.emplace(&player.get_sprite(), 0.0f);
+  click_scale_increases.emplace(&player.get_sprite(), 0.0f);
   original_scales.emplace(&player.get_sprite(), player.get_sprite().getScale());
 }
 
 void Animator::animate()
 {
-  refresh_hover_states();
-  scale_hovered();
-  scale_clicked();
-  draw_damage_bubbles();
-  draw_dead_sprites();
-  draw_dropped_money();
+  float delta_time = delta_clock.restart().asSeconds();
+  elapsed_time += delta_time;
+  while (elapsed_time >= time_per_frame)
+  {
+    refresh_hover_states();
+    scale_hovered();
+    scale_clicked();
+    draw_damage_bubbles();
+    draw_dead_sprites();
+    draw_dropped_money();
+    elapsed_time -= time_per_frame;
+  }
 }
 
 void Animator::refresh_hover_states()
@@ -50,24 +59,23 @@ void Animator::scale(sf::Sprite &sprite, const float &increment)
 
 void Animator::scale_hovered()
 {
-  const float max_scale_increase = 0.05f;
-  const float frame_count = 40;
-  const float increment = max_scale_increase / frame_count;
-
   for (const auto &pair : hover_animation_states)
   {
     auto sprite = pair.first;
     auto should_animate = pair.second;
 
-    if (should_animate)
+    const float max_scale = 0.05f;
+    float &current_scale = hover_scale_increases[sprite];
+    float increment = max_scale / hover_animation_frames;
+
+    if (should_animate && current_scale < max_scale)
     {
-      if (sprite->getScale().x < original_scales[sprite].x + max_scale_increase)
-      {
-        scale(*sprite, increment);
-      }
+      current_scale += increment;
+      scale(*sprite, increment);
     }
-    else if (sprite->getScale().x > original_scales[sprite].x)
+    else if (!should_animate && current_scale > 0.0f)
     {
+      current_scale -= increment;
       scale(*sprite, -increment);
     }
   }
@@ -75,23 +83,29 @@ void Animator::scale_hovered()
 
 void Animator::scale_clicked()
 {
-  const float max_scale_increase = 0.05f;
-  const float increment = max_scale_increase / click_animation_frames;
+  const float max_scale = 0.06f;
+  const float increment = max_scale / click_animation_frames;
 
   for (auto &pair : click_animation_states)
   {
-    const auto frames_left = pair.second;
+    auto &frames_left = pair.second;
+    if (frames_left == 0)
+      continue;
 
-    if (frames_left > click_animation_frames / 2)
+    auto sprite = pair.first;
+    float &current_scale = click_scale_increases[sprite];
+
+    if (frames_left > click_animation_frames / 2 && current_scale < max_scale)
     {
-      scale(*pair.first, increment);
-      pair.second = pair.second - 1;
+      current_scale += increment;
+      scale(*sprite, increment);
     }
-    else if (frames_left > 0)
+    else
     {
-      scale(*pair.first, -increment);
-      pair.second = pair.second - 1;
+      current_scale -= increment;
+      scale(*sprite, -increment);
     }
+    frames_left--;
   }
 }
 
@@ -180,20 +194,21 @@ void Animator::draw_dead_sprites()
 
       if (death_animation_frames - frames_left < start_frames)
       {
-        const double rotation_diff = 0.2f * std::pow(frames_left, 0.13f);
-        const double position_diff = 1.0f * std::pow(frames_left, 0.20f);
-        const double scale_diff = 0.0023f * std::pow(frames_left, 0.14f);
+        const double rotation_diff = 2.0f;
+        const double position_x_diff = 10.5f;
+        const double position_y_diff = -7.5f;
+        const double scale_diff = 0.015f;
 
         sprite->rotate(static_cast<float>(rotation_diff));
-        sprite->move(static_cast<float>(position_diff),
-                     static_cast<float>(-position_diff));
+        sprite->move(static_cast<float>(position_x_diff),
+                     static_cast<float>(position_y_diff));
         scale(*sprite, static_cast<float>(scale_diff));
       }
       else
       {
-        const double position_x_diff = -1.0f * std::pow(frames_left, 0.13f);
-        const double position_y_diff = 1.0f;
-        const double scale_diff = -0.0195f;
+        const double position_x_diff = -3.5f;
+        const double position_y_diff = 3.5f;
+        const double scale_diff = -0.1035f;
 
         sprite->move(static_cast<float>(position_x_diff),
                      static_cast<float>(position_y_diff));

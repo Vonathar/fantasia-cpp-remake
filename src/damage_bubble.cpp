@@ -8,8 +8,8 @@ DamageBubble::DamageBubble(const long double &dmg, Resources &res)
 
   static std::random_device random_device;
   static std::mt19937 rng(random_device());
-  std::uniform_real_distribution<float> dist(-0.75, 0.75);
-  random_offset = dist(rng);
+  std::uniform_real_distribution<float> dist(-4.0, 4.0);
+  x_offset = dist(rng);
 
   damage_text.setFont(res.get_font(ResourceName::RIGHTEOUS_FONT));
   damage_text.setCharacterSize(18);
@@ -38,11 +38,8 @@ void DamageBubble::render(sf::RenderTarget &target)
   target.draw(bubble_rect);
   target.draw(damage_text);
 
-  const float x_offset = -0.75f + random_offset;
-  const float y_offset = -1.5f;
-
-  bubble_rect.move(x_offset, y_offset);
-  damage_text.move(x_offset, y_offset);
+  bubble_rect.move(x_offset, -4.0f);
+  damage_text.move(x_offset, -4.0f);
 
   remaining_frames--;
 }

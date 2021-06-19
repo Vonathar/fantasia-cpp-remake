@@ -37,9 +37,9 @@ class DamageBubble : public Entity
   private:
   RoundedRect bubble_rect{};
   sf::Text damage_text;
-  float random_offset;
+  float x_offset;
   int remaining_frames;
-  int total_frames = 120;
+  int total_frames = 30;
 };
 
 #endif //_DAMAGE_BUBBLE_H_
