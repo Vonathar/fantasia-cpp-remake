@@ -49,10 +49,18 @@ FetchContent_MakeAvailable(Catch2)
 find_package(SFML 2.5 COMPONENTS system window graphics network audio REQUIRED)
 
 #########################
+##     Load Spdlog     ##
+#########################
+
+if (NOT TARGET spdlog)
+    find_package(spdlog REQUIRED)
+endif ()
+
+#########################
 ##     Executables     ##
 #########################
 
 add_executable(sfml "src/main.cpp" ${SOURCE_FILES})
-target_link_libraries(sfml ${SFML_FILES})
+target_link_libraries(sfml ${SFML_FILES}, spdlog::spdlog)
 add_executable(tests ${SOURCE_FILES} ${TEST_FILES})
 target_link_libraries(tests PRIVATE Catch2::Catch2 ${SFML_FILES})
