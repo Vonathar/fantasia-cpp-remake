@@ -1,7 +1,7 @@
 #define private public
 
-#include "../src/inventory.h"
-#include <catch2/catch.hpp>
+#include "../src/entities/inventory.h"
+#include <catch2/catch_test_macros.hpp>
 
 namespace inventory_test
 {

@@ -1,5 +1,5 @@
 #include "../src/number_formatter.h"
-#include <catch2/catch.hpp>
+#include <catch2/catch_test_macros.hpp>
 
 NumberFormatter number_formatter{};
 

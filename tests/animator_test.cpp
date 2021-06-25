@@ -1,7 +1,9 @@
+#include <catch2/catch_approx.hpp>
+#include <catch2/catch_test_macros.hpp>
+
 #define private public
 
-#include "../src/animator.h"
-#include <catch2/catch.hpp>
+#include "../src/gui/animator.h"
 
 namespace animator_test
 {
@@ -11,22 +13,23 @@ Resources r{};
 Inventory i{r};
 Player p{r};
 Enemy e{r};
-Stage s{r};
+StageGUI sg{r};
+Stage s{r, sg};
 
 TEST_CASE("Sprites are scaled correctly", "[animator]")
 {
   Animator animator{w, r, i, p, e, s};
-  animator.scale(e.sprite, 1.05f);
-  REQUIRE(e.sprite.getScale().x == Approx(2.9f));
+  animator.scale(e.gui.sprite, 1.05f);
+  REQUIRE(e.gui.sprite.getScale().x == Catch::Approx(2.5035f));
 }
 
 TEST_CASE("Hovered sprites should be scaled up", "[animator]")
 {
   Animator animator{w, r, i, p, e, s};
-  animator.hover_animation_states[&e.sprite] = true;
+  animator.hover_animation_states[&e.gui.sprite] = true;
   animator.scale_hovered();
-  float original_scale = animator.original_scales[&e.sprite].x;
-  float current_scale = e.sprite.getScale().x;
+  float original_scale = animator.original_scales[&e.gui.sprite].x;
+  float current_scale = e.gui.sprite.getScale().x;
   REQUIRE(current_scale > original_scale);
 }
 
@@ -34,8 +37,8 @@ TEST_CASE("Non-hovered sprites should not be scaled up", "[animator]")
 {
   Animator animator{w, r, i, p, e, s};
   animator.scale_hovered();
-  float original_scale = animator.original_scales[&e.sprite].x;
-  float current_scale = e.sprite.getScale().x;
+  float original_scale = animator.original_scales[&e.gui.sprite].x;
+  float current_scale = e.gui.sprite.getScale().x;
   REQUIRE(current_scale == original_scale);
 }
 
@@ -43,20 +46,20 @@ TEST_CASE("Non-hovered sprites should return to their original value",
           "[animator]")
 {
   Animator animator{w, r, i, p, e, s};
-  animator.hover_animation_states[&e.sprite] = true;
+  animator.hover_animation_states[&e.gui.sprite] = true;
   animator.scale_hovered();
-  animator.hover_animation_states[&e.sprite] = false;
+  animator.hover_animation_states[&e.gui.sprite] = false;
   animator.scale_hovered();
-  float original_scale = animator.original_scales[&e.sprite].x;
-  float current_scale = e.sprite.getScale().x;
+  float original_scale = animator.original_scales[&e.gui.sprite].x;
+  float current_scale = e.gui.sprite.getScale().x;
   REQUIRE(current_scale == original_scale);
 }
 
 TEST_CASE("Clicked sprites should be assigned new frames to draw", "[animator]")
 {
   Animator animator{w, r, i, p, e, s};
-  animator.set_clicked_state(e.sprite);
-  REQUIRE(animator.click_animation_states[&e.sprite] ==
+  animator.set_clicked_state(e.gui.sprite);
+  REQUIRE(animator.click_animation_states[&e.gui.sprite] ==
           animator.click_animation_frames);
 }
 
@@ -65,10 +68,11 @@ TEST_CASE(
     "[animator]")
 {
   Animator animator{w, r, i, p, e, s};
-  animator.click_animation_states[&e.sprite] = animator.click_animation_frames;
+  animator.click_animation_states[&e.gui.sprite] =
+      animator.click_animation_frames;
   animator.scale_clicked();
-  float original_scale = animator.original_scales[&e.sprite].x;
-  float current_scale = e.sprite.getScale().x;
+  float original_scale = animator.original_scales[&e.gui.sprite].x;
+  float current_scale = e.gui.sprite.getScale().x;
   REQUIRE(current_scale > original_scale);
 }
 
@@ -77,11 +81,11 @@ TEST_CASE(
     "[animator]")
 {
   Animator animator{w, r, i, p, e, s};
-  animator.click_animation_states[&e.sprite] =
+  animator.click_animation_states[&e.gui.sprite] =
       animator.click_animation_frames / 2;
   animator.scale_clicked();
-  float original_scale = animator.original_scales[&e.sprite].x;
-  float current_scale = e.sprite.getScale().x;
+  float original_scale = animator.original_scales[&e.gui.sprite].x;
+  float current_scale = e.gui.sprite.getScale().x;
   REQUIRE(current_scale < original_scale);
 }
 
@@ -89,18 +93,18 @@ TEST_CASE("Clicked sprites should not be scaled if there are no frames left",
           "[animator]")
 {
   Animator animator{w, r, i, p, e, s};
-  animator.click_animation_states[&e.sprite] = 0;
+  animator.click_animation_states[&e.gui.sprite] = 0;
   animator.scale_clicked();
-  float original_scale = animator.original_scales[&e.sprite].x;
-  float current_scale = e.sprite.getScale().x;
+  float original_scale = animator.original_scales[&e.gui.sprite].x;
+  float current_scale = e.gui.sprite.getScale().x;
   REQUIRE(current_scale == original_scale);
 }
 
 TEST_CASE("Dead sprites should be assigned new frames to draw", "[animator]")
 {
   Animator animator{w, r, i, p, e, s};
-  animator.set_dead_state(e.sprite);
-  REQUIRE(animator.death_animation_states[&e.sprite] ==
+  animator.set_dead_state(e.gui.sprite);
+  REQUIRE(animator.death_animation_states[&e.gui.sprite] ==
           animator.death_animation_frames);
 }
 
@@ -109,13 +113,13 @@ TEST_CASE("Dead sprites should not be assigned new frames if there are some "
           "[animator]")
 {
   Animator animator{w, r, i, p, e, s};
-  animator.set_dead_state(e.sprite);
+  animator.set_dead_state(e.gui.sprite);
   for (int i = 0; i < 5; ++i)
   {
     animator.draw_dead_sprites();
   }
-  animator.set_dead_state(e.sprite);
-  REQUIRE(animator.death_animation_states[&e.sprite] ==
+  animator.set_dead_state(e.gui.sprite);
+  REQUIRE(animator.death_animation_states[&e.gui.sprite] ==
           animator.death_animation_frames - 5);
 }
 
@@ -124,7 +128,7 @@ TEST_CASE("When a sprite is set as dead, their related entity should be set to "
           "[animator]")
 {
   Animator animator{w, r, i, p, e, s};
-  animator.set_dead_state(e.sprite);
+  animator.set_dead_state(e.gui.sprite);
   REQUIRE(e.regenerating);
 }
 
@@ -133,10 +137,11 @@ TEST_CASE(
     "[animator]")
 {
   Animator animator{w, r, i, p, e, s};
-  float original_scale = e.sprite.getScale().x;
-  float original_pos_x = e.sprite.getPosition().x;
-  float original_pos_y = e.sprite.getPosition().y;
-  animator.death_animation_states[&e.sprite] = animator.death_animation_frames;
+  float original_scale = e.gui.sprite.getScale().x;
+  float original_pos_x = e.gui.sprite.getPosition().x;
+  float original_pos_y = e.gui.sprite.getPosition().y;
+  animator.death_animation_states[&e.gui.sprite] =
+      animator.death_animation_frames;
 
   int frames = static_cast<int>(animator.death_animation_frames * 60 / 100);
   for (int i = 0; i < frames; i++)
@@ -144,9 +149,9 @@ TEST_CASE(
     animator.draw_dead_sprites();
   }
 
-  float current_scale = e.sprite.getScale().x;
-  float current_pos_x = e.sprite.getPosition().x;
-  float current_pos_y = e.sprite.getPosition().y;
+  float current_scale = e.gui.sprite.getScale().x;
+  float current_pos_x = e.gui.sprite.getPosition().x;
+  float current_pos_y = e.gui.sprite.getPosition().y;
   REQUIRE(current_scale > original_scale);
   REQUIRE(current_pos_x > original_pos_x);
   REQUIRE(current_pos_y < original_pos_y);
@@ -157,7 +162,8 @@ TEST_CASE("Dead sprites should be scaled and moved down in the last 40% of the "
           "[animator]")
 {
   Animator animator{w, r, i, p, e, s};
-  animator.death_animation_states[&e.sprite] = animator.death_animation_frames;
+  animator.death_animation_states[&e.gui.sprite] =
+      animator.death_animation_frames;
 
   int start_frames =
       static_cast<int>(animator.death_animation_frames * 60 / 100);
@@ -166,8 +172,8 @@ TEST_CASE("Dead sprites should be scaled and moved down in the last 40% of the "
     animator.draw_dead_sprites();
   }
 
-  float original_scale = e.sprite.getScale().x;
-  float original_pos_y = e.sprite.getPosition().y;
+  float original_scale = e.gui.sprite.getScale().x;
+  float original_pos_y = e.gui.sprite.getPosition().y;
 
   int end_frames = static_cast<int>(animator.death_animation_frames * 40 / 100);
   for (int i = 0; i < end_frames; i++)
@@ -175,8 +181,8 @@ TEST_CASE("Dead sprites should be scaled and moved down in the last 40% of the "
     animator.draw_dead_sprites();
   }
 
-  float current_scale = e.sprite.getScale().x;
-  float current_pos_y = e.sprite.getPosition().y;
+  float current_scale = e.gui.sprite.getScale().x;
+  float current_pos_y = e.gui.sprite.getPosition().y;
   REQUIRE(current_scale < original_scale);
   REQUIRE(current_pos_y > original_pos_y);
 }
@@ -186,7 +192,7 @@ TEST_CASE("When animating dead sprites, the last frame should trigger the "
           "[animator]")
 {
   Animator animator{w, r, i, p, e, s};
-  animator.death_animation_states[&e.sprite] = 1;
+  animator.death_animation_states[&e.gui.sprite] = 1;
   e.hp = 0;
   animator.draw_dead_sprites();
   REQUIRE(e.hp == e.max_hp);
@@ -197,10 +203,10 @@ TEST_CASE(
     "[animator]")
 {
   Animator animator{w, r, i, p, e, s};
-  animator.death_animation_states[&e.sprite] = 1;
-  e.sprite.setRotation(5.0f);
+  animator.death_animation_states[&e.gui.sprite] = 1;
+  e.gui.sprite.setRotation(5.0f);
   animator.draw_dead_sprites();
-  REQUIRE(e.sprite.getRotation() == 0);
+  REQUIRE(e.gui.sprite.getRotation() == 0);
 }
 
 TEST_CASE("Damage bubbles should be added correctly", "[animator]")

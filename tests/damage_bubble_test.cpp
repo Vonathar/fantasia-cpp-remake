@@ -1,7 +1,7 @@
 #define private public
 
-#include "../src/animator.h"
-#include <catch2/catch.hpp>
+#include "../src/gui/animator.h"
+#include <catch2/catch_test_macros.hpp>
 
 namespace damage_bubble_test
 {
@@ -13,7 +13,7 @@ TEST_CASE("Damage bubbles should have a random x-position offset",
           "[damage_bubble]")
 {
   DamageBubble damage_bubble{5, r};
-  REQUIRE((damage_bubble.x_offset >= -0.75 && damage_bubble.x_offset <= 0.75));
+  REQUIRE((damage_bubble.x_offset >= -4.0f && damage_bubble.x_offset <= 4.0f));
 }
 
 TEST_CASE("Damage bubbles should have all frames available when initialised",
@@ -27,7 +27,7 @@ TEST_CASE("Damage bubbles should have one less frame after each render",
           "[damage_bubble]")
 {
   DamageBubble damage_bubble{5, r};
-  damage_bubble.render(*w);
+  w->draw(damage_bubble);
   REQUIRE(damage_bubble.remaining_frames == damage_bubble.total_frames - 1);
 }
 
@@ -38,14 +38,14 @@ TEST_CASE("Damage bubbles should change their position after each render",
 
   sf::Vector2f starting_position_rect = damage_bubble.bubble_rect.getPosition();
   sf::Vector2f starting_position_text = damage_bubble.damage_text.getPosition();
-  damage_bubble.render(*w);
+  w->draw(damage_bubble);
   sf::Vector2f current_position_rect = damage_bubble.bubble_rect.getPosition();
   sf::Vector2f current_position_text = damage_bubble.damage_text.getPosition();
 
-  REQUIRE(current_position_rect.x < starting_position_rect.x);
-  REQUIRE(current_position_rect.y < starting_position_rect.y);
-  REQUIRE(current_position_text.x < starting_position_text.x);
-  REQUIRE(current_position_text.y < starting_position_text.y);
+  REQUIRE(current_position_rect.x != starting_position_rect.x);
+  REQUIRE(current_position_rect.y != starting_position_rect.y);
+  REQUIRE(current_position_text.x != starting_position_text.x);
+  REQUIRE(current_position_text.y != starting_position_text.y);
 }
 
 TEST_CASE("Damage bubbles should not render if there are no frames left",
@@ -56,7 +56,7 @@ TEST_CASE("Damage bubbles should not render if there are no frames left",
 
   sf::Vector2f starting_position_rect = damage_bubble.bubble_rect.getPosition();
   sf::Vector2f starting_position_text = damage_bubble.damage_text.getPosition();
-  damage_bubble.render(*w);
+  w->draw(damage_bubble);
   sf::Vector2f current_position_rect = damage_bubble.bubble_rect.getPosition();
   sf::Vector2f current_position_text = damage_bubble.damage_text.getPosition();
   REQUIRE(starting_position_rect.x == current_position_rect.x);

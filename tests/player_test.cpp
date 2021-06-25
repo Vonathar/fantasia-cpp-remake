@@ -1,7 +1,7 @@
 #define private public
 
-#include "../src/player.h"
-#include <catch2/catch.hpp>
+#include "../src/entities/player.h"
+#include <catch2/catch_test_macros.hpp>
 
 TEST_CASE("Player receives damage", "[player]")
 {

@@ -1,8 +1,8 @@
 #ifndef _ENEMY_GENERATOR_H_
 #define _ENEMY_GENERATOR_H_
 
-#include "enemy_name.h"
-#include "stage_name.h"
+#include "enums/enemy_name.h"
+#include "enums/stage_name.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <map>

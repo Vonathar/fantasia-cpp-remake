@@ -2,7 +2,7 @@
 
 #include "../src/enemy_generator.h"
 #include <algorithm>
-#include <catch2/catch.hpp>
+#include <catch2/catch_test_macros.hpp>
 
 TEST_CASE("Returns a random enemy for the given stage", "[enemy_generator]")
 {

@@ -1,5 +1,5 @@
-#include "../src/resources.h"
-#include <catch2/catch.hpp>
+#include "../src/gui/resources.h"
+#include <catch2/catch_test_macros.hpp>
 
 Resources resources{};
 
