@@ -11,7 +11,7 @@ class Stage : public sf::Drawable
 {
 
   public:
-  explicit Stage(Resources &r, StageGUI &g);
+  explicit Stage(Resources &r);
   void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
   bool is_next_level_in_bounds(sf::Vector2f &pos);
   bool is_boss_button_in_bounds(sf::Vector2f &pos);
@@ -26,7 +26,7 @@ class Stage : public sf::Drawable
   private:
   Resources &resources;
   sf::Sprite sprite{};
-  StageGUI gui;
+  StageGUI gui{resources};
   StageName name;
   int level;
   bool boss_available;

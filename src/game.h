@@ -23,11 +23,10 @@ class Game
   std::unique_ptr<sf::RenderWindow> window{};
   Resources resources{};
   StaticGUI static_gui{resources};
-  StageGUI stage_gui{resources};
   Inventory inventory{resources};
   Player player{resources};
   Enemy enemy{resources};
-  Stage stage{resources, stage_gui};
+  Stage stage{resources};
   Animator animator{window, resources, inventory, player, enemy, stage};
 
   void process_event(sf::Event event);

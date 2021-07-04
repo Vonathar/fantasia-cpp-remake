@@ -1,6 +1,6 @@
 #include "stage.h"
 
-Stage::Stage(Resources &r, StageGUI &g) : resources(r), gui(g)
+Stage::Stage(Resources &r) : resources(r)
 {
   sprite.setPosition(0, 0);
   sprite.setScale(1.0f, 1.0f);

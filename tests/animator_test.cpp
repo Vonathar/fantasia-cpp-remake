@@ -13,8 +13,7 @@ Resources r{};
 Inventory i{r};
 Player p{r};
 Enemy e{r};
-StageGUI sg{r};
-Stage s{r, sg};
+Stage s{r};
 
 TEST_CASE("Sprites are scaled correctly", "[animator]")
 {

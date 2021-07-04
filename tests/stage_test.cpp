@@ -14,7 +14,7 @@ TEST_CASE("Next stage is not unlocked if the boss has not been killed",
           "[stage]")
 {
   StageGUI gui{r};
-  Stage stage{r, gui};
+  Stage stage{r};
 
   for (int i = 0; i < stage.ENEMIES_PER_STAGE; i++)
     stage.record_enemy_death(false);
@@ -27,7 +27,7 @@ TEST_CASE("Next stage remains locked if more enemies are killed while the boss "
           "[stage]")
 {
   StageGUI gui{r};
-  Stage stage{r, gui};
+  Stage stage{r};
 
   for (int i = 0; i < stage.ENEMIES_PER_STAGE + 3; i++)
     stage.record_enemy_death(false);
@@ -38,7 +38,7 @@ TEST_CASE("Next stage remains locked if more enemies are killed while the boss "
 TEST_CASE("Next stage is locked if the boss was not killed", "[stage]")
 {
   StageGUI gui{r};
-  Stage stage{r, gui};
+  Stage stage{r};
 
   for (int i = 0; i < stage.ENEMIES_PER_STAGE - 1; i++)
     stage.record_enemy_death(false);
@@ -49,7 +49,7 @@ TEST_CASE("Next stage is locked if the boss was not killed", "[stage]")
 TEST_CASE("Next stage is unlocked after the boss is killed", "[stage]")
 {
   StageGUI gui{r};
-  Stage stage{r, gui};
+  Stage stage{r};
 
   for (int i = 0; i < stage.ENEMIES_PER_STAGE; i++)
     stage.record_enemy_death(false);
@@ -62,7 +62,7 @@ TEST_CASE("Next stage is unlocked after the boss is killed", "[stage]")
 TEST_CASE("Boss is not available anymore after it's killed", "[stage]")
 {
   StageGUI gui{r};
-  Stage stage{r, gui};
+  Stage stage{r};
 
   for (int i = 0; i < stage.ENEMIES_PER_STAGE; i++)
     stage.record_enemy_death(false);
@@ -75,7 +75,7 @@ TEST_CASE("Boss is not available anymore after it's killed", "[stage]")
 TEST_CASE("Boss cannot be unlocked more than once in the same stage", "[stage]")
 {
   StageGUI gui{r};
-  Stage stage{r, gui};
+  Stage stage{r};
 
   for (int i = 0; i < stage.ENEMIES_PER_STAGE; i++)
     stage.record_enemy_death(false);
@@ -91,7 +91,7 @@ TEST_CASE("Boss cannot be unlocked more than once in the same stage", "[stage]")
 TEST_CASE("Incrementing the level resets number of enemies left", "[stage]")
 {
   StageGUI gui{r};
-  Stage stage{r, gui};
+  Stage stage{r};
 
   stage.increment_level();
 
@@ -102,7 +102,7 @@ TEST_CASE("When incrementing the level, the boss should not be available",
           "[stage]")
 {
   StageGUI gui{r};
-  Stage stage{r, gui};
+  Stage stage{r};
 
   stage.increment_level();
 
@@ -113,7 +113,7 @@ TEST_CASE("When an enemy is killed, the GUI counter should be updated",
           "[stage][integration]")
 {
   StageGUI gui{r};
-  Stage stage{r, gui};
+  Stage stage{r};
 
   for (int i = 0; i < stage.ENEMIES_PER_STAGE - 1; i++)
   {
@@ -130,7 +130,7 @@ TEST_CASE("When the boss is unlocked, the GUI should display the button to "
           "[stage][integration]")
 {
   StageGUI gui{r};
-  Stage stage{r, gui};
+  Stage stage{r};
 
   for (int i = 0; i < stage.ENEMIES_PER_STAGE; i++)
     stage.record_enemy_death(false);
@@ -148,7 +148,7 @@ TEST_CASE("When the boss fight is active, the GUI should display the button to "
           "[stage][integration]")
 {
   StageGUI gui{r};
-  Stage stage{r, gui};
+  Stage stage{r};
 
   for (int i = 0; i < stage.ENEMIES_PER_STAGE; i++)
     stage.record_enemy_death(false);
@@ -167,7 +167,7 @@ TEST_CASE("When quitting the boss fight, the GUI should display the button to "
           "[stage][integration]")
 {
   StageGUI gui{r};
-  Stage stage{r, gui};
+  Stage stage{r};
 
   for (int i = 0; i < stage.ENEMIES_PER_STAGE; i++)
     stage.record_enemy_death(false);
@@ -187,7 +187,7 @@ TEST_CASE(
     "[stage][integration]")
 {
   StageGUI gui{r};
-  Stage stage{r, gui};
+  Stage stage{r};
 
   for (int i = 0; i < 10; i++)
     stage.increment_level();
@@ -200,7 +200,7 @@ TEST_CASE(
     "[stage][integration]")
 {
   StageGUI gui{r};
-  Stage stage{r, gui};
+  Stage stage{r};
 
   for (int i = 0; i < 10; i++)
     stage.increment_level();
@@ -212,7 +212,7 @@ TEST_CASE("When unlocking a new level, the GUI should be updated",
           "[stage][integration]")
 {
   StageGUI gui{r};
-  Stage stage{r, gui};
+  Stage stage{r};
 
   for (int i = 0; i < stage.ENEMIES_PER_STAGE; i++)
     stage.record_enemy_death(false);
@@ -228,7 +228,7 @@ TEST_CASE(
     "[stage][integration]")
 {
   StageGUI gui{r};
-  Stage stage{r, gui};
+  Stage stage{r};
 
   int initial_next_level = stage.gui.get_next_level().value;
   stage.increment_level();
@@ -242,7 +242,7 @@ TEST_CASE("When incrementing level, the following level should should be "
           "[stage][integration]")
 {
   StageGUI gui{r};
-  Stage stage{r, gui};
+  Stage stage{r};
 
   for (int i = 0; i < stage.ENEMIES_PER_STAGE; i++)
     stage.record_enemy_death(false);
