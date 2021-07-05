@@ -3,9 +3,8 @@
 PlayerGUI::PlayerGUI(Resources &r) : resources(r)
 {
   info.setFont(resources.get_font(ResourceName::RIGHTEOUS_FONT));
-  info.setCharacterSize(17);
+  info.setCharacterSize(20);
   info.setFillColor(sf::Color::White);
-  info.setLetterSpacing(0.5f);
   fever_bar.set_max_value(100);
 }
 
@@ -13,7 +12,8 @@ void PlayerGUI::set_info(const std::string &rank, int level)
 {
   info.setString("Lv. " + std::to_string(level) + " " + rank);
   sf::FloatRect player_info_bounds = info.getLocalBounds();
-  info.setPosition(697.0f - player_info_bounds.width / 2, 832.0f);
+  float pos_x = 697.0f - (float)int(player_info_bounds.width / 2);
+  info.setPosition(pos_x, 832.0f);
 }
 
 void PlayerGUI::set_hp(double hp)

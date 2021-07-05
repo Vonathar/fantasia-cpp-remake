@@ -10,48 +10,35 @@ StaticGUI::StaticGUI(Resources &r) : resources(r)
   title_text.setPosition(900.0f, 50.0f);
   title_text.setString("Fantasia");
 
-  auto_progress_text.setFont(resources.get_font(ResourceName::RIGHTEOUS_FONT));
-  auto_progress_text.setCharacterSize(13);
-  auto_progress_text.setFillColor(sf::Color::White);
-  auto_progress_text.setLetterSpacing(0.5f);
-  auto_progress_text.setPosition(927.0f, 430.0f);
-  auto_progress_text.setString("Auto progress");
-
   player_hp_text.setFont(resources.get_font(ResourceName::RIGHTEOUS_FONT));
-  player_hp_text.setCharacterSize(13);
+  player_hp_text.setCharacterSize(16);
   player_hp_text.setFillColor(sf::Color::White);
-  player_hp_text.setLetterSpacing(0.5f);
-  player_hp_text.setPosition(603.0f, 868.0f);
+  player_hp_text.setPosition(603.0f, 865.0f);
   player_hp_text.setString("HP");
 
   player_fever_text.setFont(resources.get_font(ResourceName::RIGHTEOUS_FONT));
-  player_fever_text.setCharacterSize(13);
+  player_fever_text.setCharacterSize(16);
   player_fever_text.setFillColor(sf::Color::White);
-  player_fever_text.setLetterSpacing(0.5f);
-  player_fever_text.setPosition(603.0f, 893.0f);
+  player_fever_text.setPosition(603.0f, 891.0f);
   player_fever_text.setString("FV");
 
   player_xp_text.setFont(resources.get_font(ResourceName::RIGHTEOUS_FONT));
-  player_xp_text.setCharacterSize(13);
+  player_xp_text.setCharacterSize(16);
   player_xp_text.setFillColor(sf::Color::White);
-  player_xp_text.setLetterSpacing(0.5f);
-  player_xp_text.setPosition(603.0f, 918.0f);
+  player_xp_text.setPosition(603.0f, 916.0f);
   player_xp_text.setString("XP");
 
   enemy_hp_text.setFont(resources.get_font(ResourceName::RIGHTEOUS_FONT));
-  enemy_hp_text.setCharacterSize(13);
+  enemy_hp_text.setCharacterSize(16);
   enemy_hp_text.setFillColor(sf::Color::White);
-  enemy_hp_text.setLetterSpacing(0.5f);
-  enemy_hp_text.setPosition(882.0f, 868.0f);
+  enemy_hp_text.setPosition(885.0f, 866.0f);
   enemy_hp_text.setString("HP");
 
   inventory_text.setFont(resources.get_font(ResourceName::RIGHTEOUS_FONT));
-  inventory_text.setCharacterSize(18);
+  inventory_text.setCharacterSize(20);
   inventory_text.setFillColor(sf::Color::White);
-  inventory_text.setLetterSpacing(0.1f);
-  inventory_text.setPosition(1594.0f, 210.0f);
+  inventory_text.setPosition(1600.0f, 210.0f);
   inventory_text.setString("Inventory");
-  inventory_text.setStyle(sf::Text::Style::Bold);
 
   title_rect.set_size(sf::Vector2f(275.0f, 50.0f));
   title_rect.set_corners_radius(25);
@@ -85,9 +72,10 @@ StaticGUI::StaticGUI(Resources &r) : resources(r)
 
   sf::Texture &coin_texture =
       resources.get_texture(ResourceName::COIN_TEXTURE_1);
+  coin_icon.setScale(0.68f, 0.68f);
   coin_texture.setSmooth(true);
   coin_icon.setTexture(coin_texture);
-  coin_icon.setPosition(1610.0f, 240.0f);
+  coin_icon.setPosition(1621.0f, 255.0f);
 }
 
 void StaticGUI::draw(sf::RenderTarget &target, sf::RenderStates states) const
@@ -100,7 +88,6 @@ void StaticGUI::draw(sf::RenderTarget &target, sf::RenderStates states) const
   target.draw(enemy_info_rect);
   target.draw(inventory_rect);
   target.draw(title_text);
-  target.draw(auto_progress_text);
   target.draw(player_hp_text);
   target.draw(player_xp_text);
   target.draw(player_fever_text);

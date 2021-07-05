@@ -3,12 +3,12 @@
 StageEnemyCounter::StageEnemyCounter(Resources &r) : resources(r)
 {
   sprite.setTexture(resources.get_texture(ResourceName::PIERCED_SKULL_TEXTURE));
-  sprite.setPosition(930.0f, 395.0f);
+  sprite.setPosition(930.0f, 410.0f);
   sprite.setScale(0.7f, 0.7f);
 
   text.setFont(resources.get_font(ResourceName::RIGHTEOUS_FONT));
-  text.setPosition(960.0f, 400.0f);
-  text.setCharacterSize(13);
+  text.setPosition(960.0f, 412.0f);
+  text.setCharacterSize(14);
   text.setFillColor(sf::Color(255, 255, 255, 230));
   set_enemies_killed(0);
 

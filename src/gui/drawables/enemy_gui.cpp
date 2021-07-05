@@ -4,9 +4,8 @@
 EnemyGUI::EnemyGUI(Resources &r) : resources(r)
 {
   info.setFont(resources.get_font(ResourceName::RIGHTEOUS_FONT));
-  info.setCharacterSize(17);
+  info.setCharacterSize(20);
   info.setFillColor(sf::Color::White);
-  info.setLetterSpacing(0.5f);
 }
 
 void EnemyGUI::set_max_hp(double max_hp)
@@ -23,7 +22,8 @@ void EnemyGUI::set_info(const std::string &name, int level)
 {
   info.setString("Lv. " + std::to_string(level) + " " + name);
   sf::FloatRect enemy_info_bounds = info.getLocalBounds();
-  info.setPosition(1098.0f - enemy_info_bounds.width / 2, 832.0f);
+  float pos_x = 1098.0f - (float)int(enemy_info_bounds.width / 2);
+  info.setPosition(pos_x, 832.0f);
 }
 
 void EnemyGUI::set_texture(const sf::Texture &texture)
@@ -31,7 +31,7 @@ void EnemyGUI::set_texture(const sf::Texture &texture)
   sprite.setTexture(texture, true);
   sprite.setOrigin(sprite.getLocalBounds().width / 2,
                    sprite.getLocalBounds().height /
-                   (2 * std::pow(sprite.getLocalBounds().height, -0.082)));
+                       (2 * std::pow(sprite.getLocalBounds().height, -0.082)));
   sprite.setPosition(1095.0f, 760.0f);
   sprite.setScale(0.8f, 0.8f);
 }

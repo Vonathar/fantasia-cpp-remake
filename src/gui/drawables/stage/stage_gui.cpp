@@ -16,7 +16,7 @@ StageGUI::StageGUI(Resources &r) : resources(r)
   level_rect_5.set_status(StageLevelStatus::LOCKED);
 
   stage_name_text.setFont(resources.get_font(ResourceName::RIGHTEOUS_FONT));
-  stage_name_text.setCharacterSize(14);
+  stage_name_text.setCharacterSize(18);
   stage_name_text.setFillColor(sf::Color(255, 255, 255, 230));
   stage_name = StageName::GREEN_FOREST;
   set_stage_name_text(stage_name);

@@ -11,7 +11,7 @@ DamageBubble::DamageBubble(const long double &dmg, Resources &res)
   std::uniform_real_distribution<float> dist(-4.0, 4.0);
   x_offset = dist(rng);
 
-  damage_text.setFont(res.get_font(ResourceName::RIGHTEOUS_FONT));
+  damage_text.setFont(res.get_font(ResourceName::SKRANJI_FONT));
   damage_text.setCharacterSize(18);
   damage_text.setFillColor(sf::Color(255, 255, 255, 230));
   damage_text.setString(NumberFormatter::abbreviate(dmg));

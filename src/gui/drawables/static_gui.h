@@ -19,7 +19,6 @@ class StaticGUI : public sf::Drawable
   RoundedRect enemy_info_rect{};
   RoundedRect inventory_rect{};
   sf::Text title_text;
-  sf::Text auto_progress_text{};
   sf::Text player_hp_text;
   sf::Text player_fever_text;
   sf::Text player_xp_text;

@@ -3,7 +3,8 @@
 
 Resources::Resources()
 {
-  load_font(ResourceName::RIGHTEOUS_FONT, "righteous.ttf");
+  load_font(ResourceName::SKRANJI_FONT, "skranji_regular.ttf");
+  load_font(ResourceName::RIGHTEOUS_FONT, "odibee_sans_regular.ttf");
   load_font(ResourceName::GREAT_VIBES_FONT, "great_vibes.ttf");
 
   load_texture(StageName::GREEN_FOREST, "green_forest.jpg");
@@ -123,11 +124,15 @@ Resources::Resources()
 
   load_texture(ResourceName::PIERCED_SKULL_TEXTURE, "img/pierced_skull.png");
   load_texture(ResourceName::PLAYER_TEXTURE, "img/player.png");
-  load_texture(ResourceName::COIN_TEXTURE_1, "img/money/coin_01a.png");
-  load_texture(ResourceName::COIN_TEXTURE_2, "img/money/coin_01b.png");
-  load_texture(ResourceName::COIN_TEXTURE_3, "img/money/coin_01c.png");
-  load_texture(ResourceName::COIN_TEXTURE_4, "img/money/coin_01d.png");
-  load_texture(ResourceName::COIN_TEXTURE_5, "img/money/coin_01e.png");
+  load_texture(ResourceName::COIN_TEXTURE_1, "img/money/money_1.png");
+  load_texture(ResourceName::COIN_TEXTURE_2, "img/money/money_2.png");
+  load_texture(ResourceName::COIN_TEXTURE_3, "img/money/money_3.png");
+  load_texture(ResourceName::COIN_TEXTURE_4, "img/money/money_4.png");
+  load_texture(ResourceName::COIN_TEXTURE_5, "img/money/money_5.png");
+  load_texture(ResourceName::COIN_TEXTURE_6, "img/money/money_6.png");
+  load_texture(ResourceName::COIN_TEXTURE_7, "img/money/money_7.png");
+  load_texture(ResourceName::COIN_TEXTURE_8, "img/money/money_8.png");
+  load_texture(ResourceName::COIN_TEXTURE_9, "img/money/money_9.png");
 
   enemy_names = {
       // Stage 1

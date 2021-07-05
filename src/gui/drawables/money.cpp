@@ -29,8 +29,8 @@ Money::Money(const long double &value, Resources &resources) : value(value)
   mid_point.x = 1205.0f + mid_offset_x;
   mid_point.y = 1000.0f + mid_offset_y;
 
-  end_point.x = 1605.0f;
-  end_point.y = 240.0f;
+  end_point.x = 1621.0f;
+  end_point.y = 255.0f;
 
   sprite.setPosition(start_point);
   sprite.setScale(sf::Vector2f(0.80f, 0.80f));
@@ -43,14 +43,26 @@ Money::Money(const long double &value, Resources &resources) : value(value)
     if (value <= 20)
       return ResourceName::COIN_TEXTURE_2;
 
-    if (value <= 30)
+    if (value <= 40)
       return ResourceName::COIN_TEXTURE_3;
 
-    if (value <= 40)
+    if (value <= 80)
       return ResourceName::COIN_TEXTURE_4;
 
-    if (value > 40)
+    if (value > 150)
       return ResourceName::COIN_TEXTURE_5;
+
+    if (value <= 500)
+      return ResourceName::COIN_TEXTURE_6;
+
+    if (value <= 2000)
+      return ResourceName::COIN_TEXTURE_7;
+
+    if (value <= 10000)
+      return ResourceName::COIN_TEXTURE_8;
+
+    else
+      return ResourceName::COIN_TEXTURE_9;
   }();
 
   sprite.setTexture(resources.get_texture(texture_name));
@@ -64,9 +76,9 @@ void Money::draw(sf::RenderTarget &target, sf::RenderStates states) const
   target.draw(sprite);
 
   if (remaining_frames > total_frames / 2)
-    sprite.scale(1.002, 1.002);
+    sprite.scale(1.003, 1.003);
   else
-    sprite.scale(0.991, 0.991);
+    sprite.scale(0.987, 0.987);
 
   const float t = static_cast<float>(total_frames - remaining_frames) /
                   static_cast<float>(total_frames);
